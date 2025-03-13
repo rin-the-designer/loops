@@ -1,7 +1,10 @@
 <script lang="ts">
 	interface Project {
 		title: string;
-		route?: string;
+		slug: string;
+		route: string;
+		guide: string;
+		description: string;
 	}
 
 	export let project: Project;

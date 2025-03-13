@@ -4,7 +4,7 @@
 </script>
 
 <div class="list-container">
-	{#each data.summaries as project}
+	{#each data.projects as project}
 		<List {project} />
 	{/each}
 </div>
