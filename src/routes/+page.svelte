@@ -1,3 +1,17 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import List from '$lib/components/List.svelte';
+	export let data;
+</script>
+
+<div class="list-container">
+	{#each data.summaries as project}
+		<List {project} />
+	{/each}
+</div>
+
+<style>
+	.list-container {
+		display: flex;
+		flex-direction: column;
+	}
+</style>
