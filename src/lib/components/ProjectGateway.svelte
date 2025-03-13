@@ -71,28 +71,30 @@
 
 	@media (max-width: 768px) {
 		.project-gateway {
-			display: block;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto 1fr;
 			height: auto;
-			min-height: 100vh;
-			overflow-y: auto;
 		}
 
 		.description {
+			grid-row: 1/2;
 			font-size: 1rem;
 			border-right: none;
 			border-bottom: 2px solid white;
 			padding: 1rem;
-			overflow-y: visible;
 			max-height: none;
 		}
 
 		.guide {
+			grid-row: 2/3;
 			font-size: 1rem;
 			padding: 1rem;
 			white-space: pre-line;
 		}
 
 		button {
+			position: fixed;
+			bottom: 0;
 			font-size: 1.5rem;
 			padding: 1rem;
 			width: 100%;
