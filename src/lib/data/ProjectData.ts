@@ -64,5 +64,13 @@ export const projectData: Project[] = [
 			our next transformation. The journey continues infinitely, reminding
 			us that every ending is simply the start of a new beginning.
 		</p>`
+	},
+	{
+		title: 'Accumulation',
+		slug: 'accumulation',
+		route: '/projects/accumulation',
+		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		description: `<p style="margin-block-start: 0;">
+		</p>`
 	}
 ];

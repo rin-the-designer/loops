@@ -31,7 +31,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
-		height: 100vh;
+		height: calc(100vh - 66px);
 		color: white;
 	}
 
@@ -52,6 +52,7 @@
 		font-size: 1.2rem;
 		line-height: 1.5;
 		padding: 1rem;
+		background-color: #000;
 	}
 
 	button {
@@ -72,7 +73,7 @@
 	@media (max-width: 768px) {
 		.project-gateway {
 			grid-template-columns: 1fr;
-			grid-template-rows: auto 1fr;
+			grid-template-rows: auto;
 			height: auto;
 		}
 
@@ -80,16 +81,20 @@
 			grid-row: 1/2;
 			font-size: 1rem;
 			border-right: none;
-			border-bottom: 2px solid white;
 			padding: 1rem;
 			max-height: none;
 		}
 
 		.guide {
-			grid-row: 2/3;
+			position: fixed;
+			bottom: 61.5px;
+			right: 0;
+			left: 0;
 			font-size: 1rem;
 			padding: 1rem;
 			white-space: pre-line;
+			border-top: 2px solid white;
+			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 		}
 
 		button {

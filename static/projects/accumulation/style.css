@@ -1,0 +1,48 @@
+body {
+	margin: 0 !important;
+	overflow: hidden;
+	font-family: 'Inter', sans-serif;
+	background-color: #fff;
+}
+
+.canvas {
+	background-color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.circle {
+	background-color: #000;
+	width: 320px;
+	height: 320px;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.info {
+	z-index: 10000;
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
+	color: #000;
+	display: flex;
+	flex-direction: column;
+}
+
+.line {
+	z-index: 10000;
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	text-align: right;
+	mix-blend-mode: difference;
+}

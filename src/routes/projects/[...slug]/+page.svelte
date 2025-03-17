@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import ProjectGateway from '$lib/components/ProjectGateway.svelte';
 	import { projectData, type Project } from '$lib/data/ProjectData';
+	import ProjectHeader from '$lib/components/ProjectHeader.svelte';
 
 	let iframeLoaded = false;
 	let showIframe = false;
@@ -19,8 +20,22 @@
 	$: currentProject = projectData.find((project: Project) => project.slug === slug);
 </script>
 
+<ProjectHeader title={currentProject?.title || ''} />
+
+<svelte:head>
+	<script>
+		window.isGatewayOpen = true;
+	</script>
+</svelte:head>
+
 {#if currentProject && !showIframe}
-	<ProjectGateway project={currentProject} on:enter={enterProject} />
+	<ProjectGateway
+		project={currentProject}
+		on:enter={() => {
+			showIframe = true;
+			window.isGatewayOpen = false;
+		}}
+	/>
 {:else if showIframe}
 	<div class="iframe-container">
 		<iframe
@@ -37,6 +52,9 @@
 
 <style>
 	.iframe-container {
+		position: absolute !important;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100vh;
 		overflow: hidden;

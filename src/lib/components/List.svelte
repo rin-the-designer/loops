@@ -10,9 +10,11 @@
 	export let project: Project;
 </script>
 
-<div class="list-item">
-	<h2><a href={project.route}>{project.title}</a></h2>
-</div>
+<a href={project.route}
+	><div class="list-item">
+		<h2>{project.title}</h2>
+	</div></a
+>
 
 <style>
 	.list-item {
