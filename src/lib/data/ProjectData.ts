@@ -71,6 +71,21 @@ export const projectData: Project[] = [
 		route: '/projects/accumulation',
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
 		description: `<p style="margin-block-start: 0;">
+			Accumulation is a digital reflection of a physical process: drawing a black circle,
+			covering it with white, and repeating. What seems like a simple, meaningless loop
+			gradually builds weight — both literally on a canvas, and metaphorically in code.
+			Each iteration leaves behind traces, even if partially erased, creating layers of
+			hidden history beneath the surface. This work explores how small, repetitive
+			actions accumulate over time, carrying subtle changes and quiet narratives within
+			cycles that feel monotonous on the surface.
+		</p>
+		<p>
+			Inspired by my painting project Blank Canvas, this piece asks the viewer to consider
+			what's happening beneath repetition — how mistakes, adjustments, and tiny decisions
+			compound. Even when actions feel routine or insignificant, they leave behind marks
+			that shape what follows. Through code, I recreate that weight and persistence,
+			inviting the audience to slow down and notice how loops, though seemingly
+			meaningless, become records of patience, curiosity, and quiet transformation.
 		</p>`
 	}
 ];
