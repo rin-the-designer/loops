@@ -46,3 +46,7 @@ body {
 	text-align: right;
 	mix-blend-mode: difference;
 }
+
+audio {
+	display: none;
+}
