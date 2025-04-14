@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	let lineCount = 20;
+	const colors = ['#D81D1D', '#FF8800', '#FFD000', '#8CD406', '#225CE3', '#D922E3'];
+
+	function getRandomColor() {
+		return colors[Math.floor(Math.random() * colors.length)];
+	}
 
 	function updateCodeLines() {
 		const codeLinesElement = document.getElementById('codelines');
@@ -24,6 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		lineText.textContent = `<div class="${type}"></div>`;
 		lineDiv.appendChild(lineText);
 	}
+
+	// Add click event listener
+	document.addEventListener('click', () => {
+		const circles = document.querySelectorAll('.circle');
+		circles.forEach((circle) => {
+			circle.style.backgroundColor = getRandomColor();
+			// Reset color after one iteration (2 seconds, since we add circle+canvas every 1s)
+			setTimeout(() => {
+				circle.style.backgroundColor = '#000';
+			}, 2000);
+		});
+	});
 
 	// Function to add elements
 	function startAccumulation() {

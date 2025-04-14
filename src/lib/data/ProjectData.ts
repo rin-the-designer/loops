@@ -87,5 +87,23 @@ export const projectData: Project[] = [
 			inviting the audience to slow down and notice how loops, though seemingly
 			meaningless, become records of patience, curiosity, and quiet transformation.
 		</p>`
+	},
+	{
+		title: 'Zen Garden',
+		slug: 'zen-garden',
+		route: '/projects/zen-garden',
+		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		description: `<p style="margin-block-start: 0;">
+			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
+			Japanese landscape art that features a dry landscape design with rocks, sand,
+			and plants. These gardens are raked continuously to create its patterns and designs.
+			Just like the raking, we all have our daily routines and patterns. Sometimes they
+			feel like a loop, and almost meaningless when seen from afar.
+		</p>
+		<p>
+			However, when we look closely, we can see the beauty and the patterns in the
+			small details. Like the karesansui, altough we feel like we are in a loop,
+			we have the agency to the details and the changes we make within these loops.
+		</p>`
 	}
 ];

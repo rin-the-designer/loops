@@ -20,7 +20,7 @@
 				if (!window.isGatewayOpen) {
 					isHeaderVisible = false;
 				}
-			}, 5000);
+			}, 200);
 		}
 	}
 
@@ -29,7 +29,7 @@
 			if (!window.isGatewayOpen) {
 				isHeaderVisible = false;
 			}
-		}, 5000);
+		}, 200);
 
 		window.addEventListener('mousemove', handleUserActivity);
 		window.addEventListener('click', handleUserActivity);
