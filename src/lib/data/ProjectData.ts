@@ -86,12 +86,38 @@ export const projectData: Project[] = [
 			that shape what follows. Through code, I recreate that weight and persistence,
 			inviting the audience to slow down and notice how loops, though seemingly
 			meaningless, become records of patience, curiosity, and quiet transformation.
-		</p>`
+		</p>
+		<p>
+			Link to <a
+            href="https://mfadt.rinchong.kim/spring-2025/pgte-5201/ms2-08"
+            target="_blank"
+            style="color: #fff; text-decoration: underline;"
+            >'Blank Canvas'</a
+          >
+		`
 	},
 	{
 		title: 'Zen Garden',
 		slug: 'zen-garden',
 		route: '/projects/zen-garden',
+		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		description: `<p style="margin-block-start: 0;">
+			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
+			Japanese landscape art that features a dry landscape design with rocks, sand,
+			and plants. These gardens are raked continuously to create its patterns and designs.
+			Just like the raking, we all have our daily routines and patterns. Sometimes they
+			feel like a loop, and almost meaningless when seen from afar.
+		</p>
+		<p>
+			However, when we look closely, we can see the beauty and the patterns in the
+			small details. Like the karesansui, altough we feel like we are in a loop,
+			we have the agency to the details and the changes we make within these loops.
+		</p>`
+	},
+	{
+		title: 'Incense',
+		slug: 'incense',
+		route: '/projects/incense',
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
 		description: `<p style="margin-block-start: 0;">
 			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
