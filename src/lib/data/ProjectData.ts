@@ -2,6 +2,8 @@ export interface Project {
 	title: string;
 	slug: string;
 	route: string;
+	thumbnail: string;
+	excerpt: string;
 	guide: string;
 	description: string;
 }
@@ -11,7 +13,10 @@ export const projectData: Project[] = [
 		title: 'Myth of Sisyphus',
 		slug: 'myth-of-sisyphus',
 		route: '/projects/myth-of-sisyphus',
+		thumbnail: '/projects/myth-of-sisyphus/thumb.png',
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+		excerpt:
+			'A visual represenation of a philosophical essay that explores the concept of the absurd and the human search for meaning in a meaningless world.',
 		description: `<p style="margin-block-start: 0;">
           <a
             href="https://www.google.com/books/edition/The_Myth_of_Sisyphus/zG9wDwAAQBAJ?hl=en&gbpv=0"
@@ -47,7 +52,10 @@ export const projectData: Project[] = [
 		title: 'Doors',
 		slug: 'doors',
 		route: '/projects/doors',
+		thumbnail: '/projects/doors/thumb.png',
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		excerpt:
+			'A continuous cylce of black and white doors representing the transitions we experience in life.',
 		description: `<p style="margin-block-start: 0;">
 			Doors act as gateways that allow us to move through space, much like
 			the transitions we experience in life. We enter and exit different
@@ -69,7 +77,9 @@ export const projectData: Project[] = [
 		title: 'Accumulation',
 		slug: 'accumulation',
 		route: '/projects/accumulation',
+		thumbnail: '/projects/accumulation/thumb.png',
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		excerpt: 'A digital reflection of the accumulation of small, repetitive actions.',
 		description: `<p style="margin-block-start: 0;">
 			Accumulation is a digital reflection of a physical process: drawing a black circle,
 			covering it with white, and repeating. What seems like a simple, meaningless loop
@@ -100,7 +110,10 @@ export const projectData: Project[] = [
 		title: 'Zen Garden',
 		slug: 'zen-garden',
 		route: '/projects/zen-garden',
+		thumbnail: '/projects/zen-garden/thumb.png',
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		excerpt:
+			'A visualized graphic of a Karesansui, focusing on the tranquility and patterns of the raking.',
 		description: `<p style="margin-block-start: 0;">
 			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
 			Japanese landscape art that features a dry landscape design with rocks, sand,
@@ -118,7 +131,10 @@ export const projectData: Project[] = [
 		title: 'Incense',
 		slug: 'incense',
 		route: '/projects/incense',
+		thumbnail: '/projects/incense/thumb.png',
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		excerpt:
+			'A visualization of the burning of incense, changing directions through human interaction.',
 		description: `<p style="margin-block-start: 0;">
 			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
 			Japanese landscape art that features a dry landscape design with rocks, sand,
@@ -130,6 +146,32 @@ export const projectData: Project[] = [
 			However, when we look closely, we can see the beauty and the patterns in the
 			small details. Like the karesansui, altough we feel like we are in a loop,
 			we have the agency to the details and the changes we make within these loops.
+		</p>`
+	},
+	{
+		title: 'Playground Spinner',
+		slug: 'playground-spinner',
+		route: '/projects/playground-spinner',
+		thumbnail: '/projects/playground-spinner/thumb.png',
+		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		excerpt: 'A childhood memory.',
+		description: `<p style="margin-block-start: 0;">
+			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
+			Japanese landscape art that features a dry landscape design with rocks, sand,
+			and plants. These gardens are raked continuously to create its patterns and designs.
+		</p>`
+	},
+	{
+		title: 'The Continuance',
+		slug: 'continuance',
+		route: '/projects/continuance',
+		thumbnail: '/projects/continuance/thumb.png',
+		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
+		description: `<p style="margin-block-start: 0;">
+			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
+			Japanese landscape art that features a dry landscape design with rocks, sand,
+			and plants. These gardens are raked continuously to create its patterns and designs.
 		</p>`
 	}
 ];

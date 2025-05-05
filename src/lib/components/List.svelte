@@ -3,41 +3,79 @@
 		title: string;
 		slug: string;
 		route: string;
+		thumbnail: string;
 		guide: string;
+		excerpt: string;
 		description: string;
 	}
-
 	export let project: Project;
 </script>
 
-<a href={project.route}
-	><div class="list-item">
-		<h2>{project.title}</h2>
-	</div></a
->
+<a href={project.route} class="gallery-item">
+	<div class="image-container">
+		<img src={project.thumbnail} alt={project.title} />
+	</div>
+	<div class="caption-container">
+		<div class="caption">{project.title}</div>
+		<div class="excerpt">{project.excerpt}</div>
+	</div>
+</a>
 
 <style>
-	.list-item {
+	.gallery-item {
 		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		justify-content: left;
-		padding: 1rem;
-		border-bottom: 1px solid #ffffff30;
-	}
-
-	h2 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		color: #fff;
-	}
-
-	a {
+		flex-direction: column;
+		align-items: center;
 		text-decoration: none;
-		color: #fff;
+		background: #181818;
+		overflow: hidden;
+		transition: box-shadow 0.2s;
 	}
 
-	.list-item:hover {
-		background-color: #ffffff0d;
+	.gallery-item:hover {
+		background: #222;
+	}
+
+	.image-container {
+		width: 100%;
+		aspect-ratio: 1/1;
+		background: #111;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.gallery-item img {
+		width: 60%;
+		aspect-ratio: 1/1;
+		object-fit: cover;
+		display: block;
+	}
+
+	.caption-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: start;
+		width: 100%;
+		background: #000;
+		padding: 1rem 0;
+		gap: 0.5rem;
+		height: 100%;
+	}
+
+	.caption {
+		color: #fff;
+		font-size: 0.875rem;
+		font-weight: 500;
+		padding: 0 1rem;
+	}
+
+	.excerpt {
+		color: #fff;
+		font-size: 0.75rem;
+		line-height: 1.4;
+		opacity: 0.5;
+		padding: 0 1rem;
 	}
 </style>

@@ -3,6 +3,7 @@ let burnProgress = 0;
 let burnRate = 0.1;
 let lastTime = 0;
 let particles = [];
+let colors = ['#FF8800', '#0F0F0F', '#000000'];
 
 // For body pose detection
 let video;
@@ -17,7 +18,7 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	background(15);
+	background(colors[1]);
 	strokeCap(SQUARE);
 	startY = height / 3;
 	lastTime = millis();
@@ -65,12 +66,12 @@ function draw() {
 
 	// Draw stick
 	if (burnProgress < 1) {
-		stroke(0);
+		stroke(colors[2]);
 		strokeWeight(10);
 		line(width / 2, height, width / 2, currentY);
 
 		// Burning part
-		stroke(255, 136, 0);
+		stroke(colors[0]);
 		line(width / 2, currentY, width / 2, currentY - 10);
 	}
 }
