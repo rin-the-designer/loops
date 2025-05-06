@@ -1,3 +1,10 @@
+:root {
+	--circle-bg: #000;
+	--canvas-bg: #fff;
+	--text-color: #fff;
+	--circle-size: 20vw;
+}
+
 body {
 	margin: 0 !important;
 	overflow: hidden;
@@ -6,7 +13,7 @@ body {
 }
 
 .canvas {
-	background-color: #fff;
+	background-color: var(--canvas-bg);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -15,9 +22,9 @@ body {
 }
 
 .circle {
-	background-color: #000;
-	width: 320px;
-	height: 320px;
+	background-color: var(--circle-bg);
+	width: var(--circle-size);
+	aspect-ratio: 1 / 1;
 	border-radius: 50%;
 	position: absolute;
 	top: 50%;
@@ -30,9 +37,10 @@ body {
 	position: absolute;
 	bottom: 1rem;
 	left: 1rem;
-	color: #000;
+	color: var(--text-color);
 	display: flex;
 	flex-direction: column;
+	mix-blend-mode: difference;
 }
 
 .line {
@@ -40,7 +48,7 @@ body {
 	position: absolute;
 	bottom: 1rem;
 	right: 1rem;
-	color: #fff;
+	color: var(--text-color);
 	display: flex;
 	flex-direction: column;
 	text-align: right;

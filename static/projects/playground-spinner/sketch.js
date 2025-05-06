@@ -35,6 +35,7 @@ function draw() {
 	background(colors[colorIndex][1]);
 	handleHandSwipe();
 	rotateY(angle);
+	scale(2);
 	drawSpinner();
 	angle -= spinSpeed;
 	// Gradually slow down the spinner

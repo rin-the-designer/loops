@@ -132,20 +132,18 @@ export const projectData: Project[] = [
 		slug: 'incense',
 		route: '/projects/incense',
 		thumbnail: '/projects/incense/thumb.png',
-		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
 		excerpt:
 			'A visualization of the burning of incense, changing directions through human interaction.',
 		description: `<p style="margin-block-start: 0;">
-			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
-			Japanese landscape art that features a dry landscape design with rocks, sand,
-			and plants. These gardens are raked continuously to create its patterns and designs.
-			Just like the raking, we all have our daily routines and patterns. Sometimes they
-			feel like a loop, and almost meaningless when seen from afar.
+			In the asian culture, incense sticks are use for ceremonies and rituals, connecting
+			the spirits of the living and the deceased. All loops in life comes to an end at the end
+			of your life. Or, it could be a start of another loop in some cultural context.
 		</p>
 		<p>
-			However, when we look closely, we can see the beauty and the patterns in the
-			small details. Like the karesansui, altough we feel like we are in a loop,
-			we have the agency to the details and the changes we make within these loops.
+			This project is a digital representation of a burning incense stick as a connection
+			between life and death. The smoke changes directions based on the position of the
+			viewer, just as it would change direction based on the wind of people moving by.
 		</p>`
 	},
 	{
@@ -156,22 +154,25 @@ export const projectData: Project[] = [
 		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
 		excerpt: 'A childhood memory.',
 		description: `<p style="margin-block-start: 0;">
-			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
-			Japanese landscape art that features a dry landscape design with rocks, sand,
-			and plants. These gardens are raked continuously to create its patterns and designs.
-		</p>`
+			Playground Spinner is a nostalgic trip down memory lane. It is a simple
+			playground ride. Yet, looking at it from an adult's perspective, it was
+			a ride that looped endlessly, but .
+			</p>`
 	},
 	{
 		title: 'The Continuance',
 		slug: 'continuance',
 		route: '/projects/continuance',
 		thumbnail: '/projects/continuance/thumb.png',
-		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		guide: 'No interaction required.',
 		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
 		description: `<p style="margin-block-start: 0;">
-			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
-			Japanese landscape art that features a dry landscape design with rocks, sand,
-			and plants. These gardens are raked continuously to create its patterns and designs.
+			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
+			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
+			and finding a way to continue.
+		</p>
+		<p style="margin-block-start: 0;">
+			This work is a complemntary piece to the other projects in this collection.
 		</p>`
 	}
 ];
