@@ -29,11 +29,12 @@
 		text-decoration: none;
 		background: #181818;
 		overflow: hidden;
-		transition: box-shadow 0.2s;
+		transition: all 0.2s ease;
 	}
 
 	.gallery-item:hover {
-		background: #222;
+		background: #333;
+		box-shadow: 0 1px 0 0 #fff;
 	}
 
 	.image-container {
@@ -43,6 +44,11 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		transition: background 0.2s ease;
+	}
+
+	.gallery-item:hover .image-container {
+		background: #222;
 	}
 
 	.gallery-item img {
@@ -50,6 +56,11 @@
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		display: block;
+		transition: width 0.2s ease;
+	}
+
+	.gallery-item:hover img {
+		width: 64%;
 	}
 
 	.caption-container {
@@ -58,10 +69,15 @@
 		justify-content: start;
 		align-items: start;
 		width: 100%;
-		background: #000;
+		background: transparent;
 		padding: 1rem 0;
 		gap: 0.5rem;
 		height: 100%;
+		transition: background 0.2s ease;
+	}
+
+	.gallery-item:hover .caption-container {
+		background: transparent;
 	}
 
 	.caption {
@@ -69,6 +85,11 @@
 		font-size: 0.875rem;
 		font-weight: 500;
 		padding: 0 1rem;
+		transition: color 0.2s ease;
+	}
+
+	.gallery-item:hover .caption {
+		color: #fff;
 	}
 
 	.excerpt {
@@ -77,5 +98,10 @@
 		line-height: 1.4;
 		opacity: 0.5;
 		padding: 0 1rem;
+		transition: opacity 0.2s ease;
+	}
+
+	.gallery-item:hover .excerpt {
+		opacity: 0.7;
 	}
 </style>

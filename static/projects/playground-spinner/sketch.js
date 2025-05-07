@@ -35,7 +35,7 @@ function draw() {
 	background(colors[colorIndex][1]);
 	handleHandSwipe();
 	rotateY(angle);
-	scale(2);
+	//scale(2);
 	drawSpinner();
 	angle -= spinSpeed;
 	// Gradually slow down the spinner
@@ -70,40 +70,45 @@ function handleHandSwipe() {
 function drawSpinner() {
 	fill(colors[colorIndex][0]);
 	noStroke();
+	let baseValue = width / 5;
 
 	// Draw base disk
 	push();
-	translate(0, 30, 0);
+	translate(0, baseValue / 4, 0);
 	rotateX(180);
-	cylinder(120, 8, 48, 1); // disk
+	cylinder(baseValue, baseValue / 15, 48, 1);
 	pop();
 
 	// Draw central pole
 	push();
-	cylinder(8, 100);
+	cylinder(baseValue / 15, (baseValue / 6) * 5);
 	pop();
 
 	// Draw handles
 	let numHandles = 6;
-	let r = 110;
+	let r = (baseValue / 12) * 11;
 	for (let i = 0; i < numHandles; i++) {
 		let theta = (360 / numHandles) * i;
 		let x = r * cos(theta);
 		let z = r * sin(theta);
 		push();
-		translate(x, -8, z);
+		translate(x, -baseValue / 15, z);
 		// vertical part
-		cylinder(4, 80);
+		cylinder(baseValue / 30, (baseValue / 3) * 2);
 		// horizontal part: connect to center
-		translate(0, -40, 0); // Move to top of post
+		translate(0, -baseValue / 3, 0);
 		rotateY(-theta); // Rotate to face center
 		rotateZ(90);
-		translate(10, 60, 0); // Move so bar starts at post and points to center
-		cylinder(4, 120); // Bar length to center
+		translate(baseValue / 12, baseValue / 2, 0);
+		cylinder(baseValue / 30, baseValue);
 		pop();
 	}
 }
 
 function gotHands(results) {
 	hands = results;
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
 }

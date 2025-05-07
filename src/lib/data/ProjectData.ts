@@ -187,5 +187,22 @@ export const projectData: Project[] = [
 		<p style="margin-block-start: 0;">
 			This work is a complemntary piece to the other projects in this collection.
 		</p>`
+	},
+	{
+		title: 'Thresholds',
+		slug: 'thresholds',
+		route: '/projects/thresholds',
+		thumbnail: '/projects/thresholds/thumb.png',
+		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+		interaction: [{ type: 'camera' }],
+		excerpt: 'A visualization of the thresholds we face in our lives.',
+		description: `<p style="margin-block-start: 0;">
+			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
+			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
+			and finding a way to continue.
+		</p>
+		<p style="margin-block-start: 0;">
+			This work is a complemntary piece to the other projects in this collection.
+		</p>`
 	}
 ];

@@ -237,3 +237,7 @@ function draw() {
 
 	drawCelestialBodies();
 }
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}

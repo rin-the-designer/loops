@@ -7,6 +7,18 @@
 
 	let iframeLoaded = false;
 	let showIframe = false;
+	let isDirectAccess = false;
+
+	onMount(() => {
+		// Check if this is a direct access (no referrer or referrer is from a different domain)
+		const referrer = document.referrer;
+		isDirectAccess = !referrer || !referrer.includes(window.location.host);
+		if (isDirectAccess) {
+			// For direct access, show the iframe immediately
+			showIframe = true;
+			window.isGatewayOpen = false;
+		}
+	});
 
 	function handleIframeLoad() {
 		iframeLoaded = true;
@@ -14,6 +26,7 @@
 
 	function enterProject() {
 		showIframe = true;
+		window.isGatewayOpen = false;
 	}
 
 	$: slug = $page.params.slug;
@@ -24,18 +37,12 @@
 
 <svelte:head>
 	<script>
-		window.isGatewayOpen = true;
+		window.isGatewayOpen = !showIframe;
 	</script>
 </svelte:head>
 
 {#if currentProject && !showIframe}
-	<ProjectGateway
-		project={currentProject}
-		on:enter={() => {
-			showIframe = true;
-			window.isGatewayOpen = false;
-		}}
-	/>
+	<ProjectGateway project={currentProject} on:enter={enterProject} />
 {:else if showIframe}
 	<div class="iframe-container">
 		<iframe

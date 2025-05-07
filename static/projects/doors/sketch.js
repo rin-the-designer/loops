@@ -216,6 +216,10 @@ function resetScene() {
 	fadeStartTime = millis();
 }
 
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
+
 // trial for adding lights - Pranav told me to get rid of it
 // let lightColor = isWhiteScene ? 30 : 255;
 // push();

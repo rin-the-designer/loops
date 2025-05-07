@@ -138,3 +138,7 @@ function draw() {
 function gotHands(results) {
 	hands = results;
 }
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
