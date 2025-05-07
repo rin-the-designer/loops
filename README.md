@@ -1,58 +1,20 @@
-# create-svelte
+# Loops
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## Artist Statement
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+The Loops is a collection of digital artworks that explore the cycles and repetitions woven into everyday life. These works visualize the tension between involuntary loops, patterns we find ourselves caught in, and the chosen thresholds where we assert meaning and agency.
 
-## Creating a project
+This project was born from personal reflection after a period of intense creative work, where I found myself questioning the purpose of repetitive actions and daily rituals. Rather than resisting these loops, I began to see them as rivers: continuous, sometimes absurd, but also full of quiet energy and possibility. Just as a river moves forward while following its banks, I follow the paths given to me, yet at every threshold, I make choices that shape who I am.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Through a series of animations and interactive sketches made in JavaScript, I invite viewers to experience cycles that may seem meaningless on the surface, but hold the potential for discovery, reflection, and transformation. Each loop, each repetition, becomes not just a constraint, but an opportunity to ask: What narratives emerge from the tension between involuntary loops and chosen thresholds?
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Project Goal
 
-# create a new project in my-app
-npx sv create my-app
-```
+The goal of this project is to invite the audience to reflect on their own 'loops' and 'thresholds.' Though life often feels absurd, repetitive, and beyond our control, this project encourages viewers to recognize that even within involuntary cycles, there are moments of choice, thresholds where meaning can be created.
 
-## Developing
+By experiencing these digital loops, I hope the audience will pause to consider the patterns they find themselves repeating, and the subtle moments where they can decide how to interpret or respond. The work suggests that rather than resisting these loops, we can accept their presence, embrace their absurdity, and ultimately regain a sense of agency.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Technology Stack
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
-
-## Building
-
-To build your library:
-
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+- Frontend: SvelteKit
+- Deployment: Vercel

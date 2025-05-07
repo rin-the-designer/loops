@@ -1,0 +1,13 @@
+{
+	"version": 2,
+	"routes": [
+		{
+			"src": "/projects/([^/]+)/index.html",
+			"dest": "/static/projects/$1/index.html"
+		},
+		{
+			"src": "/projects/([^/]+)/(.*\\.(js|css|mp3|png|jpg|svg))",
+			"dest": "/static/projects/$1/$2"
+		}
+	]
+}
