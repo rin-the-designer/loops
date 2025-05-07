@@ -7,6 +7,10 @@
 		route: string;
 		guide: string;
 		description: string;
+		interaction: {
+			type: 'camera' | 'click' | 'audio';
+			optional?: boolean;
+		}[];
 	}
 
 	export let project: Project;
@@ -35,7 +39,18 @@
 	<div class="description">
 		{@html project.description}
 	</div>
-	<div class="guide">{project.guide}</div>
+	<div class="guide">
+		<div class="interaction-icons">
+			{#each project.interaction as interaction}
+				<img
+					src="/icons/{interaction.type}.svg"
+					alt="{interaction.type} interaction"
+					class:optional={interaction.optional}
+				/>
+			{/each}
+		</div>
+		<div class="guide-text">{project.guide}</div>
+	</div>
 	<button on:click={handleEnter}>↳ Enter</button>
 </div>
 
@@ -58,14 +73,35 @@
 
 	.guide {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
+		gap: 1rem;
 		justify-content: center;
-		white-space: pre-wrap;
-		text-align: center;
+		background-color: #000;
+		padding: 1rem;
+	}
+
+	.interaction-icons {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		align-items: center;
+	}
+
+	.interaction-icons img {
+		width: 48px;
+		height: 48px;
+	}
+
+	.interaction-icons img.optional {
+		opacity: 0.2;
+	}
+
+	.guide-text {
 		font-size: 1.2rem;
 		line-height: 1.5;
-		padding: 1rem;
-		background-color: #000;
+		white-space: pre-wrap;
+		text-align: center;
 	}
 
 	button {
@@ -108,6 +144,15 @@
 			white-space: pre-line;
 			border-top: 2px solid white;
 			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+		}
+
+		.guide-text {
+			font-size: 1rem;
+		}
+
+		.interaction-icons img {
+			width: 36px;
+			height: 36px;
 		}
 
 		button {

@@ -156,7 +156,7 @@ function draw() {
 	rotateY(cameraRotation);
 
 	//lights();
-	orbitControl(1, 0, 0);
+	// orbitControl(1, 0, 0);
 
 	push();
 	fill(15);

@@ -19,13 +19,91 @@ let isWhiteScene = false;
 let opacity = 255;
 let fadeStartTime = 0;
 
+// For body pose detection
+let video;
+let bodyPose;
+let poses = [];
+let cameraRotation = 0;
+let isVisible = false;
+
+function preload() {
+	bodyPose = ml5.bodyPose({ flipped: true });
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	background(0);
+
+	// Set up intersection observer
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				isVisible = entry.isIntersecting;
+				if (isVisible) {
+					// Start camera when visible
+					if (!video) {
+						video = createCapture(VIDEO, { flipped: true });
+						video.size(width, height);
+						video.hide();
+						bodyPose.detectStart(video, gotPoses);
+					}
+				} else {
+					// Stop camera when not visible
+					if (video) {
+						video.remove();
+						video = null;
+						bodyPose.detectStop();
+					}
+				}
+			});
+		},
+		{ threshold: 0.5 }
+	); // Trigger when 50% of the iframe is visible
+
+	// Start observing the canvas
+	observer.observe(canvas);
+}
+
+function gotPoses(results) {
+	poses = results;
+}
+
+function updateCameraRotation() {
+	if (!isVisible || !poses.length) return;
+
+	let facePose = poses[0];
+	let validPoints = 0;
+	let sum = 0;
+
+	// Using direct property access which is more reliable
+	const faceKeypoints = [
+		facePose.nose,
+		facePose.left_eye,
+		facePose.right_eye,
+		facePose.left_ear,
+		facePose.right_ear
+	];
+
+	// Average facial keypoints
+	for (let i = 0; i < faceKeypoints.length; i++) {
+		if (faceKeypoints[i] && faceKeypoints[i].confidence > 0.3) {
+			sum += faceKeypoints[i].x;
+			validPoints++;
+		}
+	}
+
+	if (validPoints > 0) {
+		// Calculate normalized position (-1 to 1)
+		let normalizedX = (sum / validPoints / width) * 2 - 1;
+		// Map to rotation angle (1 to -1 degrees, inverted)
+		let targetRotation = map(normalizedX, -1, 1, 0.5, -0.5);
+		// Smoothly transition to new rotation
+		cameraRotation = lerp(cameraRotation, targetRotation, 0.1);
+	}
 }
 
 function draw() {
-	//orbitControl(1, 0, 1);
+	// orbitControl(1, 0, 0);
 
 	let progress = map(currentOffset.z, FINAL_MOVEMENT, FINAL_MOVEMENT + 400, 0, 1);
 	progress = constrain(progress, 0, 1);
@@ -35,6 +113,11 @@ function draw() {
 	background(bgColor);
 	lights();
 	noStroke();
+
+	// Update camera rotation based on face position
+	updateCameraRotation();
+	// Apply camera rotation
+	rotateY(cameraRotation);
 
 	// fade-in effect for scene transition
 	if (fadeStartTime > 0) {

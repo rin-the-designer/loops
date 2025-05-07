@@ -6,6 +6,10 @@ export interface Project {
 	excerpt: string;
 	guide: string;
 	description: string;
+	interaction: {
+		type: 'camera' | 'click' | 'audio' | 'flash';
+		optional?: boolean;
+	}[];
 }
 
 export const projectData: Project[] = [
@@ -15,6 +19,7 @@ export const projectData: Project[] = [
 		route: '/projects/myth-of-sisyphus',
 		thumbnail: '/projects/myth-of-sisyphus/thumb.png',
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+		interaction: [{ type: 'camera' }, { type: 'click' }],
 		excerpt:
 			'A visual represenation of a philosophical essay that explores the concept of the absurd and the human search for meaning in a meaningless world.',
 		description: `<p style="margin-block-start: 0;">
@@ -53,7 +58,9 @@ export const projectData: Project[] = [
 		slug: 'doors',
 		route: '/projects/doors',
 		thumbnail: '/projects/doors/thumb.png',
-		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		guide:
+			'This project contains audio.\nPlease ensure your volume is turned on.\nCamera input is optional.',
+		interaction: [{ type: 'audio' }, { type: 'camera', optional: true }],
 		excerpt:
 			'A continuous cylce of black and white doors representing the transitions we experience in life.',
 		description: `<p style="margin-block-start: 0;">
@@ -78,8 +85,8 @@ export const projectData: Project[] = [
 		slug: 'accumulation',
 		route: '/projects/accumulation',
 		thumbnail: '/projects/accumulation/thumb.png',
-		guide:
-			'This project contains audio and click interaction.\nPlease ensure your volume is turned on.',
+		guide: 'This project utilizes click interaction.\nAudio is optional.',
+		interaction: [{ type: 'click' }, { type: 'audio', optional: true }],
 		excerpt: 'A digital reflection of the accumulation of small, repetitive actions.',
 		description: `<p style="margin-block-start: 0;">
 			Accumulation is a digital reflection of a physical process: drawing a black circle,
@@ -112,7 +119,8 @@ export const projectData: Project[] = [
 		slug: 'zen-garden',
 		route: '/projects/zen-garden',
 		thumbnail: '/projects/zen-garden/thumb.png',
-		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		guide: 'Audio is optional.',
+		interaction: [{ type: 'audio', optional: true }],
 		excerpt:
 			'A visualized graphic of a Karesansui, focusing on the tranquility and patterns of the raking.',
 		description: `<p style="margin-block-start: 0;">
@@ -134,6 +142,7 @@ export const projectData: Project[] = [
 		route: '/projects/incense',
 		thumbnail: '/projects/incense/thumb.png',
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+		interaction: [{ type: 'camera' }],
 		excerpt:
 			'A visualization of the burning of incense, changing directions through human interaction.',
 		description: `<p style="margin-block-start: 0;">
@@ -152,7 +161,9 @@ export const projectData: Project[] = [
 		slug: 'playground-spinner',
 		route: '/projects/playground-spinner',
 		thumbnail: '/projects/playground-spinner/thumb.png',
-		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		guide:
+			'This project utilizes camera input.\nPlease allow access to your camera.\nPotentially flashing content.',
+		interaction: [{ type: 'camera' }, { type: 'flash' }],
 		excerpt: 'A childhood memory.',
 		description: `<p style="margin-block-start: 0;">
 			Playground Spinner is a nostalgic trip down memory lane. It is a simple
@@ -165,7 +176,8 @@ export const projectData: Project[] = [
 		slug: 'continuance',
 		route: '/projects/continuance',
 		thumbnail: '/projects/continuance/thumb.png',
-		guide: 'No interaction required.',
+		guide: 'Camera input is optional.',
+		interaction: [{ type: 'camera', optional: true }],
 		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
 		description: `<p style="margin-block-start: 0;">
 			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
