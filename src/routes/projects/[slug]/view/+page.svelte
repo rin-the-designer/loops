@@ -31,7 +31,7 @@
 
 <div class="iframe-container">
 	<iframe
-		src={`/projects/${slug}/index.html`}
+		src={`/static/projects/${slug}/index.html`}
 		title="{slug} Project"
 		on:load={handleIframeLoad}
 		class:loaded={iframeLoaded}
