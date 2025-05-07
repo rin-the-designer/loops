@@ -1,5 +1,9 @@
 html {
-	background-color: #111;
+	background-color: #0f0f0f;
+}
+
+body {
+	margin: 0;
 }
 
 .title {
@@ -37,4 +41,12 @@ html {
 	font-size: 1.25rem;
 	line-height: 1.5;
 	margin-bottom: 1.2em;
+}
+
+.cofee iframe {
+	border: none;
+	width: 100vw;
+	height: 60vh;
+	display: block;
+	margin: 8rem auto 0 auto;
 }

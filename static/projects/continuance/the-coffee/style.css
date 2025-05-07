@@ -2,9 +2,9 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+	background-color: #111;
 	overflow: hidden;
 	font-family: 'Inter', sans-serif;
-	background-color: #ffffff; /* Sand-like background color */
 }
 
 canvas {

@@ -48,3 +48,27 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 	});
 });
+
+// // Wait for the page to load
+// window.addEventListener('load', () => {
+// 	// Get the iframe element
+// 	const iframe = document.querySelector('.cofee iframe');
+
+// 	// Add wheel event listener to the iframe
+// 	iframe.addEventListener(
+// 		'wheel',
+// 		(e) => {
+// 			// Prevent default to avoid double scrolling
+// 			e.preventDefault();
+
+// 			// Create and dispatch a new wheel event
+// 			const wheelEvent = new WheelEvent('wheel', {
+// 				deltaY: e.deltaY,
+// 				deltaMode: e.deltaMode,
+// 				bubbles: true
+// 			});
+// 			document.dispatchEvent(wheelEvent);
+// 		},
+// 		{ passive: false }
+// 	);
+// });

@@ -175,21 +175,5 @@ export const projectData: Project[] = [
 		<p style="margin-block-start: 0;">
 			This work is a complemntary piece to the other projects in this collection.
 		</p>`
-	},
-	{
-		title: 'The Coffee',
-		slug: 'the-coffee',
-		route: '/projects/the-coffee',
-		thumbnail: '/projects/the-coffee/thumb.png',
-		guide: 'No interaction required.',
-		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
-		description: `<p style="margin-block-start: 0;">
-			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
-			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
-			and finding a way to continue.
-		</p>
-		<p style="margin-block-start: 0;">
-			This work is a complemntary piece to the other projects in this collection.
-		</p>`
 	}
 ];

@@ -22,6 +22,7 @@ let bodyPose;
 let poses = [];
 let targetX;
 let cameraRotation = 0;
+let isVisible = false;
 
 function preload() {
 	bodyPose = ml5.bodyPose({ flipped: true });
@@ -50,10 +51,34 @@ function setup() {
 	cupR = 25 * multiplier;
 	cupH = 50 * multiplier;
 
-	video = createCapture(VIDEO, { flipped: true });
-	video.size(width, height);
-	video.hide();
-	bodyPose.detectStart(video, gotPoses);
+	// Set up intersection observer
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				isVisible = entry.isIntersecting;
+				if (isVisible) {
+					// Start camera when visible
+					if (!video) {
+						video = createCapture(VIDEO, { flipped: true });
+						video.size(width, height);
+						video.hide();
+						bodyPose.detectStart(video, gotPoses);
+					}
+				} else {
+					// Stop camera when not visible
+					if (video) {
+						video.remove();
+						video = null;
+						bodyPose.detectStop();
+					}
+				}
+			});
+		},
+		{ threshold: 0.5 }
+	); // Trigger when 50% of the iframe is visible
+
+	// Start observing the iframe
+	observer.observe(document.querySelector('main'));
 }
 
 function gotPoses(results) {
@@ -61,36 +86,36 @@ function gotPoses(results) {
 }
 
 function updateCameraRotation() {
-	if (poses.length > 0) {
-		let facePose = poses[0];
-		let validPoints = 0;
-		let sum = 0;
+	if (!isVisible || !poses.length) return;
 
-		// Using direct property access which is more reliable
-		const faceKeypoints = [
-			facePose.nose,
-			facePose.left_eye,
-			facePose.right_eye,
-			facePose.left_ear,
-			facePose.right_ear
-		];
+	let facePose = poses[0];
+	let validPoints = 0;
+	let sum = 0;
 
-		// Average facial keypoints
-		for (let i = 0; i < faceKeypoints.length; i++) {
-			if (faceKeypoints[i] && faceKeypoints[i].confidence > 0.3) {
-				sum += faceKeypoints[i].x;
-				validPoints++;
-			}
+	// Using direct property access which is more reliable
+	const faceKeypoints = [
+		facePose.nose,
+		facePose.left_eye,
+		facePose.right_eye,
+		facePose.left_ear,
+		facePose.right_ear
+	];
+
+	// Average facial keypoints
+	for (let i = 0; i < faceKeypoints.length; i++) {
+		if (faceKeypoints[i] && faceKeypoints[i].confidence > 0.3) {
+			sum += faceKeypoints[i].x;
+			validPoints++;
 		}
+	}
 
-		if (validPoints > 0) {
-			// Calculate normalized position (-1 to 1)
-			let normalizedX = (sum / validPoints / width) * 2 - 1;
-			// Map to rotation angle (30 to -30 degrees, inverted)
-			let targetRotation = map(normalizedX, -1, 1, 30, -30);
-			// Smoothly transition to new rotation
-			cameraRotation = lerp(cameraRotation, targetRotation, 0.1);
-		}
+	if (validPoints > 0) {
+		// Calculate normalized position (-1 to 1)
+		let normalizedX = (sum / validPoints / width) * 2 - 1;
+		// Map to rotation angle (30 to -30 degrees, inverted)
+		let targetRotation = map(normalizedX, -1, 1, 30, -30);
+		// Smoothly transition to new rotation
+		cameraRotation = lerp(cameraRotation, targetRotation, 0.1);
 	}
 }
 
