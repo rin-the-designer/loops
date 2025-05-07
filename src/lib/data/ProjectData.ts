@@ -198,7 +198,7 @@ export const projectData: Project[] = [
 		excerpt: 'A visualization of the thresholds we face in the loop of life.',
 		description: `<p style="margin-block-start: 0;">
 			Thresholds takes this project back to the beginning. The project started out with
-			myself defining unvoluntary circumstances and the voluntary actions that we take as loops
+			myself defining involuntary circumstances and the voluntary actions that we take as loops
 			and thresholds. This project is a coded version of the first sketch I created for this collection.
 		</p>
 		<p style="margin-block-start: 0;">
