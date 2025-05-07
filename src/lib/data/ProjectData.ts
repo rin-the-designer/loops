@@ -78,7 +78,8 @@ export const projectData: Project[] = [
 		slug: 'accumulation',
 		route: '/projects/accumulation',
 		thumbnail: '/projects/accumulation/thumb.png',
-		guide: 'This project contains audio.\nPlease ensure your volume is turned on.',
+		guide:
+			'This project contains audio and click interaction.\nPlease ensure your volume is turned on.',
 		excerpt: 'A digital reflection of the accumulation of small, repetitive actions.',
 		description: `<p style="margin-block-start: 0;">
 			Accumulation is a digital reflection of a physical process: drawing a black circle,
@@ -164,6 +165,22 @@ export const projectData: Project[] = [
 		slug: 'continuance',
 		route: '/projects/continuance',
 		thumbnail: '/projects/continuance/thumb.png',
+		guide: 'No interaction required.',
+		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
+		description: `<p style="margin-block-start: 0;">
+			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
+			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
+			and finding a way to continue.
+		</p>
+		<p style="margin-block-start: 0;">
+			This work is a complemntary piece to the other projects in this collection.
+		</p>`
+	},
+	{
+		title: 'The Coffee',
+		slug: 'the-coffee',
+		route: '/projects/the-coffee',
+		thumbnail: '/projects/the-coffee/thumb.png',
 		guide: 'No interaction required.',
 		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
 		description: `<p style="margin-block-start: 0;">

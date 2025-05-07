@@ -9,7 +9,6 @@ let colors = ['#FF8800', '#0F0F0F', '#000000'];
 let video;
 let bodyPose;
 let poses = [];
-let connections;
 let targetX;
 
 function preload() {
