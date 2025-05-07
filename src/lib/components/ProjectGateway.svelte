@@ -43,7 +43,7 @@
 		<div class="interaction-icons">
 			{#each project.interaction as interaction}
 				<img
-					src="/static/icons/{interaction.type}.svg"
+					src="/icons/{interaction.type}.svg"
 					alt="{interaction.type} interaction"
 					class:optional={interaction.optional}
 				/>

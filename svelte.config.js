@@ -11,7 +11,13 @@ const config = {
 		// adapter-auto handles detecting the deployment platform automatically
 		adapter: adapter(),
 
-		// Ensure this static directory is properly mapped
+		// Define paths for assets
+		paths: {
+			base: '',
+			assets: ''
+		},
+
+		// Define where static files are located
 		files: {
 			assets: 'static'
 		}
