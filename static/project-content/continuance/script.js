@@ -23,11 +23,11 @@ function animateWeight() {
 document.addEventListener('DOMContentLoaded', animateWeight);
 
 const sections = [
-	{ id: 'familiar', file: 'the-familiar.txt' },
-	{ id: 'ripple', file: 'the-ripple.txt' },
-	{ id: 'spiral', file: 'the-spiral.txt' },
-	{ id: 'acceptance', file: 'the-accpetance.txt' }, // fix filename if needed
-	{ id: 'continuance', file: 'the-continuance.txt' }
+	{ id: 'familiar', file: '/project-content/continuance/the-familiar.txt' },
+	{ id: 'ripple', file: '/project-content/continuance/the-ripple.txt' },
+	{ id: 'spiral', file: '/project-content/continuance/the-spiral.txt' },
+	{ id: 'acceptance', file: '/project-content/continuance/the-accpetance.txt' }, // fix filename if needed
+	{ id: 'continuance', file: '/project-content/continuance/the-continuance.txt' }
 ];
 
 function textToParagraphs(text) {
