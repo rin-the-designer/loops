@@ -18,3 +18,5 @@ By experiencing these digital loops, I hope the audience will pause to consider 
 
 - Frontend: SvelteKit
 - Deployment: Vercel
+- Canvas: p5.js
+- Motion Sensing: ml5.js

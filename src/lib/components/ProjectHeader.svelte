@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let title: string;
 
@@ -7,7 +8,7 @@
 	let hideTimeout: ReturnType<typeof setTimeout>;
 
 	function goBack() {
-		history.back();
+		goto('/');
 	}
 
 	function handleUserActivity() {
