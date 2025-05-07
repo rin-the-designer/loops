@@ -2,18 +2,22 @@ import type { PageServerLoad } from './$types.js';
 import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ cookies, url, params }) => {
-	// Check for a special cookie that might be set by the gateway page
+	// Strict enforcement of redirection rules:
+	// 1. If we have a verified gateway visit (cookie), allow this access
+	// 2. If we have a direct from_gateway param, allow this access
+	// 3. Otherwise, force redirect to the gateway page
+
+	// Check for both sources of valid access
 	const hasVisitedGateway = cookies.get(`visited_gateway_${params.slug}`);
 	const fromGatewayParam = url.searchParams.has('from_gateway');
 
-	// If there's a direct access to the view URL without the proper cookie or query param,
-	// redirect to the gateway page
+	// Stronger redirect rule - both conditions must fail to trigger redirect
 	if (!hasVisitedGateway && !fromGatewayParam) {
-		// This is a server-side redirect, will work on Vercel
+		// Force redirect to gateway to prevent direct access to view
 		return redirect(302, `/projects/${params.slug}`);
 	}
 
-	// Otherwise, allow the page to load
+	// We have verification of prior gateway visit, allow the view page to load
 	return {
 		slug: params.slug
 	};

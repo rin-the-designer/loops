@@ -12,30 +12,53 @@
 		iframeLoaded = true;
 	}
 
+	function hasCookie(name: string): boolean {
+		return document.cookie.split(';').some((item) => item.trim().startsWith(`${name}=`));
+	}
+
+	// Immediately set isGatewayOpen to false for the view page
+	if (typeof window !== 'undefined') {
+		window.isGatewayOpen = false;
+	}
+
 	$: slug = $page.params.slug;
 	$: currentProject = projectData.find((project: Project) => project.slug === slug);
 
 	onMount(() => {
-		// Check if we came from the gateway
+		// Set title
+		document.title = `${currentProject?.title || 'Project'} View`;
+
+		// Set iframe mode immediately
+		window.isGatewayOpen = false;
+
+		// Multiple checks to determine if we should stay on view or redirect to gateway
 		const fromGateway = sessionStorage.getItem('coming_from_gateway');
 		const fromGatewayParam = $page.url.searchParams.has('from_gateway');
+		const hasVisitedCookie = hasCookie(`visited_gateway_${slug}`);
 
-		shouldRedirect = !fromGateway && !fromGatewayParam;
+		// Only redirect if we have no indication this is a valid view access
+		shouldRedirect = !fromGateway && !fromGatewayParam && !hasVisitedCookie;
 
 		if (shouldRedirect) {
 			// If not from gateway, redirect back to gateway
 			goto(`/projects/${slug}`);
 		} else {
-			// Clear the flag so future refreshes will use the server check
+			// For first time access, set a cookie to remember for future refreshes
+			if (fromGateway || fromGatewayParam) {
+				const expiryTime = new Date();
+				expiryTime.setMinutes(expiryTime.getMinutes() + 30);
+				document.cookie = `visited_gateway_${slug}=true; expires=${expiryTime.toUTCString()}; path=/`;
+			}
+
+			// Clear the sessionStorage flag as we've now set the cookie
 			sessionStorage.removeItem('coming_from_gateway');
-			// Mark that we're not in gateway mode
-			window.isGatewayOpen = false;
 		}
 	});
 </script>
 
 <svelte:head>
 	<script>
+		// Force non-gateway mode at the earliest possible moment
 		window.isGatewayOpen = false;
 	</script>
 </svelte:head>
