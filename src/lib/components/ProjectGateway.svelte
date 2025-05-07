@@ -8,7 +8,7 @@
 		guide: string;
 		description: string;
 		interaction: {
-			type: 'camera' | 'click' | 'audio';
+			type: 'camera' | 'click' | 'audio' | 'flash';
 			optional?: boolean;
 		}[];
 	}

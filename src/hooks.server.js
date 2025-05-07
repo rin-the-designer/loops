@@ -3,12 +3,12 @@
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
-	const { url, request, isDataRequest } = event;
+	const { url, isDataRequest } = event;
 	const { pathname } = url;
 
 	// Only apply to non-data requests to view pages
 	if (!isDataRequest && pathname.includes('/projects/') && pathname.endsWith('/view')) {
-		// Check cookies using the same logic as page.server.ts
+		// Check cookies
 		const slug = pathname.split('/').slice(-2)[0];
 		const hasVisitedGateway = event.cookies.get(`visited_gateway_${slug}`);
 		const fromGatewayParam = url.searchParams.has('from_gateway');

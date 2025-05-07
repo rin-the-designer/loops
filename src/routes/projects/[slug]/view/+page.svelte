@@ -7,7 +7,6 @@
 
 	let iframeLoaded = false;
 	let shouldRedirect = false;
-	let metaRedirectAdded = false;
 
 	function handleIframeLoad() {
 		iframeLoaded = true;
@@ -32,7 +31,7 @@
 		// Set iframe mode immediately
 		window.isGatewayOpen = false;
 
-		// Multiple checks to determine if we should stay on view or redirect to gateway
+		// Check if we came from the gateway
 		const fromGateway = sessionStorage.getItem('coming_from_gateway');
 		const fromGatewayParam = $page.url.searchParams.has('from_gateway');
 		const hasVisitedCookie = hasCookie(`visited_gateway_${slug}`);
@@ -43,15 +42,6 @@
 		if (shouldRedirect) {
 			// If not from gateway, redirect back to gateway
 			goto(`/projects/${slug}`);
-
-			// Add a meta redirect as a failsafe for Vercel
-			if (!metaRedirectAdded) {
-				const meta = document.createElement('meta');
-				meta.httpEquiv = 'refresh';
-				meta.content = `0;url=/projects/${slug}`;
-				document.head.appendChild(meta);
-				metaRedirectAdded = true;
-			}
 		} else {
 			// For first time access, set a cookie to remember for future refreshes
 			if (fromGateway || fromGatewayParam) {
@@ -71,11 +61,6 @@
 		// Force non-gateway mode at the earliest possible moment
 		window.isGatewayOpen = false;
 	</script>
-
-	{#if shouldRedirect}
-		<!-- Fallback redirect mechanism for Vercel -->
-		<meta http-equiv="refresh" content="0;url=/projects/{slug}" />
-	{/if}
 </svelte:head>
 
 <ProjectHeader title={currentProject?.title || ''} />
@@ -83,7 +68,7 @@
 {#if !shouldRedirect}
 	<div class="iframe-container">
 		<iframe
-			src={`/projects/${slug}/index.html`}
+			src={`/project-content/${slug}/index.html`}
 			title="{slug} Project"
 			on:load={handleIframeLoad}
 			class:loaded={iframeLoaded}

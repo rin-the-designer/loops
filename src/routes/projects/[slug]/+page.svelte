@@ -24,45 +24,29 @@
 		goto(`/projects/${slug}/view?from_gateway=true`);
 	}
 
-	// Immediately set the flag to ensure it's available before the page renders
+	// Set the gateway flag
 	if (typeof window !== 'undefined') {
 		window.isGatewayOpen = true;
-
-		// Forcibly remove any existing iframes that might be present
-		setTimeout(() => {
-			const iframes = document.querySelectorAll('iframe');
-			iframes.forEach((iframe) => iframe.remove());
-		}, 0);
 	}
 
 	onMount(() => {
-		// Explicitly set to true to ensure we're in gateway mode
-		window.isGatewayOpen = true;
+		// Set title
 		document.title = `${currentProject?.title || 'Project'} Gateway`;
+
+		// Ensure we're in gateway mode
+		window.isGatewayOpen = true;
 
 		// Clear any navigation state that might cause issues
 		if (sessionStorage.getItem('coming_from_gateway')) {
 			sessionStorage.removeItem('coming_from_gateway');
 		}
-
-		// Double-check to remove any iframes that might be getting loaded
-		const iframes = document.querySelectorAll('iframe');
-		iframes.forEach((iframe) => iframe.remove());
 	});
 </script>
 
 <svelte:head>
 	<script>
-		// Force gateway mode at the earliest possible moment
+		// Set gateway mode
 		window.isGatewayOpen = true;
-
-		// Prevent any iframe loading on this page
-		window.addEventListener('DOMContentLoaded', function () {
-			const iframes = document.querySelectorAll('iframe');
-			iframes.forEach(function (iframe) {
-				iframe.remove();
-			});
-		});
 	</script>
 </svelte:head>
 
