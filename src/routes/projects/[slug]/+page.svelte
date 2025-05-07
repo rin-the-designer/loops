@@ -2,12 +2,14 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import ProjectGateway from '$lib/components/ProjectGateway.svelte';
-	import { projectData, type Project } from '$lib/data/ProjectData';
 	import ProjectHeader from '$lib/components/ProjectHeader.svelte';
 	import { onMount } from 'svelte';
 
+	// Get data from server component
+	export let data;
+
+	$: currentProject = data.project;
 	$: slug = $page.params.slug;
-	$: currentProject = projectData.find((project: Project) => project.slug === slug);
 
 	function enterProject() {
 		// Store that we're navigating from the gateway
