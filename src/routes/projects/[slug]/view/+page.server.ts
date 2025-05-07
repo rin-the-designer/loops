@@ -1,7 +1,8 @@
 import type { PageServerLoad } from './$types.js';
 import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ cookies, url, params }) => {
+// Force a hard redirect for Vercel deployments
+export const load: PageServerLoad = async ({ cookies, url, params, setHeaders }) => {
 	// Strict enforcement of redirection rules:
 	// 1. If we have a verified gateway visit (cookie), allow this access
 	// 2. If we have a direct from_gateway param, allow this access
@@ -13,8 +14,16 @@ export const load: PageServerLoad = async ({ cookies, url, params }) => {
 
 	// Stronger redirect rule - both conditions must fail to trigger redirect
 	if (!hasVisitedGateway && !fromGatewayParam) {
+		// Extra headers to prevent caching and ensure redirect works on Vercel
+		setHeaders({
+			'Cache-Control': 'no-cache, no-store, must-revalidate',
+			Pragma: 'no-cache',
+			Expires: '0'
+		});
+
 		// Force redirect to gateway to prevent direct access to view
-		return redirect(302, `/projects/${params.slug}`);
+		// Using 307 (Temporary Redirect) to ensure method and body are preserved
+		return redirect(307, `/projects/${params.slug}`);
 	}
 
 	// We have verification of prior gateway visit, allow the view page to load

@@ -7,6 +7,7 @@
 
 	let iframeLoaded = false;
 	let shouldRedirect = false;
+	let metaRedirectAdded = false;
 
 	function handleIframeLoad() {
 		iframeLoaded = true;
@@ -42,6 +43,15 @@
 		if (shouldRedirect) {
 			// If not from gateway, redirect back to gateway
 			goto(`/projects/${slug}`);
+
+			// Add a meta redirect as a failsafe for Vercel
+			if (!metaRedirectAdded) {
+				const meta = document.createElement('meta');
+				meta.httpEquiv = 'refresh';
+				meta.content = `0;url=/projects/${slug}`;
+				document.head.appendChild(meta);
+				metaRedirectAdded = true;
+			}
 		} else {
 			// For first time access, set a cookie to remember for future refreshes
 			if (fromGateway || fromGatewayParam) {
@@ -61,6 +71,11 @@
 		// Force non-gateway mode at the earliest possible moment
 		window.isGatewayOpen = false;
 	</script>
+
+	{#if shouldRedirect}
+		<!-- Fallback redirect mechanism for Vercel -->
+		<meta http-equiv="refresh" content="0;url=/projects/{slug}" />
+	{/if}
 </svelte:head>
 
 <ProjectHeader title={currentProject?.title || ''} />

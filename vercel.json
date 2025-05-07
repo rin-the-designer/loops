@@ -1,1 +1,29 @@
-{}
+{
+	"version": 2,
+	"cleanUrls": true,
+	"headers": [
+		{
+			"source": "/projects/(.*)/view",
+			"headers": [
+				{
+					"key": "Cache-Control",
+					"value": "no-cache, no-store, must-revalidate"
+				},
+				{
+					"key": "Pragma",
+					"value": "no-cache"
+				},
+				{
+					"key": "Expires",
+					"value": "0"
+				}
+			]
+		}
+	],
+	"rewrites": [
+		{
+			"source": "/projects/:slug/index.html",
+			"destination": "/projects/:slug/index.html"
+		}
+	]
+}

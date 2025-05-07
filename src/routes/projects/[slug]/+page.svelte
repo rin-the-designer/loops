@@ -27,6 +27,12 @@
 	// Immediately set the flag to ensure it's available before the page renders
 	if (typeof window !== 'undefined') {
 		window.isGatewayOpen = true;
+
+		// Forcibly remove any existing iframes that might be present
+		setTimeout(() => {
+			const iframes = document.querySelectorAll('iframe');
+			iframes.forEach((iframe) => iframe.remove());
+		}, 0);
 	}
 
 	onMount(() => {
@@ -38,6 +44,10 @@
 		if (sessionStorage.getItem('coming_from_gateway')) {
 			sessionStorage.removeItem('coming_from_gateway');
 		}
+
+		// Double-check to remove any iframes that might be getting loaded
+		const iframes = document.querySelectorAll('iframe');
+		iframes.forEach((iframe) => iframe.remove());
 	});
 </script>
 
@@ -45,6 +55,14 @@
 	<script>
 		// Force gateway mode at the earliest possible moment
 		window.isGatewayOpen = true;
+
+		// Prevent any iframe loading on this page
+		window.addEventListener('DOMContentLoaded', function () {
+			const iframes = document.querySelectorAll('iframe');
+			iframes.forEach(function (iframe) {
+				iframe.remove();
+			});
+		});
 	</script>
 </svelte:head>
 
