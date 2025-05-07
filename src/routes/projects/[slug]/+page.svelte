@@ -4,6 +4,7 @@
 	import ProjectGateway from '$lib/components/ProjectGateway.svelte';
 	import { projectData, type Project } from '$lib/data/ProjectData';
 	import ProjectHeader from '$lib/components/ProjectHeader.svelte';
+	import { onMount } from 'svelte';
 
 	$: slug = $page.params.slug;
 	$: currentProject = projectData.find((project: Project) => project.slug === slug);
@@ -11,7 +12,14 @@
 	function enterProject() {
 		// Store that we're navigating from the gateway
 		sessionStorage.setItem('coming_from_gateway', 'true');
-		goto(`/projects/${slug}/view`);
+
+		// Set a cookie that expires in 30 minutes
+		const expiryTime = new Date();
+		expiryTime.setMinutes(expiryTime.getMinutes() + 30);
+		document.cookie = `visited_gateway_${slug}=true; expires=${expiryTime.toUTCString()}; path=/`;
+
+		// Navigate to the view page with a query parameter for additional verification
+		goto(`/projects/${slug}/view?from_gateway=true`);
 		window.isGatewayOpen = false;
 	}
 </script>

@@ -2,6 +2,10 @@
 	"version": 2,
 	"routes": [
 		{
+			"src": "/static/(.*)",
+			"dest": "/static/$1"
+		},
+		{
 			"src": "/static/projects/([^/]+)/thumb.png",
 			"dest": "/static/projects/$1/thumb.png"
 		},
@@ -22,6 +26,14 @@
 		{
 			"source": "/static/:path*",
 			"destination": "/static/:path*"
+		},
+		{
+			"source": "/projects/:slug",
+			"destination": "/projects/:slug"
+		},
+		{
+			"source": "/projects/:slug/view",
+			"destination": "/projects/:slug/view"
 		}
 	]
 }
