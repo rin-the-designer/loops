@@ -24,6 +24,16 @@
 		goto(`/projects/${slug}/view?from_gateway=true`);
 		window.isGatewayOpen = false;
 	}
+
+	onMount(() => {
+		// Ensure we're in gateway mode when on this page
+		window.isGatewayOpen = true;
+
+		// Clear any lingering state that might cause iframe issues
+		if (sessionStorage.getItem('coming_from_gateway')) {
+			sessionStorage.removeItem('coming_from_gateway');
+		}
+	});
 </script>
 
 <svelte:head>

@@ -2,10 +2,11 @@
 	import { page } from '$app/stores';
 	import { onMount, afterUpdate } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { projectData, type Project } from '$lib/data/ProjectData';
+	import { projectData, type Project } from '$lib/data/ProjectData.js';
 	import ProjectHeader from '$lib/components/ProjectHeader.svelte';
 
 	let iframeLoaded = false;
+	let shouldRedirect = false;
 
 	function handleIframeLoad() {
 		iframeLoaded = true;
@@ -17,27 +18,41 @@
 	onMount(() => {
 		// Check if we came from the gateway
 		const fromGateway = sessionStorage.getItem('coming_from_gateway');
-		if (!fromGateway) {
-			// If not, redirect back to the gateway
+		const fromGatewayParam = $page.url.searchParams.has('from_gateway');
+
+		shouldRedirect = !fromGateway && !fromGatewayParam;
+
+		if (shouldRedirect) {
+			// If not from gateway, redirect back to gateway
 			goto(`/projects/${slug}`);
 		} else {
-			// Clear the flag so refreshes will redirect
+			// Clear the flag so future refreshes will use the server check
 			sessionStorage.removeItem('coming_from_gateway');
+			// Mark that we're not in gateway mode
+			window.isGatewayOpen = false;
 		}
 	});
 </script>
 
+<svelte:head>
+	<script>
+		window.isGatewayOpen = false;
+	</script>
+</svelte:head>
+
 <ProjectHeader title={currentProject?.title || ''} />
 
-<div class="iframe-container">
-	<iframe
-		src={`/projects/${slug}/index.html`}
-		title="{slug} Project"
-		on:load={handleIframeLoad}
-		class:loaded={iframeLoaded}
-		allow="camera; microphone; fullscreen"
-	></iframe>
-</div>
+{#if !shouldRedirect}
+	<div class="iframe-container">
+		<iframe
+			src={`/projects/${slug}/index.html`}
+			title="{slug} Project"
+			on:load={handleIframeLoad}
+			class:loaded={iframeLoaded}
+			allow="camera; microphone; fullscreen"
+		></iframe>
+	</div>
+{/if}
 
 <style>
 	.iframe-container {
