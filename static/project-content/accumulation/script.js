@@ -15,6 +15,34 @@ function setNextColorScheme() {
 	applyColorScheme(colorIndex);
 }
 
+function setCircleSizeFromDistance(event) {
+	// Get viewport center
+	const viewportCenterX = window.innerWidth / 2;
+	const viewportCenterY = window.innerHeight / 2;
+
+	// Get click coordinates
+	const clickX = event.clientX;
+	const clickY = event.clientY;
+
+	// Calculate distance using Pythagorean theorem
+	const distanceX = clickX - viewportCenterX;
+	const distanceY = clickY - viewportCenterY;
+	const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+	// Calculate diameter in pixels
+	const diameterPx = distance * 2;
+
+	// Convert to vw units
+	const diameterVw = (diameterPx / window.innerWidth) * 100;
+
+	// Apply minimum size of 5vw
+	const minSizeVw = 5;
+	const finalSizeVw = Math.max(diameterVw, minSizeVw);
+
+	// Set the circle size
+	document.documentElement.style.setProperty('--circle-size', `${finalSizeVw}vw`);
+}
+
 function setRandomCircleSize() {
 	const minSize = 10;
 	const maxSize = 40;
@@ -92,9 +120,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	applyColorScheme(colorIndex);
 
 	// On every click, change color scheme and circle size
-	document.addEventListener('click', () => {
+	document.addEventListener('click', (event) => {
 		setNextColorScheme();
-		setRandomCircleSize();
+		setCircleSizeFromDistance(event);
 	});
 
 	calculateCurrentSize();

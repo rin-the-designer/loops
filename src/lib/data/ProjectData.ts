@@ -85,9 +85,11 @@ export const projectData: Project[] = [
 		slug: 'accumulation',
 		route: '/projects/accumulation',
 		thumbnail: '/project-content/accumulation/thumb.png',
-		guide: 'This project utilizes click interaction.\nAudio is optional.',
-		interaction: [{ type: 'click' }, { type: 'audio', optional: true }],
-		excerpt: 'A digital reflection of the accumulation of small, repetitive actions.',
+		guide:
+			'This project utilizes click interaction.\nPotentially flashing content.\nAudio is optional.',
+		interaction: [{ type: 'click' }, { type: 'flash' }, { type: 'audio', optional: true }],
+		excerpt:
+			'A digital reflection of the accumulation of small, repetitive actions, adding up to a larger pattern.',
 		description: `<p style="margin-block-start: 0;">
 			Accumulation is a digital reflection of a physical process: drawing a black circle,
 			covering it with white, and repeating. What seems like a simple, meaningless loop
@@ -98,20 +100,18 @@ export const projectData: Project[] = [
 			cycles that feel monotonous on the surface.
 		</p>
 		<p>
-			Inspired by my painting project Blank Canvas, this piece asks the viewer to consider
+			Inspired by my painting project <a
+            href="https://mfadt.rinchong.kim/spring-2025/pgte-5201/ms2-08"
+            target="_blank"
+            style="color: #fff; text-decoration: underline;"
+            >Blank Canvas</a
+          >, this piece asks the viewer to consider
 			what's happening beneath repetition — how mistakes, adjustments, and tiny decisions
 			compound. Even when actions feel routine or insignificant, they leave behind marks
 			that shape what follows. Through code, I recreate that weight and persistence,
 			inviting the audience to slow down and notice how loops, though seemingly
 			meaningless, become records of patience, curiosity, and quiet transformation.
 		</p>
-		<p>
-			Link to <a
-            href="https://mfadt.rinchong.kim/spring-2025/pgte-5201/ms2-08"
-            target="_blank"
-            style="color: #fff; text-decoration: underline;"
-            >'Blank Canvas'</a
-          >
 		`
 	},
 	{
@@ -144,7 +144,7 @@ export const projectData: Project[] = [
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
 		interaction: [{ type: 'camera' }],
 		excerpt:
-			'A visualization of the burning of incense, changing directions through human interaction.',
+			'A visualization of a burning incense, changing directions through human interaction, representing the connection between life and death.',
 		description: `<p style="margin-block-start: 0;">
 			In the asian culture, incense sticks are use for ceremonies and rituals, connecting
 			the spirits of the living and the deceased. All loops in life comes to an end at the end
@@ -164,7 +164,7 @@ export const projectData: Project[] = [
 		guide:
 			'This project utilizes camera input.\nPlease allow access to your camera.\nPotentially flashing content.',
 		interaction: [{ type: 'camera' }, { type: 'flash' }],
-		excerpt: 'A childhood memory.',
+		excerpt: 'A revisit to a childhood playground memory.',
 		description: `<p style="margin-block-start: 0;">
 			Playground Spinner is a nostalgic trip down memory lane. It is a simple
 			playground ride. Yet, looking at it from an adult's perspective, it was
@@ -178,7 +178,7 @@ export const projectData: Project[] = [
 		thumbnail: '/project-content/continuance/thumb.png',
 		guide: 'Camera input is optional.',
 		interaction: [{ type: 'camera', optional: true }],
-		excerpt: 'A fictional story of an artist finding their way through a mundane cycle',
+		excerpt: 'A fictional story of an artist finding their way through a mundane cycle.',
 		description: `<p style="margin-block-start: 0;">
 			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
 			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
@@ -195,7 +195,7 @@ export const projectData: Project[] = [
 		thumbnail: '/project-content/thresholds/thumb.png',
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
 		interaction: [{ type: 'camera' }],
-		excerpt: 'A visualization of the thresholds we face in our lives.',
+		excerpt: 'A visualization of the thresholds we face in the loop of life.',
 		description: `<p style="margin-block-start: 0;">
 			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
 			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
