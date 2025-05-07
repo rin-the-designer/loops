@@ -168,7 +168,7 @@ export const projectData: Project[] = [
 		description: `<p style="margin-block-start: 0;">
 			Playground Spinner is a nostalgic trip down memory lane. It is a simple
 			playground ride. Yet, looking at it from an adult's perspective, it was
-			a ride that looped endlessly, but .
+			a ride that looped endlessly, but also under control of the kids riding it.
 			</p>`
 	},
 	{
@@ -197,12 +197,13 @@ export const projectData: Project[] = [
 		interaction: [{ type: 'camera' }],
 		excerpt: 'A visualization of the thresholds we face in the loop of life.',
 		description: `<p style="margin-block-start: 0;">
-			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
-			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
-			and finding a way to continue.
+			Thresholds takes this project back to the beginning. The project started out with
+			myself defining unvoluntary circumstances and the voluntary actions that we take as loops
+			and thresholds. This project is a coded version of the first sketch I created for this collection.
 		</p>
 		<p style="margin-block-start: 0;">
-			This work is a complemntary piece to the other projects in this collection.
+			The piece captures the number of people visible in the camera view, and detects
+			arm movements to make a "threshold" in a continuous "loop".
 		</p>`
 	}
 ];
