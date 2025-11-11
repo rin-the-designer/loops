@@ -6,6 +6,11 @@ let isNewIteration = true;
 let handPose;
 let video;
 let hands = [];
+let smoothedHandX = null;
+let smoothedHandY = null;
+let handSmoothingFactor = 0.2;
+let handBoundsInsetX = 0.08;
+let handBoundsInsetY = 0.08;
 
 function preload() {
 	handPose = ml5.handPose({ maxHands: 1, flipped: true });
@@ -23,8 +28,25 @@ function setup() {
 	updateHillConfiguration();
 	noStroke();
 
-	video = createCapture(VIDEO, { flipped: true });
+	video = createCapture({
+		audio: false,
+		video: {
+			width: { ideal: windowWidth },
+			height: { ideal: windowHeight },
+			facingMode: 'user'
+		},
+		flipped: true
+	});
 	video.size(windowWidth, windowHeight);
+	// video.style('position', 'absolute');
+	// video.style('top', '0');
+	// video.style('left', '0');
+	// video.style('width', `${windowWidth}px`);
+	// video.style('height', `${windowHeight}px`);
+	// video.style('object-fit', 'cover');
+	// video.style('opacity', '0.4');
+	// video.style('pointer-events', 'none');
+	// video.style('z-index', '10');
 	video.hide();
 	handPose.detectStart(video, gotHands);
 }
@@ -109,27 +131,63 @@ function draw() {
 	// hand control
 	if (hands.length > 0) {
 		cursor('none');
-		let hand = hands[0];
-		let handTop = hand.middle_finger_tip;
-		let handBottom = hand.wrist;
-		let handCenterX = (handTop.x + handBottom.x) / 2;
-		let handCenterY = (handTop.y + handBottom.y) / 2;
-		fill(51);
-		circle(handCenterX, handCenterY, 20);
+		let handCenterX;
+		let handCenterY;
+		if (hands?.[0]) {
+			let keypoints = hands[0].keypoints;
+			let indices = [0, 1, 5, 9, 13, 17]; // wrist + fingertips
+			let sumX = 0;
+			let sumY = 0;
+			let count = 0;
+			for (let i of indices) {
+				let point = keypoints[i];
+				if (point && !isNaN(point.x) && !isNaN(point.y)) {
+					sumX += point.x;
+					sumY += point.y;
+					count++;
+				}
+			}
+			if (count > 0) {
+				let avgX = Math.round(sumX / count);
+				let avgY = Math.round(sumY / count);
+				console.log('Average X:', avgX, 'Average Y:', avgY);
+				if (smoothedHandX === null || smoothedHandY === null) {
+					smoothedHandX = avgX;
+					smoothedHandY = avgY;
+				} else {
+					smoothedHandX = lerp(smoothedHandX, avgX, handSmoothingFactor);
+					smoothedHandY = lerp(smoothedHandY, avgY, handSmoothingFactor);
+				}
+				let insetLeft = windowWidth * handBoundsInsetX;
+				let insetRight = windowWidth - insetLeft;
+				let insetTop = windowHeight * handBoundsInsetY;
+				let insetBottom = windowHeight - insetTop;
+				let clampedX = constrain(smoothedHandX, insetLeft, insetRight);
+				let clampedY = constrain(smoothedHandY, insetTop, insetBottom);
+				let normalizedX = (clampedX - insetLeft) / Math.max(1, insetRight - insetLeft);
+				let normalizedY = (clampedY - insetTop) / Math.max(1, insetBottom - insetTop);
+				handCenterX = normalizedX * windowWidth;
+				handCenterY = normalizedY * windowHeight;
+				fill(51);
+				ellipse(handCenterX, handCenterY, 20);
+			}
+		}
 
-		if (dist(handCenterX, handCenterY, rock.x, rock.y) < rock.radius) {
-			rock.x = handCenterX;
-			rock.y = targetY;
-			rock.velocity = 0;
-		} else {
-			if ((direction === 1 && rock.x > 0) || (direction === -1 && rock.x < windowWidth)) {
-				rock.velocity -= gravity * direction;
-				rock.x += rock.velocity;
+		if (typeof handCenterX === 'number' && typeof handCenterY === 'number') {
+			if (dist(handCenterX, handCenterY, rock.x, rock.y) < rock.radius) {
+				rock.x = handCenterX;
 				rock.y = targetY;
-			} else {
-				rock.x = direction === 1 ? 0 : windowWidth;
-				rock.y = windowHeight;
 				rock.velocity = 0;
+			} else {
+				if ((direction === 1 && rock.x > 0) || (direction === -1 && rock.x < windowWidth)) {
+					rock.velocity -= gravity * direction;
+					rock.x += rock.velocity;
+					rock.y = targetY;
+				} else {
+					rock.x = direction === 1 ? 0 : windowWidth;
+					rock.y = windowHeight;
+					rock.velocity = 0;
+				}
 			}
 		}
 	}
@@ -141,4 +199,9 @@ function gotHands(results) {
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
+	if (video) {
+		video.size(windowWidth, windowHeight);
+		// video.style('width', `${windowWidth}px`);
+		// video.style('height', `${windowHeight}px`);
+	}
 }
