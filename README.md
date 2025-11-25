@@ -26,24 +26,107 @@ The results -
 
 ![Property 1=Variant7.png](static/images/loop-1.png)
 
-Myth of Sisyphus is the first piece in the series, a digital interpretation of Albert Camus’ philosophical essay on the absurd and the human pursuit of meaning. The work transforms Sisyphus’ endless labor into an interactive, meditative loop.
+Albert Camus’ Myth of Sisyphus retells the story of the Greek titan condemned to push a boulder up a hill only to see it fall back again. In this endless, absurd task, Camus finds a metaphor for our search for meaning in an indifferent world. Yet he ends with a radical turn: “One must imagine Sisyphus happy.”
 
-The orange circle on the screen represents the boulder. Viewers can grasp and drag it either with a mouse or by using their hand through a webcam, which tracks motion in real time. As they push the digital rock toward the top of the screen, it inevitably rolls back down in either direction, inviting continuous repetition.
+In that line, Sisyphus is no longer a victim of punishment but a figure of defiance, reclaiming agency through acceptance. He embraces his circumstance and his struggle becomes his purpose; the act of rolling the rock becomes an act of choice.
+
+_Myth of Sisyphus_, the first piece in the Loop series, is a digital interpretation of Albert Camus’ philosophical essay on the absurd and the human pursuit of meaning. The work transforms Sisyphus’ endless labor into an interactive, meditative loop.
+
+The orange circle on the screen represents the boulder. Viewers can grasp and drag it either with a mouse or by using their hand through real-time webcam motion tracking. As they push the digital rock toward the top of the screen, it inevitably rolls back down in either direction, inviting continuous repetition.
+
+The loop has no reward, no score, and no ending. Through this repetition, the audience becomes both observer and participant in the myth.
 
 ### Interaction
 
+The piece offers two modes of control:
+
+- **Mouse input**<br>
+  The user clicks and drags the orange circle (the rock) up the black triangular slope.
+
+- **Hand-tracking camera input**<br>
+  Using a webcam, the system detects user’s hand and replaces the cursor with a small circle that follows their motion.
+
 ### Technical Overview
 
-The sketch is built on JavaScript, p5.js for the canvas and ml5.js for hand tracking through camera input.
+The sketch is built on JavaScript, p5.js for visual rendering and ml5.js for hand tracking through camera feed.
 
-- **Hand tracking**
-  Uses ml5.handPose() with a single-hand model (maxHands: 1, flipped: true). The function gotHands receives pose results and computes the average position of 6 keypoints (wrist and finger bases) to estimate hand center.
-- **Motion smoothing**
-  Hand coordinates are filtered with a lerp-based smoothing factor (handSmoothingFactor = 0.2) to prevent jitter and create fluid motion.
-- **Spatial bounds**
-  The hand position is constrained with screen insets (handBoundsInsetX/Y = 0.08, meaning 8% of the windowWidth/Height) to maintain consistent control regardless of camera framing.
-- **Physics simulation**
+- **Hand tracking**<br>
+  Uses `ml5.handPose()` with a single-hand model (maxHands: 1, flipped: true). The function gotHands receives pose results and computes the average position of 6 keypoints (wrist and finger bases) to estimate hand center.
+
+- **Motion smoothing**<br>
+  Hand coordinates are filtered with a lerp-based smoothing factor `handSmoothingFactor = 0.2` to prevent jitter and create fluid motion.
+
+- **Spatial bounds**<br>
+  The hand position is constrained with screen insets (`handBoundsInsetX/Y = 0.08`, meaning 8% of the windowWidth/Height) to maintain consistent control regardless of camera framing.
+
+- **Physics simulation**<br>
   Gravity (0.5) acts on the rock’s velocity. The hill geometry flips direction at the end of each iteration, forming an endless repetition. The rock’s position updates along the slope equation to simulate rolling motion.
+
+### Tasks
+
+[x] Jitter on interaction has to be fixed (Smoothened calculation, 251111)
+
+### Comments
+
+[Comments from future testing iterations will be added here]
+
+### Reflections
+
+This project lays foundations to this entire collection. It was born from the monotony and mundaneness of everyday repetition, and in making it, I found myself repeating again, trapped in the same cycle I was trying to express. The process mirrored the work’s concept: building, testing, watching the rock fall, and starting over.
+
+The moment when the rock slides back to the bottom isn’t a failure, it’s a renewal. Each reset is another chance to start, another loop to inhabit. Through this, I began to see the core of my project that repetition, when accepted and embraced, can become a quiet space for reflection, patience, and persistence.'
+
+## Loop 2 - Doors
+
+![Property 1=Variant7.png](static/images/loop-2.png)
+
+A door is one of the most ordinary things we encounter, yet it quietly defines how we move through the world. Every time we pass through one, we shift roles and identities. Stepping through the office door, we become our work-self, returning home, we become our private self. Each doorway marks a subtle transformation, A threshold between who we were and who we are about to be.
+
+_Doors_ extends this everyday ritual into an infinite sequence. The piece visualizes transition as an endless corridor of alternating black and white thresholds. Each passage mirrors the phases of life - child to adult, student to professional, beginnings and endings - where every role reshapes our sense of self. The alternating colors represent the dualities that frame existence: light and dark, life and death, presence and absence.
+
+Walking through these doors becomes a metaphor for continual transformation. The corridor never ends, it only loops. Each step forward collapses into the next, reminding us that every conclusion simply opens another beginning.
+
+### Interaction
+
+_Doors_ uses subtle body tracking to create a sense of presence within the corridor.
+
+- **Body and face input**<br>
+  The webcam tracks the viewer’s face and upper body using the `ml5.bodyPose()` model. As the viewer moves left or right, the orientation of the 3D door rotates to face the viewer, as if the world is responding to their movement.
+
+- **Autonomous movement**<br>
+  The environment itself advances through the space. The staircase and corridors move autonomously as if the viewer is climbing the stairs, walking along the corridor, and opening the door. The space fades after the door opens, leading to another scene of a corridor.
+
+### Technical Overview
+
+The sketch is built in JavaScript, using p5.js (WEBGL) for 3D rendering and ml5.js for upper body and face tracking.
+
+- **Rendering and motion**
+  The environment is constructed from box primitives forming stairs, walls, and a floor plane. The camera advances forward using interpolated offsets `currentOffset` and `targetOffset` for smooth motion.
+
+- **Step sequencing**
+  The motion progresses in timed increments `MOVE_INTERVAL`, `STEP_SIZE, SMOOTH_SPEED` for `MAX_MOVES` cycles before entering a final long transition `FINAL_MOVEMENT`, `FINAL DURATION`
+
+- Scene inversion
+
+- Face tracking
+
+### Audio Source
+
+An ambient soundtrack accompanies the piece, reinforcing the sense of forward motion and spatial depth. The repeating rhythm of the audio complements the continuous passage through doors, creating an immersive and meditative atmosphere.
+
+Source: _Feel_ by Master Minded, [artlist.io](https://artlist.io/royalty-free-music/song/feel/132927).
+
+[Feel_License.pdf](static/files/Feel_License.pdf)
+
+### Tasks
+
+[ ]
+
+### Comments
+
+[Comments from future testing iterations will be added here]
+
+### Reflections
 
 ## Prototype 1
 

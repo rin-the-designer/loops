@@ -205,5 +205,17 @@ export const projectData: Project[] = [
 			The piece captures the number of people visible in the camera view, and detects
 			arm movements to make a "threshold" in a continuous "loop".
 		</p>`
+	},
+	{
+		title: 'Large Loop Model',
+		slug: 'large-loop-model',
+		route: '/projects/large-loop-model',
+		thumbnail: '/project-content/large-loop-model/thumb.png',
+		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+		interaction: [{ type: 'camera' }],
+		excerpt: 'A visualization of the large loop model.',
+		description: `<p style="margin-block-start: 0;">
+			Large Loop Model is a visualization of the large loop model.
+		</p>`
 	}
 ];
