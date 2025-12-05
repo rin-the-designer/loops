@@ -31,11 +31,11 @@
 		window.addEventListener('resize', updateColumns);
 		return () => window.removeEventListener('resize', updateColumns);
 	});
-
-	onMount(() => {
-		document.title = 'Loops by Rin Kim';
-	});
 </script>
+
+<svelte:head>
+	<title>Loops by Rin Kim</title>
+</svelte:head>
 
 <div class="hero"></div>
 <div class="gallery-grid">
