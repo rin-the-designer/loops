@@ -211,7 +211,7 @@ export const projectData: Project[] = [
 		slug: 'meaningful-meaningless',
 		route: '/projects/meaningful-meaningless',
 		thumbnail: '/project-content/meaningful-meaningless/thumb.png',
-		guide: 'WIP.',
+		guide: '',
 		interaction: [],
 		excerpt: 'Work In Progress.',
 		description: `<p style="margin-block-start: 0;">
