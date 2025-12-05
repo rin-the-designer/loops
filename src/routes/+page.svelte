@@ -31,6 +31,7 @@
 		window.addEventListener('resize', updateColumns);
 		return () => window.removeEventListener('resize', updateColumns);
 	});
+	document.title = 'Loops by Rin Kim';
 </script>
 
 <div class="hero"></div>

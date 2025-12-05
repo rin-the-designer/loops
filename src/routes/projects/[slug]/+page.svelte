@@ -31,7 +31,7 @@
 
 	onMount(() => {
 		// Set title
-		document.title = `${currentProject?.title || 'Project'} Gateway`;
+		document.title = `${currentProject?.title || 'Project'} from Loops by Rin Kim`;
 
 		// Ensure we're in gateway mode
 		window.isGatewayOpen = true;
