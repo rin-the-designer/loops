@@ -207,15 +207,15 @@ export const projectData: Project[] = [
 		</p>`
 	},
 	{
-		title: 'Large Loop Model',
-		slug: 'large-loop-model',
-		route: '/projects/large-loop-model',
-		thumbnail: '/project-content/large-loop-model/thumb.png',
-		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+		title: 'Meaningful/Meaningless',
+		slug: 'meaningful-meaningless',
+		route: '/projects/meaningful-meaningless',
+		thumbnail: '/project-content/meaningful-meaningless/thumb.png',
+		guide: 'WIP.',
 		interaction: [{ type: 'camera' }],
-		excerpt: 'A visualization of the large loop model.',
+		excerpt: 'Work In Progress.',
 		description: `<p style="margin-block-start: 0;">
-			Large Loop Model is a visualization of the large loop model.
+			Work In Progress.
 		</p>`
 	}
 ];

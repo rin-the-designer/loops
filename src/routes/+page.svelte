@@ -33,6 +33,7 @@
 	});
 </script>
 
+<div class="hero"></div>
 <div class="gallery-grid">
 	{#each data.projects as project}
 		<List {project} />
@@ -43,6 +44,13 @@
 </div>
 
 <style>
+	.hero {
+		background: black;
+		border-bottom: 1px solid #ffffff40;
+		height: 80vh;
+		width: 100%;
+	}
+
 	.gallery-grid {
 		display: grid;
 		background: #ffffff40;
