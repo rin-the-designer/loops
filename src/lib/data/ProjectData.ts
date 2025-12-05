@@ -211,8 +211,8 @@ export const projectData: Project[] = [
 		slug: 'meaningful-meaningless',
 		route: '/projects/meaningful-meaningless',
 		thumbnail: '/project-content/meaningful-meaningless/thumb.png',
-		guide: '',
-		interaction: [],
+		guide: 'Click interaction available to zoom in to artworks and descriptions.',
+		interaction: [{ type: 'click', optional: true }],
 		excerpt: 'Work In Progress.',
 		description: `<p style="margin-block-start: 0;">
 			Text Work In Progress.
