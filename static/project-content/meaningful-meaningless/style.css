@@ -1,0 +1,20 @@
+:root {
+  --canvas-width: 300px;
+}
+
+html,
+body {
+  margin: 0;
+  background-color: #191919;
+  font-family: "Pretendard Variable", "Inter", sans-serif;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+#gallery-canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-color: #191919;
+  cursor: default;
+}

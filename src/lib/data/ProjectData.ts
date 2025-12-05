@@ -212,10 +212,10 @@ export const projectData: Project[] = [
 		route: '/projects/meaningful-meaningless',
 		thumbnail: '/project-content/meaningful-meaningless/thumb.png',
 		guide: 'WIP.',
-		interaction: [{ type: 'camera' }],
+		interaction: [],
 		excerpt: 'Work In Progress.',
 		description: `<p style="margin-block-start: 0;">
-			Work In Progress.
+			Text Work In Progress.
 		</p>`
 	}
 ];
