@@ -1,25 +1,150 @@
-let strokeW = 24;
-let gap = strokeW * 2;
-let patterns = [];
-let currentY = 0;
-let isFirstPattern = true;
-let speedFactor = 720;
+let strokeW,
+	gap,
+	patterns = [],
+	currentY = 0;
+let speedFactor = 720; // Lower number = Faster Speed
+const arcSizes = [8, 4, 0.5];
+
+// Fade and reset variables
+let completionTime = null,
+	isFading = false,
+	resetTime = null;
+const waitDuration = 3000;
+const fadeInDuration = 3000;
+const restartWaitDuration = 3000;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	strokeW = windowHeight / 37;
+	gap = strokeW * 2;
 	strokeWeight(strokeW);
 	strokeCap(ROUND);
 	angleMode(DEGREES);
 	noFill();
+	stroke(0);
+	patterns.push({ travelDistance: 0, lineRightX: 0, yOffset: currentY, isFirst: true });
+}
 
-	// Add first pattern
-	patterns.push({
-		travelDistance: 0,
-		lineRightX: 0,
-		lineLeftX: 0,
-		yOffset: currentY,
-		isFirst: true
-	});
+function drawArcs(x, y, startAngle, endAngle) {
+	for (let i = 0; i < arcSizes.length; i++) {
+		push();
+		strokeWeight(i === 2 ? strokeW / 2 : strokeW);
+		arc(x, y, strokeW * arcSizes[i], strokeW * arcSizes[i], startAngle, endAngle);
+		pop();
+	}
+}
+
+function drawLines(x1, y1, x2, y2, yOffset) {
+	for (let i = 0; i < 3; i++) {
+		line(x1, y1 + gap * i + yOffset, x2, y2 + gap * i + yOffset);
+	}
+}
+
+function getWhiteRectAlpha() {
+	if (!completionTime) return 0;
+	let elapsed = millis() - completionTime;
+	if (elapsed < waitDuration) return 0;
+	let fadeElapsed = elapsed - waitDuration;
+	return fadeElapsed >= fadeInDuration ? 255 : map(fadeElapsed, 0, fadeInDuration, 0, 255);
+}
+
+function resetAnimation() {
+	patterns = [];
+	currentY = 0;
+	completionTime = null;
+	isFading = false;
+	resetTime = null;
+	stroke(0);
+	patterns.push({ travelDistance: 0, lineRightX: 0, yOffset: currentY, isFirst: true });
+}
+
+function drawArcR(travelDist, startDist, turnDist, endPointRight, yOffset) {
+	let arcEnd = startDist + turnDist;
+	let centerY = strokeW / 2 + gap * 2 + yOffset;
+	if (travelDist >= startDist && travelDist <= arcEnd) {
+		let arcAngle = map((travelDist - startDist) / turnDist, 0, 1, -90, 90);
+		drawArcs(endPointRight, centerY, -90, min(arcAngle, 90));
+	} else if (travelDist >= arcEnd) {
+		drawArcs(endPointRight, centerY, -90, 90);
+	}
+	return arcEnd;
+}
+
+function drawArcL(travelDist, startDist, turnDist, endPointLeft, yOffset) {
+	let arcEnd = startDist + turnDist;
+	let centerY = strokeW / 2 + gap * 4 + yOffset;
+	if (travelDist >= startDist && travelDist <= arcEnd) {
+		let arcAngle = map((travelDist - startDist) / turnDist, 0, 1, 270, 90);
+		drawArcs(endPointLeft, centerY, max(arcAngle, 90), 270);
+	} else if (travelDist >= arcEnd) {
+		drawArcs(endPointLeft, centerY, 90, 270);
+	}
+	return arcEnd;
+}
+
+function drawLineRL(travelDist, startDist, lineDist, endPointRight, endPointLeft, yOffset) {
+	let lineEnd = startDist + lineDist;
+	let baseY = strokeW / 2 + gap * 2 + yOffset;
+	if (travelDist >= startDist && travelDist <= lineEnd) {
+		let currentX = endPointRight - ((travelDist - startDist) / lineDist) * lineDist;
+		drawLines(endPointRight, baseY, max(endPointLeft, currentX), baseY, 0);
+	} else if (travelDist >= lineEnd) {
+		drawLines(endPointRight, baseY, endPointLeft, baseY, 0);
+	}
+	return lineEnd;
+}
+
+function drawLineLR(travelDist, startDist, lineDist, endPointLeft, endPointRight, yOffset) {
+	let lineEnd = startDist + lineDist;
+	let baseY = strokeW / 2 + gap * 4 + yOffset;
+	if (travelDist >= startDist && travelDist <= lineEnd) {
+		let currentX = endPointLeft + ((travelDist - startDist) / lineDist) * lineDist;
+		drawLines(endPointLeft, baseY, min(endPointRight, currentX), baseY, 0);
+	} else if (travelDist >= lineEnd) {
+		drawLines(endPointLeft, baseY, endPointRight, baseY, 0);
+	}
+	return lineEnd;
+}
+
+function drawLastLine(travelDist, startDist, lineDist, endPointLeft, windowWidth, yOffset) {
+	let lineEnd = startDist + lineDist;
+	let baseY = strokeW / 2 + gap * 4 + yOffset;
+	if (travelDist >= startDist && travelDist <= lineEnd) {
+		let currentX = endPointLeft + ((travelDist - startDist) / lineDist) * lineDist;
+		drawLines(endPointLeft, baseY, min(windowWidth, currentX), baseY, 0);
+	} else if (travelDist >= lineEnd) {
+		drawLines(endPointLeft, baseY, windowWidth, baseY, 0);
+	}
+	return lineEnd;
+}
+
+function drawCompleteCycle(
+	travelDist,
+	startDist,
+	turnDist,
+	lineDist,
+	endPointRight,
+	endPointLeft,
+	yOffset
+) {
+	let dist = drawArcR(travelDist, startDist, turnDist, endPointRight, yOffset);
+	dist = drawLineRL(travelDist, dist, lineDist, endPointRight, endPointLeft, yOffset);
+	dist = drawArcL(travelDist, dist, turnDist, endPointLeft, yOffset);
+	return drawLineLR(travelDist, dist, lineDist, endPointLeft, endPointRight, yOffset);
+}
+
+function drawIncompleteCycle(
+	travelDist,
+	startDist,
+	turnDist,
+	lineDist,
+	endPointRight,
+	endPointLeft,
+	yOffset
+) {
+	let dist = drawArcR(travelDist, startDist, turnDist, endPointRight, yOffset);
+	dist = drawLineRL(travelDist, dist, lineDist, endPointRight, endPointLeft, yOffset);
+	return drawArcL(travelDist, dist, turnDist, endPointLeft, yOffset);
 }
 
 function draw() {
@@ -29,201 +154,139 @@ function draw() {
 	let speed = width / speedFactor;
 	let turnDistance = speed * 180;
 	let lineDistance = endPointRight - endPointLeft;
-	const arcSizes = [8, 4, 0.5];
+	const numCompleteCycles = 3;
+	let cycleDistance = 2 * turnDistance + 2 * lineDistance;
+	let incompleteCycleDistance = turnDistance + lineDistance + turnDistance;
 
-	// Update the current pattern
-	if (patterns.length > 0) {
+	// Check if fade completes, clear patterns and set resetTime
+	if (completionTime && !resetTime) {
+		if (millis() - completionTime >= waitDuration + fadeInDuration) {
+			patterns = [];
+			resetTime = millis();
+		}
+	}
+
+	// Check if restart wait is complete, then reset and restart
+	if (resetTime && millis() - resetTime >= restartWaitDuration) {
+		resetAnimation();
+		return;
+	}
+
+	// Update patterns (only if not fading and not in restart wait)
+	if (patterns.length > 0 && !isFading && !resetTime) {
 		let currentPattern = patterns[patterns.length - 1];
 		currentPattern.travelDistance += speed;
 
-		// If current pattern completes, add a new pattern
-		if (
-			currentPattern.travelDistance >=
-			endPointRight + turnDistance + lineDistance + turnDistance + lineDistance
-		) {
+		let firstLineDistance = currentPattern.isFirst ? endPointRight : 0;
+		let lastLineDistance = width - endPointLeft;
+		let patternCompleteDistance =
+			firstLineDistance +
+			numCompleteCycles * cycleDistance +
+			incompleteCycleDistance +
+			lastLineDistance;
+
+		// Check if first pattern's last line is complete
+		if (patterns.length === 1 && patterns[0].isFirst && !completionTime) {
+			let lastLineStart =
+				firstLineDistance + numCompleteCycles * cycleDistance + incompleteCycleDistance;
+			if (patterns[0].travelDistance >= lastLineStart + lastLineDistance) {
+				completionTime = millis();
+				isFading = true;
+			}
+		}
+
+		// Add new pattern if current completes
+		if (currentPattern.travelDistance >= patternCompleteDistance) {
 			currentY += gap * 4;
 			patterns.push({
-				travelDistance: endPointRight, // Start from first arc position
+				travelDistance: endPointRight,
 				lineRightX: endPointRight,
-				lineLeftX: endPointRight,
 				yOffset: currentY,
 				isFirst: false
 			});
 		}
 	}
 
-	// Remove patterns that are off screen
-	if (patterns.length > 5) {
-		patterns.shift();
-	}
-
 	// Draw all patterns
-	for (let p = 0; p < patterns.length; p++) {
-		let pattern = patterns[p];
+	for (let pattern of patterns) {
+		let firstLineDistance = pattern.isFirst ? endPointRight : 0;
+		let baseYOffset = pattern.yOffset;
 
 		// Draw first line (only for first pattern)
 		if (pattern.isFirst) {
-			if (pattern.travelDistance >= 0 && pattern.travelDistance <= endPointRight) {
+			if (pattern.travelDistance <= endPointRight) {
 				pattern.lineRightX += speed;
-				for (let i = 0; i < 3; i++) {
-					line(
-						0,
-						strokeW / 2 + gap * i + pattern.yOffset,
-						min(pattern.lineRightX, endPointRight),
-						strokeW / 2 + gap * i + pattern.yOffset
-					);
-				}
-			} else if (pattern.travelDistance >= endPointRight) {
-				for (let i = 0; i < 3; i++) {
-					line(
-						0,
-						strokeW / 2 + gap * i + pattern.yOffset,
-						endPointRight,
-						strokeW / 2 + gap * i + pattern.yOffset
-					);
-				}
+				drawLines(0, strokeW / 2, min(pattern.lineRightX, endPointRight), strokeW / 2, baseYOffset);
+			} else {
+				drawLines(0, strokeW / 2, endPointRight, strokeW / 2, baseYOffset);
 			}
 		}
 
-		// Draw first arc (Arc Right)
-		if (
-			pattern.travelDistance >= endPointRight &&
-			pattern.travelDistance <= endPointRight + turnDistance
-		) {
-			pattern.lineLeftX = endPointRight;
+		// Draw 3 complete cycles
+		for (let cycle = 0; cycle < numCompleteCycles; cycle++) {
+			drawCompleteCycle(
+				pattern.travelDistance,
+				firstLineDistance + cycle * cycleDistance,
+				turnDistance,
+				lineDistance,
+				endPointRight,
+				endPointLeft,
+				baseYOffset + cycle * gap * 4
+			);
+		}
 
-			let extraDistanceRight = pattern.travelDistance - endPointRight;
-			let arcAngleRight = map(extraDistanceRight, 0, turnDistance, -90, 90);
-			arcAngleRight = min(arcAngleRight, 90);
+		// Draw incomplete 4th cycle
+		let incompleteCycleYOffset = baseYOffset + numCompleteCycles * gap * 4;
+		let incompleteStartDist = firstLineDistance + numCompleteCycles * cycleDistance;
+		drawIncompleteCycle(
+			pattern.travelDistance,
+			incompleteStartDist,
+			turnDistance,
+			lineDistance,
+			endPointRight,
+			endPointLeft,
+			incompleteCycleYOffset
+		);
 
-			for (let i = 0; i < arcSizes.length; i++) {
+		// Draw Last Line
+		drawLastLine(
+			pattern.travelDistance,
+			incompleteStartDist + incompleteCycleDistance,
+			width - endPointLeft,
+			endPointLeft,
+			width,
+			incompleteCycleYOffset
+		);
+	}
+
+	// Draw white rectangle overlay when fading in
+	if (isFading && completionTime) {
+		let elapsed = millis() - completionTime;
+		if (elapsed < waitDuration + fadeInDuration) {
+			let rectAlpha = getWhiteRectAlpha();
+			if (rectAlpha > 0) {
 				push();
-				strokeWeight(i === 2 ? strokeW / 2 : strokeW);
-				arc(
-					endPointRight,
-					strokeW / 2 + gap * 2 + pattern.yOffset,
-					strokeW * arcSizes[i],
-					strokeW * arcSizes[i],
-					-90,
-					arcAngleRight
-				);
-				pop();
-			}
-		} else if (pattern.travelDistance >= endPointRight + turnDistance) {
-			for (let i = 0; i < arcSizes.length; i++) {
-				push();
-				strokeWeight(i === 2 ? strokeW / 2 : strokeW);
-				arc(
-					endPointRight,
-					strokeW / 2 + gap * 2 + pattern.yOffset,
-					strokeW * arcSizes[i],
-					strokeW * arcSizes[i],
-					-90,
-					90
-				);
+				fill(255, rectAlpha);
+				noStroke();
+				rect(0, 0, width, height);
 				pop();
 			}
 		}
+	}
 
-		// Draw second line (Line Left)
-		if (
-			pattern.travelDistance >= endPointRight + turnDistance &&
-			pattern.travelDistance <= endPointRight + turnDistance + lineDistance
-		) {
-			pattern.lineLeftX -= speed;
-			for (let i = 0; i < 3; i++) {
-				line(
-					endPointRight,
-					strokeW / 2 + gap * (i + 2) + pattern.yOffset,
-					max(endPointLeft, pattern.lineLeftX),
-					strokeW / 2 + gap * (i + 2) + pattern.yOffset
-				);
-			}
-		} else if (pattern.travelDistance >= endPointRight + turnDistance + lineDistance) {
-			for (let i = 0; i < 3; i++) {
-				line(
-					endPointRight,
-					strokeW / 2 + gap * (i + 2) + pattern.yOffset,
-					endPointLeft,
-					strokeW / 2 + gap * (i + 2) + pattern.yOffset
-				);
-			}
-		}
-
-		// Draw second arc (Arc Left)
-		if (
-			pattern.travelDistance >= endPointRight + turnDistance + lineDistance &&
-			pattern.travelDistance <= endPointRight + turnDistance + lineDistance + turnDistance
-		) {
-			pattern.lineRightX = endPointLeft;
-
-			let extraDistanceLeft = pattern.travelDistance - endPointRight - turnDistance - lineDistance;
-			let arcAngleLeft = map(extraDistanceLeft, 0, turnDistance, 270, 90);
-			arcAngleLeft = max(arcAngleLeft, 90);
-
-			for (let i = 0; i < arcSizes.length; i++) {
-				push();
-				strokeWeight(i === 2 ? strokeW / 2 : strokeW);
-				arc(
-					endPointLeft,
-					strokeW / 2 + gap * 4 + pattern.yOffset,
-					strokeW * arcSizes[i],
-					strokeW * arcSizes[i],
-					arcAngleLeft,
-					270
-				);
-				pop();
-			}
-		} else if (
-			pattern.travelDistance >=
-			endPointRight + turnDistance + lineDistance + turnDistance
-		) {
-			for (let i = 0; i < arcSizes.length; i++) {
-				push();
-				strokeWeight(i === 2 ? strokeW / 2 : strokeW);
-				arc(
-					endPointLeft,
-					strokeW / 2 + gap * 4 + pattern.yOffset,
-					strokeW * arcSizes[i],
-					strokeW * arcSizes[i],
-					90,
-					270
-				);
-				pop();
-			}
-		}
-
-		// Draw third line (Line Right)
-		if (
-			pattern.travelDistance >= endPointRight + turnDistance + lineDistance + turnDistance &&
-			pattern.travelDistance <=
-				endPointRight + turnDistance + lineDistance + turnDistance + lineDistance
-		) {
-			pattern.lineRightX += speed;
-			for (let i = 0; i < 3; i++) {
-				line(
-					endPointLeft,
-					strokeW / 2 + gap * (i + 4) + pattern.yOffset,
-					min(pattern.lineRightX, endPointRight),
-					strokeW / 2 + gap * (i + 4) + pattern.yOffset
-				);
-			}
-		} else if (
-			pattern.travelDistance >=
-			endPointRight + turnDistance + lineDistance + turnDistance + lineDistance
-		) {
-			for (let i = 0; i < 3; i++) {
-				line(
-					endPointLeft,
-					strokeW / 2 + gap * (i + 4) + pattern.yOffset,
-					endPointRight,
-					strokeW / 2 + gap * (i + 4) + pattern.yOffset
-				);
-			}
-		}
+	// Draw white screen during restart wait period
+	if (resetTime) {
+		push();
+		fill(255);
+		noStroke();
+		rect(0, 0, width, height);
+		pop();
 	}
 }
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
+	strokeW = windowHeight / 37;
+	gap = strokeW * 2;
+	strokeWeight(strokeW);
 }
