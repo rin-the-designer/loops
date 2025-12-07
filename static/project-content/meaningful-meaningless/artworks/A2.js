@@ -140,21 +140,6 @@ function drawA2(ctx, canvasX, canvasY, canvasWidth, canvasHeight) {
 			A2LapStartTime = now;
 		}
 
-		// Initialize last update time on first frame
-		if (A2LastUpdateTime === null) {
-			A2LastUpdateTime = now;
-		}
-
-		// Detect tab visibility gap (when tab was hidden and came back)
-		// If last update was more than 200ms ago, adjust start time to prevent leap
-		if (now - A2LastUpdateTime > 200) {
-			// Tab was hidden - adjust start time to account for the gap
-			// This keeps the animation smooth without a visible leap
-			const gap = now - A2LastUpdateTime;
-			A2LapStartTime += gap;
-		}
-		A2LastUpdateTime = now;
-
 		// Calculate progress based on elapsed time (same as A1: 10 seconds per lap)
 		const elapsed = now - A2LapStartTime;
 		const prevProgress = A2LapProgress;
@@ -191,14 +176,7 @@ function drawA2(ctx, canvasX, canvasY, canvasWidth, canvasHeight) {
 		}
 
 		// Calculate delta time for frame-rate independent movement
-		let deltaTime = now - A2LastUpdateTime;
-
-		// Cap delta time to prevent huge jumps when tab becomes visible again
-		// Cap at 200ms (about 12 frames at 60fps) to prevent visible leaps in trail
-		if (deltaTime > 200) {
-			deltaTime = 200;
-		}
-
+		const deltaTime = now - A2LastUpdateTime;
 		A2LastUpdateTime = now;
 
 		const a = Math.atan2(A2VelY, A2VelX) || 0;
