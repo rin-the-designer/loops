@@ -59,7 +59,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
-		height: calc(100vh - 66px);
+		height: calc(100dvh - 66px);
 		color: white;
 	}
 
@@ -69,6 +69,7 @@
 		line-height: 1.5;
 		padding: 1rem;
 		border-right: 2px solid white;
+		overflow-y: auto;
 	}
 
 	.guide {
@@ -122,8 +123,7 @@
 	@media (max-width: 768px) {
 		.project-gateway {
 			grid-template-columns: 1fr;
-			grid-template-rows: auto;
-			height: auto;
+			grid-template-rows: 1fr auto auto;
 		}
 
 		.description {
@@ -131,19 +131,15 @@
 			font-size: 1rem;
 			border-right: none;
 			padding: 1rem;
-			max-height: none;
+			overflow-y: auto;
 		}
 
 		.guide {
-			position: fixed;
-			bottom: 61.5px;
-			right: 0;
-			left: 0;
+			grid-row: 2/3;
 			font-size: 1rem;
 			padding: 1rem;
 			white-space: pre-line;
 			border-top: 2px solid white;
-			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 		}
 
 		.guide-text {
@@ -156,8 +152,7 @@
 		}
 
 		button {
-			position: fixed;
-			bottom: 0;
+			grid-row: 3/4;
 			font-size: 1.5rem;
 			padding: 1rem;
 			width: 100%;

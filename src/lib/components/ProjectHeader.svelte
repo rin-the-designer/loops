@@ -56,7 +56,7 @@
 
 	<h1>{title}</h1>
 
-	<div class="right-button">
+	<div class="right-button" style="display: none !important;">
 		<button aria-label="Information">ⓘ</button>
 	</div>
 </div>
