@@ -42,8 +42,16 @@ function setup() {
 				if (isVisible) {
 					// Start camera when visible
 					if (!video) {
-						video = createCapture(VIDEO, { flipped: true });
-						video.size(width, height);
+						video = createCapture({
+							audio: false,
+							video: {
+								width: { ideal: windowWidth },
+								height: { ideal: windowHeight },
+								facingMode: 'user'
+							},
+							flipped: true
+						});
+						video.size(windowWidth, windowHeight);
 						video.hide();
 						bodyPose.detectStart(video, gotPoses);
 					}
@@ -218,6 +226,9 @@ function resetScene() {
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
+	if (video) {
+		video.size(windowWidth, windowHeight);
+	}
 }
 
 // trial for adding lights - Pranav told me to get rid of it
