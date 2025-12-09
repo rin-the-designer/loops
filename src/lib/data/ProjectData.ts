@@ -217,5 +217,17 @@ export const projectData: Project[] = [
 		description: `<p style="margin-block-start: 0;">
 			Text Work In Progress.
 		</p>`
+	},
+	{
+		title: 'Large Loop Model',
+		slug: 'large-loop-model',
+		route: '/projects/large-loop-model',
+		thumbnail: '/project-content/large-loop-model/thumb.png',
+		guide: '',
+		interaction: [],
+		excerpt: 'Work In Progress.',
+		description: `<p style="margin-block-start: 0;">
+			Text Work In Progress.
+		</p>`
 	}
 ];

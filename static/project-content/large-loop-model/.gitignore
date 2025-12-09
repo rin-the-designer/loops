@@ -1,0 +1,8 @@
+.env
+.env.local
+local.env
+.vercel
+node_modules/
+.DS_Store
+index-local.html
+scripts/script-local.js

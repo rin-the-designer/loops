@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Absurdity Generator</title>
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌀</text></svg>"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles/style.css" />
+	</head>
+	<body>
+		<!-- Main Page -->
+		<div id="main-page">
+			<!-- History Icon -->
+			<div class="header">
+				<div class="history-icon" id="history-icon">
+					<img
+						src="/project-content/large-loop-model/assets/history.svg"
+						alt="History"
+						width="32"
+						height="32"
+					/>
+				</div>
+			</div>
+
+			<!-- Main Text Container -->
+			<div class="text-container">
+				<p id="previous-text" class="previous-text hidden"></p>
+				<p id="generated-text">Press Enter to generate</p>
+			</div>
+
+			<!-- Footer Info -->
+			<div class="footer">
+				<div class="footer-left" id="version">v0000</div>
+				<div class="footer-center" id="location">Loading location...</div>
+				<div class="footer-right" id="date-time"></div>
+			</div>
+		</div>
+
+		<!-- History Page -->
+		<div id="history-page" class="hidden">
+			<div class="history-header">
+				<h1>History</h1>
+				<button class="close-btn" id="close-history">
+					<img
+						src="/project-content/large-loop-model/assets/close.svg"
+						alt="Close"
+						width="32"
+						height="32"
+					/>
+				</button>
+			</div>
+			<div class="history-list" id="history-list">
+				<p class="loading">Loading history...</p>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+		<script src="/project-content/large-loop-model/scripts/config.js"></script>
+		<script src="/project-content/large-loop-model/scripts/script.js"></script>
+	</body>
+</html>
