@@ -4,15 +4,13 @@ let burnRate = 0.1;
 let lastTime = 0;
 let cycleStartTime = 0;
 let particles = [];
-let backgroundColor = '#191919';
+let backgroundColor = '#ffffff';
 
 // Cycle states: 'fadeInStick', 'fadeInTip', 'burning', 'waitAfterComplete'
 let cycleState = 'fadeInStick';
-let stickFadeDuration = 3; // 3 seconds
-let tipFadeDuration = 5; // 5 seconds
-let waitAfterCompleteDuration = 5; // 5 seconds
-
-// For body pose detection
+let stickFadeDuration = 3;
+let tipFadeDuration = 5;
+let waitAfterCompleteDuration = 5;
 let video;
 let bodyPose;
 let poses = [];
@@ -28,9 +26,17 @@ function setup() {
 	strokeCap(SQUARE);
 	startY = height / 3;
 	lastTime = millis();
-	targetX = width / 2; // Default target is center
+	targetX = width / 2;
 
-	video = createCapture(VIDEO, { flipped: true });
+	video = createCapture({
+		audio: false,
+		video: {
+			width: { ideal: windowWidth },
+			height: { ideal: windowHeight },
+			facingMode: 'user'
+		},
+		flipped: true
+	});
 	video.size(width, height);
 	video.hide();
 	bodyPose.detectStart(video, gotPoses);
@@ -40,7 +46,7 @@ function setup() {
 
 function draw() {
 	let currentTime = millis();
-	let cycleElapsed = (currentTime - cycleStartTime) / 1000; // in seconds
+	let cycleElapsed = (currentTime - cycleStartTime) / 1000;
 
 	// Update cycle state (may reset cycleStartTime)
 	updateCycleState(cycleElapsed, currentTime);
@@ -209,7 +215,7 @@ class Particle {
 	display(fadeOpacity = 1) {
 		noStroke();
 		let baseAlpha = this.lifespan * 0.05;
-		fill(255, 255, 255, baseAlpha * fadeOpacity);
+		fill(220, 220, 220, baseAlpha * fadeOpacity);
 		ellipse(this.pos.x, this.pos.y, this.size, this.size);
 	}
 
@@ -224,4 +230,7 @@ function gotPoses(results) {
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
+	if (video) {
+		video.size(windowWidth, windowHeight);
+	}
 }
