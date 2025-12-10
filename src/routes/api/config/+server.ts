@@ -36,4 +36,3 @@ export const OPTIONS: RequestHandler = async ({ setHeaders }) => {
 	});
 	return new Response(null, { status: 200 });
 };
-

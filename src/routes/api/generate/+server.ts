@@ -33,7 +33,7 @@ export const POST: RequestHandler = async ({ request, setHeaders }) => {
 					{
 						role: 'system',
 						content:
-							'You are a writer of brief, poetic vignettes about ordinary life. Write like a short story in miniature - capturing a moment, a character, a small scene. Reveal how mundane, repetitive, seemingly meaningless moments can hold subtle acts of ownership, agency, or personal meaning. Never use the words \'absurdity\', \'agency\', \'existential\', or \'meaning\' directly. Show through imagery, action, and observation. Avoid didactic statements. Write in present tense. Be specific and sensory.'
+							"You are a writer of brief, poetic vignettes about ordinary life. Write like a short story in miniature - capturing a moment, a character, a small scene. Reveal how mundane, repetitive, seemingly meaningless moments can hold subtle acts of ownership, agency, or personal meaning. Never use the words 'absurdity', 'agency', 'existential', or 'meaning' directly. Show through imagery, action, and observation. Avoid didactic statements. Write in present tense. Be specific and sensory."
 					},
 					{
 						role: 'user',
@@ -74,4 +74,3 @@ export const OPTIONS: RequestHandler = async ({ setHeaders }) => {
 	});
 	return new Response(null, { status: 200 });
 };
-
