@@ -10,7 +10,7 @@ async function loadConfig() {
 		return configPromise;
 	}
 
-	configPromise = fetch('/project-content/large-loop-model/api/config')
+	configPromise = fetch('/api/config')
 		.then((res) => {
 			if (!res.ok) {
 				throw new Error('Failed to load configuration');
@@ -20,7 +20,7 @@ async function loadConfig() {
 		.then((data) => {
 			window.CONFIG = {
 				supabase: data.supabase,
-				apiEndpoint: '/project-content/large-loop-model/api/generate'
+				apiEndpoint: '/api/generate'
 			};
 			configLoaded = true;
 			return window.CONFIG;
