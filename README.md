@@ -146,16 +146,16 @@ Visually, the work oscillates between presence and erasure. Technically, it is l
 
 ### Technical Overview
 
-- **Timed layering**
+- **Timed layering**<br>
   The work runs on a simple timer. It continuously adds new layers at fixed intervals, alternating between a centered circle and a full-screen overlay. The layers stack indefinitely and are never removed.
 
-- **Accumulation made visible**
+- **Accumulation made visible**<br>
   The interface displays two indicators that reflect the ongoing buildup:
 
   - a rough estimate of page “weight” (DOM size)
   - a line counter / log that increases each time a new layer is added
 
-- **Layered composition**
+- **Layered composition**<br>
   The visuals are built from two repeating element types:
   - a centered circle whose size is controlled by a CSS variable
   - a full-screen overlay that covers the entire viewport
@@ -165,6 +165,70 @@ Visually, the work oscillates between presence and erasure. Technically, it is l
 In observation, the interaction in _Accumulation_ was not immediately legible to most viewers. Without explanation, many treated it as a non-interactive animation and never discovered that clicking changes the structure. The idea of DOM growth as “digital weight” was also most visible to people already familiar with HTML and how documents are built.
 
 But once the premise was explained—that every second adds new elements and “weight,” both visually and in code, many people said it resonated with their own sense of hidden build-up: routines, stress, habits, and quiet accumulation that doesn’t read as change until it’s named. That gap between initial perception (blank, minimal, nothing happening) and later understanding became part of the piece. It highlighted how some forms of repetition and accumulation stay invisible until there’s a threshold moment where they become recognized.
+
+## #4 - Zen Garden
+
+![Zen Garden artwork showing repeated raked sand-like arcs and lines forming a continuous pattern](static/images/zen-garden.jpg)
+
+_Zen Garden_ is a loop built from a ritual gesture: raking.
+
+The screen steadily draws a field of lines that curve into repeated arcs, resembling the marks left in sand at a dry landscape garden. The movement is careful and consistent, structured enough to feel intentional, repetitive enough to feel endless. As the pattern completes, it holds briefly, fades toward blankness, and begins again. The loop is not about progress, but about returning to the same task and noticing what changes in the act of staying with it.
+
+Rather than offering a clear goal, the piece frames repetition as maintenance: a quiet, ongoing labor that can be soothing, numbing, or meditative depending on how long it is watched.
+
+### Interaction
+
+This piece runs autonomously. There is no direct user control. The only interaction is duration: choosing to watch, drifting away, and returning as the loop repeats.
+
+### Technical Overview
+
+- **Progressive drawing**<br>
+  The animation is constructed as a continuous rake-like path: straight segments that flow into rounded turns. Marks appear gradually over time rather than all at once.
+
+- **Layered bands**<br>
+  As one band completes, the system shifts downward and draws the next, building a full field of repeated marks.
+
+- **Fade and reset**<br>
+  After a full pass, the screen fades toward blankness, pauses, and restarts, returning to the beginning without resolving the loop.
+
+### Reflections
+
+_Zen Garden_ shifts the threshold away from “choice” and toward “attention.” With no moment to intervene, the piece asks what it means to stay with a repetitive act that never completes. The reset isn’t a clean slate; it’s the return of the same task. Over time, the work becomes less about the pattern itself and more about the viewer’s willingness to remain with it.
+
+## #5 - Incense
+
+![Incense artwork showing a single vertical incense stick with a glowing tip and drifting smoke particles](static/images/incense.jpg)
+
+_Incense_ is a loop about slow disappearance.
+
+A single stick fades into view, its tip begins to glow, and it burns downward at a steady pace. Ash-like particles rise from the ember and drift upward like smoke. When the stick finishes burning, the screen goes quiet for a moment—then the cycle begins again, returning to the same ritual without a conclusion.
+
+The piece treats repetition as a quiet practice: something that doesn’t “progress” so much as it continues. The loop is slow enough to feel meditative, but persistent enough to make time noticeable.
+
+### Interaction
+
+There is no direct user control. Instead, the piece responds as a presence:
+
+- The motion of the smoke subtly shifts with the viewer’s position, as if the air changes when someone is nearby.
+- The primary interaction is duration—choosing to watch long enough to notice the burn, the drift, and the reset.
+
+### Technical Overview
+
+- **Phased loop**
+  The cycle moves through four states: the stick appears, the ember fades in, the burn progresses downward, and the scene pauses briefly before restarting.
+
+- **Burn progression**
+  The burning tip is a moving point along the stick that advances gradually over time, making the “loss” feel continuous rather than sudden.
+
+- **Particle smoke**
+  Particles are emitted from the glowing tip and rise upward with slight randomness, creating a soft, constantly changing texture.
+
+- **Subtle responsiveness**
+  The smoke’s horizontal drift is gently influenced by the viewer’s position, keeping the loop mostly autonomous while still acknowledging the body in front of it.
+
+### Reflections
+
+_Incense_ makes a loop out of something that normally marks time. Watching it burn turns repetition into a kind of measuring: the same action, the same pace, the same ending—followed by a return. The reset doesn’t erase what happened; it reframes the burn as a recurring ritual. Over time, the work becomes less about the image of incense and more about how attention changes when nothing “new” arrives, only the steady continuation of the same disappearing act.
 
 ## #7 - Meaning
 
@@ -202,7 +266,7 @@ This piece clarified how much viewers want coherence. When the titles contradict
 
 It also set a direction for the larger project: the strongest part of the prototype is how quickly it produces reflection with minimal form. The open challenge is translating that same “label vs. perception” tension into a multi-screen installation where the body participates, not just the eyes.
 
-## Meaning
+## Meaning (Prototype Version Text)
 
 ![image.png](static/images/meaning.jpg)
 
