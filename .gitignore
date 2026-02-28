@@ -22,3 +22,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Wip files
+static/project-content/wip/
+static/project-content/wip-2/
+static/project-content/wip-3/

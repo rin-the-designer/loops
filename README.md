@@ -2,7 +2,11 @@
 
 ## Concept and Context
 
-This project is an interactive artwork that reveals the tension between involuntary loops\* that we are placed in and the chosen thresholds\*\*, actions that we choose to take. The form of the work is a multi-screen installation composed of mini touch displays, each presenting unique interactive artwork. Alongside touch interactions, each display has a camera that enables motion-capture interactions, transforming viewer’s gestures into a subtle part of the experience. By situating multiple loops side by side, the piece underscores the paradox of repetition: while endless cycles may feel absurd, they can also hold meaning and possibility when reframed.
+This project is an interactive artwork that reveals the tension between involuntary loops[^1] that we are placed in and the chosen thresholds[^2], actions that we choose to take. The form of the work is a multi-screen installation composed of mini touch displays, each presenting unique interactive artwork. Alongside touch interactions, each display has a camera that enables motion-capture interactions, transforming viewer’s gestures into a subtle part of the experience. By situating multiple loops side by side, the piece underscores the paradox of repetition: while endless cycles may feel absurd, they can also hold meaning and possibility when reframed.
+
+[^1]: This is the first footnote.
+
+[^2]: This is second footnote.
 
 This project was born from a period of personal reflection following an intense phase of creative work. I felt caught in daily repetitions that seemed meaningless. Over time, I began to see these loops differently, I embraced them. It reminded me again of my personal motto: live like water. Water adapts to its environment, sometimes soft and yielding, sometimes forceful and unyielding. It follows the paths carved before it, yet over time it reshapes stone, carving out new directions. In the same way, I move through the loops of life that are given to me, but at every threshold I choose how to adapt, when to resist, and when to transform. This metaphor drives my motivation and also frames my goal for the audience. By experiencing these digital loops, viewers are invited to reflect on their own patterns and consider how subtle thresholds might open up new interpretations of their routines. Rather than resisting repetition, the work encourages acceptance, play, and the regaining of agency.
 
