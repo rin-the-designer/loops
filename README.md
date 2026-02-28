@@ -28,7 +28,7 @@ The results -
 
 ## #1 - Myth of Sisyphus
 
-![Property 1=Variant7.png](static/images/myth-of-sisyphus.jpg)
+![Myth of Sisyphus artwork showing an orange circle representing the boulder on a black triangular slope](static/images/myth-of-sisyphus.jpg)
 
 Albert Camus’ Myth of Sisyphus retells the story of the Greek titan condemned to push a boulder up a hill only to see it fall back again. In this endless, absurd task, Camus finds a metaphor for our search for meaning in an indifferent world. Yet he ends with a radical turn: “One must imagine Sisyphus happy.”
 
@@ -66,19 +66,19 @@ The sketch is built on JavaScript, p5.js for visual rendering and ml5.js for han
 - **Physics simulation**<br>
   Gravity (0.5) acts on the rock’s velocity. The hill geometry flips direction at the end of each iteration, forming an endless repetition. The rock’s position updates along the slope equation to simulate rolling motion.
 
-### Comments
-
-[Comments from future testing iterations will be added here]
-
 ### Reflections
 
 This project lays foundations to this entire collection. It was born from the monotony and mundaneness of everyday repetition, and in making it, I found myself repeating again, trapped in the same cycle I was trying to express. The process mirrored the work’s concept: building, testing, watching the rock fall, and starting over.
 
-The moment when the rock slides back to the bottom isn’t a failure, it’s a renewal. Each reset is another chance to start, another loop to inhabit. Through this, I began to see the core of my project that repetition, when accepted and embraced, can become a quiet space for reflection, patience, and persistence.'
+The moment when the rock slides back to the bottom isn’t a failure, it’s a renewal. Each reset is another chance to start, another loop to inhabit. Through this, I began to see the core of my project that repetition, when accepted and embraced, can become a quiet space for reflection, patience, and persistence.
+
+In testing, people inhabited this loop in noticeably different ways. One participant tried hard to reach the peak, failed several times, finally succeeded, watched the rock fall, and immediately walked away. Another kept going, pushing the rock again and again as a small challenge. A third held the rock still in the middle of the slope and said that was where they wanted it to stay.
+
+These responses clarified what the piece is really asking. The system defines the hill, gravity, and the inevitability of return—but agency shows up in how someone chooses to stay with the repetition, resist it, pause it, or leave. “Winning” doesn’t resolve the loop; it only reveals it. The work becomes less about reaching the top and more about noticing what it feels like to keep choosing to push.
 
 ## #2 - Doors
 
-![Property 1=Variant7.png](static/images/doors.jpg)
+![Doors artwork showing an endless corridor of alternating black and white thresholds in 3D space](static/images/doors.jpg)
 
 A door is one of the most ordinary things we encounter, yet it quietly defines how we move through the world. Every time we pass through one, we shift roles and identities. Stepping through the office door, we become our work-self, returning home, we become our private self. Each doorway marks a subtle transformation, A threshold between who we were and who we are about to be.
 
@@ -118,11 +118,89 @@ Source: _Feel_ by Master Minded, [artlist.io](https://artlist.io/royalty-free-mu
 
 [Feel_License.pdf](static/files/Feel_License.pdf)
 
-### Comments
+### Reflections
 
-[Comments from future testing iterations will be added here]
+Testing made it clear that _Doors_ invites projection. One visitor began moving their legs in place, trying to sync their steps with the advancing stairs. They assumed their lower-body movement was driving the scene, treating the loop as a coordinated journey. That misreading was revealing: it showed how quickly people invent a sense of control even when none is actually available.
+
+Others sat still and waited for something more to happen, then expressed frustration at how slowly the corridor moved. A few reflected that they’ve become accustomed to fast-paced media and immediate feedback. These reactions turned the piece into a mirror for expectations about pace, progress, and control. A simple, slow loop was enough to surface those expectations and make them available as material for reflection.
+
+## #3 - Accumulation
+
+![Alt Text](static/images/accumulation.jpg)
+
+_Accumulation_ is a sketch about buildup that looks like nothing is happening.
+
+It’s based on a painting exercise: repeatedly drawing a black circle, then covering it with white paint, until the canvas appears blank—while physically getting heavier from layered material.
+
+![Alt Text](static/images/blank-canvas.jpg)
+
+This piece recreates that logic in the browser by stacking visual layers over time. Every second, it adds a new layer without removing anything: sometimes a centered circle, sometimes a full-screen “canvas” overlay. The surface may look minimal, but the system keeps accumulating underneath.
+
+Visually, the work oscillates between presence and erasure. Technically, it is literal accumulation: the piece continuously adds elements to the page, and the interface reveals this hidden growth through counters that track how much has been added.
+
+### Interaction
+
+- **Click anywhere**
+  - Flips the color scheme (white ↔ black).
+  - Resizes the circle based on where the user clicks: the farther from the center, the larger the circle.
+
+### Technical Overview
+
+- **Timed layering**
+  The work runs on a simple timer. It continuously adds new layers at fixed intervals, alternating between a centered circle and a full-screen overlay. The layers stack indefinitely and are never removed.
+
+- **Accumulation made visible**
+  The interface displays two indicators that reflect the ongoing buildup:
+
+  - a rough estimate of page “weight” (DOM size)
+  - a line counter / log that increases each time a new layer is added
+
+- **Layered composition**
+  The visuals are built from two repeating element types:
+  - a centered circle whose size is controlled by a CSS variable
+  - a full-screen overlay that covers the entire viewport
 
 ### Reflections
+
+In observation, the interaction in _Accumulation_ was not immediately legible to most viewers. Without explanation, many treated it as a non-interactive animation and never discovered that clicking changes the structure. The idea of DOM growth as “digital weight” was also most visible to people already familiar with HTML and how documents are built.
+
+But once the premise was explained—that every second adds new elements and “weight,” both visually and in code, many people said it resonated with their own sense of hidden build-up: routines, stress, habits, and quiet accumulation that doesn’t read as change until it’s named. That gap between initial perception (blank, minimal, nothing happening) and later understanding became part of the piece. It highlighted how some forms of repetition and accumulation stay invisible until there’s a threshold moment where they become recognized.
+
+## #7 - Meaning
+
+![Meaning artwork showing two canvases: one with an orange dot moving in a structured loop and one wandering unpredictably](static/images/meaning.jpg)
+
+_Meaning_ is a two-part sketch built from a simple reversal.
+
+It was developed from the drawing elicitation workshop, where participants repeatedly visualized **meaningfulness** as symmetry and structure, and **absurdity** as randomness and disorder. This piece takes that shared visual language and flips its labels: the structured sketch is titled **Meaningless(무의미)**, and the chaotic sketch is titled **Meaningful(유의미)**. By placing expectation and naming in conflict, the work asks how quickly meaning can be assigned, lost, or re-made.
+
+In **Meaningless**, an orange dot (🟠) circles a stadium-like path. The motion reads as controlled and intentional, but the longer it continues, the more it can start to feel trapped—perfect structure without escape. In **Meaningful**, the orange dot drifts unpredictably across the canvas. It may look pointless at first, but over time it invites attention through curiosity: where will it go next, and what kind of pattern might appear only after watching for longer?
+
+Together, the two canvases treat meaning as something that emerges through duration and interpretation rather than through form alone. The dot becomes a stand-in for the self moving through time, and the work asks which feels more “meaningful”: staying inside a stable system, or wandering without a clear path.
+
+### Interaction
+
+This prototype has no direct physical interaction. The threshold happens through reading and looking:
+
+- The titles shape first impressions.
+- Meaning emerges by comparing the two canvases and noticing how perception shifts over time.
+
+### Technical Overview
+
+- **Two-canvas structure**
+  The work presents two sketches side by side to encourage comparison rather than progression.
+
+- **Contrasting motion systems**
+  One sketch constrains the dot to a looped path, while the other allows it to wander with non-repeating movement logic. The contrast is designed to feel “controlled” versus “uncontrolled,” even before the labels intervene.
+
+- **Title reversal as the main mechanism**
+  The simplest change—naming—acts like an interface. It redirects interpretation without changing the motion itself.
+
+### Reflections
+
+This piece clarified how much viewers want coherence. When the titles contradict the visuals, people rarely dismiss it—they start searching for an explanation, re-reading the motion until it “fits.” That interpretive effort becomes the loop.
+
+It also set a direction for the larger project: the strongest part of the prototype is how quickly it produces reflection with minimal form. The open challenge is translating that same “label vs. perception” tension into a multi-screen installation where the body participates, not just the eyes.
 
 ## Meaning
 
