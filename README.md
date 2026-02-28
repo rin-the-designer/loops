@@ -4,9 +4,9 @@
 
 This project is an interactive artwork that reveals the tension between involuntary loops[^1] that we are placed in and the chosen thresholds[^2], actions that we choose to take. The form of the work is a multi-screen installation composed of mini touch displays, each presenting unique interactive artwork. Alongside touch interactions, each display has a camera that enables motion-capture interactions, transforming viewer’s gestures into a subtle part of the experience. By situating multiple loops side by side, the piece underscores the paradox of repetition: while endless cycles may feel absurd, they can also hold meaning and possibility when reframed.
 
-[^1]: This is the first footnote.
+[^1]: Continuous cycle of activities and circumstances that we were compelled to engage in or adhere to.
 
-[^2]: This is second footnote.
+[^2]: Autonomy to determine our actions and interpretations.
 
 This project was born from a period of personal reflection following an intense phase of creative work. I felt caught in daily repetitions that seemed meaningless. Over time, I began to see these loops differently, I embraced them. It reminded me again of my personal motto: live like water. Water adapts to its environment, sometimes soft and yielding, sometimes forceful and unyielding. It follows the paths carved before it, yet over time it reshapes stone, carving out new directions. In the same way, I move through the loops of life that are given to me, but at every threshold I choose how to adapt, when to resist, and when to transform. This metaphor drives my motivation and also frames my goal for the audience. By experiencing these digital loops, viewers are invited to reflect on their own patterns and consider how subtle thresholds might open up new interpretations of their routines. Rather than resisting repetition, the work encourages acceptance, play, and the regaining of agency.
 
@@ -26,9 +26,9 @@ The second research was diary study where subjects were asked to log what they�
 
 The results -
 
-## Loop 1 - Myth of Sisyphus
+## #1 - Myth of Sisyphus
 
-![Property 1=Variant7.png](static/images/loop-1.png)
+![Property 1=Variant7.png](static/images/myth-of-sisyphus.jpg)
 
 Albert Camus’ Myth of Sisyphus retells the story of the Greek titan condemned to push a boulder up a hill only to see it fall back again. In this endless, absurd task, Camus finds a metaphor for our search for meaning in an indifferent world. Yet he ends with a radical turn: “One must imagine Sisyphus happy.”
 
@@ -66,10 +66,6 @@ The sketch is built on JavaScript, p5.js for visual rendering and ml5.js for han
 - **Physics simulation**<br>
   Gravity (0.5) acts on the rock’s velocity. The hill geometry flips direction at the end of each iteration, forming an endless repetition. The rock’s position updates along the slope equation to simulate rolling motion.
 
-### Tasks
-
-[x] Jitter on interaction has to be fixed (Smoothened calculation, 251111)
-
 ### Comments
 
 [Comments from future testing iterations will be added here]
@@ -80,9 +76,9 @@ This project lays foundations to this entire collection. It was born from the mo
 
 The moment when the rock slides back to the bottom isn’t a failure, it’s a renewal. Each reset is another chance to start, another loop to inhabit. Through this, I began to see the core of my project that repetition, when accepted and embraced, can become a quiet space for reflection, patience, and persistence.'
 
-## Loop 2 - Doors
+## #2 - Doors
 
-![Property 1=Variant7.png](static/images/loop-2.png)
+![Property 1=Variant7.png](static/images/doors.jpg)
 
 A door is one of the most ordinary things we encounter, yet it quietly defines how we move through the world. Every time we pass through one, we shift roles and identities. Stepping through the office door, we become our work-self, returning home, we become our private self. Each doorway marks a subtle transformation, A threshold between who we were and who we are about to be.
 
@@ -122,19 +118,15 @@ Source: _Feel_ by Master Minded, [artlist.io](https://artlist.io/royalty-free-mu
 
 [Feel_License.pdf](static/files/Feel_License.pdf)
 
-### Tasks
-
-[ ]
-
 ### Comments
 
 [Comments from future testing iterations will be added here]
 
 ### Reflections
 
-## Prototype 1
+## Meaning
 
-![image.png](static/images/prototype-1.jpg)
+![image.png](static/images/meaning.jpg)
 
 The first prototype, available at [https://thesis.rin.kim/prototype-01/index.html](https://thesis.rin.kim/prototype-01/index.html), explores the findings from the drawing elicitation research. A pattern that emerged from participants’ drawing was the consistent depiction of absurdity as random scribbles and meaningfulness as symmetrical or structured sketches. To challenge this expectation, these patterns were digitalized with the titles reversed. The canvas resembling participants’ “_meaningful_” sketches was titled **Meaningless(무의미)**, while the one resembling “_absurd_” sketches was titled **Meaningful(유의미)**. By defamiliarizing and reversing common assumptions, the artwork triggers viewers to think “what really is meaningful?”
 
@@ -150,5 +142,5 @@ Feedback from this testing session was intriguing. -
 
 - Frontend: SvelteKit
 - Deployment: Vercel
-- Canvas: p5.js
+- Canvas: p5.js or vanilla js
 - Motion Sensing: ml5.js
