@@ -100,10 +100,10 @@ _Doors_ uses subtle body tracking to create a sense of presence within the corri
 
 The sketch is built in JavaScript, using p5.js (WEBGL) for 3D rendering and ml5.js for upper body and face tracking.
 
-- **Rendering and motion**
+- **Rendering and motion**<br>
   The environment is constructed from box primitives forming stairs, walls, and a floor plane. The camera advances forward using interpolated offsets `currentOffset` and `targetOffset` for smooth motion.
 
-- **Step sequencing**
+- **Step sequencing**<br>
   The motion progresses in timed increments `MOVE_INTERVAL`, `STEP_SIZE, SMOOTH_SPEED` for `MAX_MOVES` cycles before entering a final long transition `FINAL_MOVEMENT`, `FINAL DURATION`
 
 - Scene inversion
@@ -214,16 +214,16 @@ There is no direct user control. Instead, the piece responds as a presence:
 
 ### Technical Overview
 
-- **Phased loop**
+- **Phased loop**<br>
   The cycle moves through four states: the stick appears, the ember fades in, the burn progresses downward, and the scene pauses briefly before restarting.
 
-- **Burn progression**
+- **Burn progression**<br>
   The burning tip is a moving point along the stick that advances gradually over time, making the “loss” feel continuous rather than sudden.
 
-- **Particle smoke**
+- **Particle smoke**<br>
   Particles are emitted from the glowing tip and rise upward with slight randomness, creating a soft, constantly changing texture.
 
-- **Subtle responsiveness**
+- **Subtle responsiveness**<br>
   The smoke’s horizontal drift is gently influenced by the viewer’s position, keeping the loop mostly autonomous while still acknowledging the body in front of it.
 
 ### Reflections
@@ -251,13 +251,13 @@ This prototype has no direct physical interaction. The threshold happens through
 
 ### Technical Overview
 
-- **Two-canvas structure**
+- **Two-canvas structure**<br>
   The work presents two sketches side by side to encourage comparison rather than progression.
 
-- **Contrasting motion systems**
+- **Contrasting motion systems**<br>
   One sketch constrains the dot to a looped path, while the other allows it to wander with non-repeating movement logic. The contrast is designed to feel “controlled” versus “uncontrolled,” even before the labels intervene.
 
-- **Title reversal as the main mechanism**
+- **Title reversal as the main mechanism**<br>
   The simplest change—naming—acts like an interface. It redirects interpretation without changing the motion itself.
 
 ### Reflections

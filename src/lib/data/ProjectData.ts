@@ -171,43 +171,43 @@ export const projectData: Project[] = [
 			a ride that looped endlessly, but also under control of the kids riding it.
 			</p>`
 	},
+	// {
+	// 	title: 'The Continuance',
+	// 	slug: 'continuance',
+	// 	route: '/projects/continuance',
+	// 	thumbnail: '/project-content/continuance/thumb.png',
+	// 	guide: 'Camera input is optional.',
+	// 	interaction: [{ type: 'camera', optional: true }],
+	// 	excerpt: 'A fictional story of an artist finding their way through a mundane cycle.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		The Continuance is a finctional story of an artist finding their way through a mundane cycle.
+	// 		It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
+	// 		and finding a way to continue.
+	// 	</p>
+	// 	<p style="margin-block-start: 0;">
+	// 		This work is a complemntary piece to the other projects in this collection.
+	// 	</p>`
+	// },
+	// {
+	// 	title: 'Thresholds',
+	// 	slug: 'thresholds',
+	// 	route: '/projects/thresholds',
+	// 	thumbnail: '/project-content/thresholds/thumb.png',
+	// 	guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
+	// 	interaction: [{ type: 'camera' }],
+	// 	excerpt: 'A visualization of the thresholds we face in the loop of life.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		Thresholds takes this project back to the beginning. The project started out with
+	// 		myself defining involuntary circumstances and the voluntary actions that we take as loops
+	// 		and thresholds. This project is a coded version of the first sketch I created for this collection.
+	// 	</p>
+	// 	<p style="margin-block-start: 0;">
+	// 		The piece captures the number of people visible in the camera view, and detects
+	// 		arm movements to make a "threshold" in a continuous "loop".
+	// 	</p>`
+	// },
 	{
-		title: 'The Continuance',
-		slug: 'continuance',
-		route: '/projects/continuance',
-		thumbnail: '/project-content/continuance/thumb.png',
-		guide: 'Camera input is optional.',
-		interaction: [{ type: 'camera', optional: true }],
-		excerpt: 'A fictional story of an artist finding their way through a mundane cycle.',
-		description: `<p style="margin-block-start: 0;">
-			The Continuance is a finctional story of an artist finding their way through a mundane cycle.
-			It is a tranquil journey of realizing patterns in our daily lives, facing a wall of uncertainty,
-			and finding a way to continue.
-		</p>
-		<p style="margin-block-start: 0;">
-			This work is a complemntary piece to the other projects in this collection.
-		</p>`
-	},
-	{
-		title: 'Thresholds',
-		slug: 'thresholds',
-		route: '/projects/thresholds',
-		thumbnail: '/project-content/thresholds/thumb.png',
-		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
-		interaction: [{ type: 'camera' }],
-		excerpt: 'A visualization of the thresholds we face in the loop of life.',
-		description: `<p style="margin-block-start: 0;">
-			Thresholds takes this project back to the beginning. The project started out with
-			myself defining involuntary circumstances and the voluntary actions that we take as loops
-			and thresholds. This project is a coded version of the first sketch I created for this collection.
-		</p>
-		<p style="margin-block-start: 0;">
-			The piece captures the number of people visible in the camera view, and detects
-			arm movements to make a "threshold" in a continuous "loop".
-		</p>`
-	},
-	{
-		title: 'Meaningful/Meaningless',
+		title: 'Meaning',
 		slug: 'meaningful-meaningless',
 		route: '/projects/meaningful-meaningless',
 		thumbnail: '/project-content/meaningful-meaningless/thumb.png',
@@ -218,16 +218,42 @@ export const projectData: Project[] = [
 			Text Work In Progress.
 		</p>`
 	},
+	// {
+	// 	title: 'Large Loop Model',
+	// 	slug: 'large-loop-model',
+	// 	route: '/projects/large-loop-model',
+	// 	thumbnail: '/project-content/large-loop-model/thumb.png',
+	// 	guide: '',
+	// 	interaction: [],
+	// 	excerpt: 'Work In Progress.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		Text Work In Progress.
+	// 	</p>`
+	// },
 	{
-		title: 'Large Loop Model',
-		slug: 'large-loop-model',
-		route: '/projects/large-loop-model',
-		thumbnail: '/project-content/large-loop-model/thumb.png',
+		title: 'Not the Same Sun',
+		slug: 'not-the-same-sun',
+		route: '/projects/not-the-same-sun',
+		thumbnail: '/project-content/not-the-same-sun/thumb.png',
 		guide: '',
 		interaction: [],
 		excerpt: 'Work In Progress.',
 		description: `<p style="margin-block-start: 0;">
-			Text Work In Progress.
+			"In a foreign country, the sun bathing the houses on a hill in golden light.
+			A more intense emotion than that produced by the same sight in one's own country.
+			It is not the same sun. I know perfectly well that it is not the same sun."
+		</p>`
+	},
+	{
+		title: 'Fountain',
+		slug: 'fountain',
+		route: '/projects/fountain',
+		thumbnail: '/project-content/fountain/thumb.png',
+		guide: '',
+		interaction: [],
+		excerpt: 'Work In Progress.',
+		description: `<p style="margin-block-start: 0;">
+			Text work in progress.
 		</p>`
 	}
 ];
