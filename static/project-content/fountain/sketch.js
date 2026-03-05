@@ -275,7 +275,7 @@ function getLowerWaterEllipse() {
 }
 
 /** Click interaction - Coin toss */
-function mousePressed() {
+function mouseClicked() {
 	if (waterStage < 3) return;
 
 	const px = svgX(mouseX);
