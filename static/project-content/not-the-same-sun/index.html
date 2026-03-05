@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Not the Same Sun — Prototype</title>
+		<link rel="stylesheet" type="text/css" href="/project-content/not-the-same-sun/style.css" />
+	</head>
+	<body class="no-select">
+		<svg id="scene" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<!-- Sun glow filter -->
+				<filter id="sunGlow" x="-200%" y="-200%" width="400%" height="400%">
+					<feGaussianBlur id="sunBlur1" in="SourceGraphic" stdDeviation="18" result="blur1" />
+					<feGaussianBlur id="sunBlur2" in="SourceGraphic" stdDeviation="42" result="blur2" />
+					<feMerge>
+						<feMergeNode in="blur2" />
+						<feMergeNode in="blur1" />
+						<feMergeNode in="SourceGraphic" />
+					</feMerge>
+				</filter>
+
+				<!-- Haze/atmosphere filter -->
+				<filter id="hazeFilter" x="-20%" y="-20%" width="140%" height="140%">
+					<feTurbulence
+						id="turbulence"
+						type="fractalNoise"
+						baseFrequency="0.003 0.012"
+						numOctaves="2"
+						seed="7"
+						result="noise"
+					/>
+					<feDisplacementMap
+						in="SourceGraphic"
+						in2="noise"
+						scale="0"
+						xChannelSelector="R"
+						yChannelSelector="G"
+					/>
+				</filter>
+
+				<!-- Gradients -->
+				<linearGradient id="skyTint" x1="0" y1="0" x2="0" y2="1">
+					<stop id="skyTop" offset="0%" stop-color="#ffffff" stop-opacity="1" />
+					<stop id="skyBottom" offset="100%" stop-color="#f3f3f3" stop-opacity="1" />
+				</linearGradient>
+
+				<radialGradient id="sunAuraGradient" cx="50%" cy="50%" r="50%">
+					<stop id="auraStop1" offset="0%" stop-color="#ffb347" stop-opacity="0.32" />
+					<stop id="auraStop2" offset="45%" stop-color="#ffb347" stop-opacity="0.12" />
+					<stop id="auraStop3" offset="100%" stop-color="#ffb347" stop-opacity="0" />
+				</radialGradient>
+
+				<linearGradient id="groundShade" x1="0" y1="0" x2="0" y2="1">
+					<stop offset="0%" stop-color="#111111" />
+					<stop offset="100%" stop-color="#000000" />
+				</linearGradient>
+
+				<linearGradient id="riverGradient" x1="0" y1="0" x2="0" y2="1">
+					<stop id="riverTop" offset="0%" stop-color="#1d7bf0" />
+					<stop id="riverBottom" offset="100%" stop-color="#0069DA" />
+				</linearGradient>
+			</defs>
+
+			<!-- Sky -->
+			<rect id="sky" width="1920" height="1080" fill="url(#skyTint)" />
+
+			<!-- Atmospheric veil -->
+			<rect
+				id="hazeLayer"
+				width="1920"
+				height="1080"
+				fill="#ffffff"
+				opacity="0"
+				filter="url(#hazeFilter)"
+			/>
+
+			<!-- Sun aura -->
+			<circle id="sunAura" cx="960" cy="204" r="170" fill="url(#sunAuraGradient)" opacity="0.65" />
+
+			<!-- Sun -->
+			<circle id="sun" cx="960" cy="204" r="100" fill="#FF8800" filter="url(#sunGlow)" />
+
+			<!-- Seam highlight -->
+			<path
+				id="seamLight"
+				d="M1024 828 L1055 832.5 L985 930"
+				fill="none"
+				stroke="#ffffff"
+				stroke-opacity="0"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+
+			<!-- Hills -->
+			<path
+				id="hills"
+				d="M649.5 780.168L0 905V1080H1920V754H1445.5L1055 832.5L649.5 780.168Z"
+				fill="url(#groundShade)"
+			/>
+
+			<!-- River/path -->
+			<path
+				id="river"
+				d="M910.5 933.5L997 825L1055 832.5L980.5 933.5L1115 1109.5H1042L910.5 933.5Z"
+				fill="url(#riverGradient)"
+			/>
+		</svg>
+		<script src="/project-content/not-the-same-sun/script.js"></script>
+	</body>
+</html>
