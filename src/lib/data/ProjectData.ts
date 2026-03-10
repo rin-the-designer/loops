@@ -64,7 +64,7 @@ export const projectData: Project[] = [
 		excerpt:
 			'A continuous cylce of black and white doors representing the transitions we experience in life.',
 		description: `<p style="margin-block-start: 0;">
-			Doors act as gateways that allow us to move through space, much like
+			<span style="font-style: italic;">Doors</span> act as gateways that allow us to move through space, much like
 			the transitions we experience in life. We enter and exit different
 			phases, and each doorway transforms who we are. Just as an infinite
 			stairway ascends through these transitions, we progress from child to
@@ -91,7 +91,7 @@ export const projectData: Project[] = [
 		excerpt:
 			'A digital reflection of the accumulation of small, repetitive actions, adding up to a larger pattern.',
 		description: `<p style="margin-block-start: 0;">
-			Accumulation is a digital reflection of a physical process: drawing a black circle,
+			<span style="font-style: italic;">Accumulation</span> is a digital reflection of a physical process: drawing a black circle,
 			covering it with white, and repeating. What seems like a simple, meaningless loop
 			gradually builds weight — both literally on a canvas, and metaphorically in code.
 			Each iteration leaves behind traces, even if partially erased, creating layers of
@@ -151,7 +151,7 @@ export const projectData: Project[] = [
 			of your life. Or, it could be a start of another loop in some cultural context.
 		</p>
 		<p>
-			This project is a digital representation of a burning incense stick as a connection
+			<span style="font-style: italic;">Incense</span> is a digital representation of a burning incense stick as a connection
 			between life and death. The smoke changes directions based on the position of the
 			viewer, just as it would change direction based on the wind of people moving by.
 		</p>`
@@ -166,7 +166,7 @@ export const projectData: Project[] = [
 		interaction: [{ type: 'camera' }, { type: 'flash' }],
 		excerpt: 'A revisit to a childhood playground memory.',
 		description: `<p style="margin-block-start: 0;">
-			Playground Spinner is a nostalgic trip down memory lane. It is a simple
+			<span style="font-style: italic;">Playground Spinner</span> is a nostalgic trip down memory lane. It is a simple
 			playground ride. Yet, looking at it from an adult's perspective, it was
 			a ride that looped endlessly, but also under control of the kids riding it.
 			</p>`
@@ -213,11 +213,15 @@ export const projectData: Project[] = [
 		thumbnail: '/project-content/meaningful-meaningless/thumb.png',
 		guide: 'Click interaction available to zoom in to artworks and descriptions.',
 		interaction: [{ type: 'click', optional: true }],
-		excerpt: 'Work In Progress.',
+		excerpt:
+			'Reflection on how repetition, structure, and unpredictability shape our sense of meaning.',
 		description: `<p style="margin-block-start: 0;">
-			Text Work In Progress.
-		</p>`
-	},
+			<span style="font-style: italic;">Meaning</span> presents two contrasting moving drawings: one confined to a fixed, repeating path and one wandering freely across the surface. The structured side appears orderly and stable, while the other seems erratic and unresolved. Yet the work resists that first reading. By placing <span style="font-style: italic;">Meaningful</span> and <span style="font-style: italic;">Meaningless</span> in tension, the piece asks whether meaning comes from order, freedom, repetition, or the attention we bring to what unfolds over time.
+			</p>
+			<p>
+			As the drawings continue, the repeated path can begin to feel trapped inside its own logic, while the drifting line invites anticipation, interpretation, and projection. What first appears chaotic may begin to feel alive, what first appears coherent may begin to feel empty. Rather than deciding which side is correct, the work keeps that judgment open and turns meaning into something unstable, relational, and continuously negotiated by the viewer.
+			</p>`
+	}
 	// {
 	// 	title: 'Large Loop Model',
 	// 	slug: 'large-loop-model',
@@ -230,30 +234,30 @@ export const projectData: Project[] = [
 	// 		Text Work In Progress.
 	// 	</p>`
 	// },
-	{
-		title: 'Not the Same Sun',
-		slug: 'not-the-same-sun',
-		route: '/projects/not-the-same-sun',
-		thumbnail: '/project-content/not-the-same-sun/thumb.png',
-		guide: '',
-		interaction: [],
-		excerpt: 'Work In Progress.',
-		description: `<p style="margin-block-start: 0;">
-			"In a foreign country, the sun bathing the houses on a hill in golden light.
-			A more intense emotion than that produced by the same sight in one's own country.
-			It is not the same sun. I know perfectly well that it is not the same sun."
-		</p>`
-	},
-	{
-		title: 'Fountain',
-		slug: 'fountain',
-		route: '/projects/fountain',
-		thumbnail: '/project-content/fountain/thumb.png',
-		guide: '',
-		interaction: [],
-		excerpt: 'Work In Progress.',
-		description: `<p style="margin-block-start: 0;">
-			Text work in progress.
-		</p>`
-	}
+	// {
+	// 	title: 'Not the Same Sun',
+	// 	slug: 'not-the-same-sun',
+	// 	route: '/projects/not-the-same-sun',
+	// 	thumbnail: '/project-content/not-the-same-sun/thumb.png',
+	// 	guide: '',
+	// 	interaction: [],
+	// 	excerpt: 'Work In Progress.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		"In a foreign country, the sun bathing the houses on a hill in golden light.
+	// 		A more intense emotion than that produced by the same sight in one's own country.
+	// 		It is not the same sun. I know perfectly well that it is not the same sun."
+	// 	</p>`
+	// },
+	// {
+	// 	title: 'Fountain',
+	// 	slug: 'fountain',
+	// 	route: '/projects/fountain',
+	// 	thumbnail: '/project-content/fountain/thumb.png',
+	// 	guide: '',
+	// 	interaction: [],
+	// 	excerpt: 'Work In Progress.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		Text work in progress.
+	// 	</p>`
+	// }
 ];
