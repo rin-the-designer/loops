@@ -1,59 +1,30 @@
-let scaleFactor, offsetX, offsetY;
-let waterStage = 1;
-let stage1StartTime, stage2StartTime, stage3StartTime;
+// Responsive Fountain (top view)
+// - Lower basin max diameter: 640px (desktop), min: 320px (mobile)
+// - Two layers (upper + lower) with 4 waterways
+// - Starts empty -> upper fills -> channels flow -> lower fills -> subtle ripples
+// - Coin/orange dot removed for now
 
-const WATER_COLOR = '#0077FF';
+let stage = 0;
+let t0 = 0;
 
-// Spout stream - (unused)
-// const STREAM_WIDTH = 78;
-// const STREAM_X = 921;
-// const STREAM_TOP = 309;
-// const STREAM_HEIGHT_INITIAL = 12;
-// const STREAM_HEIGHT_FINAL = 120;
-// const STREAM_GROW_DURATION = 1000;
-// const SPOUT_FLUCTUATION = 12;
+// Timing (ms)
+const DUR_UPPER_FILL = 4200;
+const DUR_CHANNEL_FLOW = 1800;
+const DUR_LOWER_FILL = 5200;
 
-// Upper basin water (stage 1)
-const UPPER_WATER_RX = 177;
-const UPPER_WATER_RY = 82;
-const UPPER_DARK_BOTTOM = 430;
-const STAGE1_DURATION = 5000;
+// Colors
+const STONE_OUTER = '#050505';
+const STONE_INNER = '#2F2F2F';
+const STONE_CAVITY = '#000000';
 
-// Center stream (stage 2)
-const CENTER_STREAM_X = 921;
-const CENTER_STREAM_WIDTH = 78;
-const CENTER_STREAM_TOP = 426;
-const CENTER_STREAM_HEIGHT = 223;
-const CENTER_STREAM_HEIGHT_STAGE3 = 150;
-const CENTER_STREAM_DURATION = 1000;
-const CORNERS_TOP = [100, 100, 0, 0];
-const CORNERS_BOTTOM = [0, 0, 100, 100];
-
-// Lower basin water (stage 3)
-const LOWER_WATER_RX = 292;
-const LOWER_WATER_RY = 142;
-const LOWER_DARK_BOTTOM = 650;
-
-// Inner ellipses (structure, not water) - coin must stay inside
-const UPPER_INNER = { cx: 960, cy: 345, rx: 180, ry: 85 };
-const LOWER_INNER = { cx: 960, cy: 505, rx: 300, ry: 145 };
-const STAGE3_DURATION = 5000;
-
-// Water wave animation (after stage 3 complete)
-const WATER_WAVE_AMOUNT = 0.015;
-const WATER_WAVE_SPEED = 0.003;
-
-// Coin toss
-const COIN_DIAMETER = 24;
-const COIN_COLORS = ['#FF8800', '#D9D9D9'];
-const COIN_SPIN_SPEED = 0.04;
-const COIN_FLY_DURATION = 800;
-const COIN_SINK_DURATION = 600;
-const COIN_LAUNCH_Y = 1080;
-let coins = [];
+const WATER_A = '#2A91FF';
+const WATER_B = '#1670D1';
+const WATER_C = '#1059AD';
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	noStroke();
+	t0 = millis();
 }
 
 function windowResized() {
@@ -61,309 +32,281 @@ function windowResized() {
 }
 
 function draw() {
-	background(255);
+	background(232);
 
-	scaleFactor = min(width / 1920, height / 1080);
-	offsetX = width / 2 - 960 * scaleFactor;
-	offsetY = height / 2 - 540 * scaleFactor;
-	noStroke();
+	// Base sizing
+	const targetLowerD = clamp(min(width, height) * 0.72, 320, 640);
+	const s = targetLowerD / 640; // reference is 640
+	const cx = width / 2;
+	const cy = height / 2;
 
-	// Structure
-	drawLowerBasinStructure();
-	if (waterStage >= 3) drawLowerBasinWater();
-	drawUpperBasinStructure();
-	drawCreak();
+	// Geometry (reference space)
+	const lowerOuter = { rx: 320, ry: 320 }; // outer circle (base ring)
+	const lowerRim = { rx: 320, ry: 160 }; // rim ellipse
+	const lowerCavity = { rx: 300, ry: 145 }; // inner cavity ellipse
 
-	// Stage content
-	if (waterStage >= 2) drawCenterStream();
-	if (waterStage >= 1) drawStage1();
-	if (waterStage >= 2) updateStage2();
+	const upperRim = { rx: 200, ry: 100 };
+	const upperCavity = { rx: 180, ry: 85 };
 
-	// Coins (on top)
-	updateCoins();
-	drawCoins();
-}
+	// Channel geometry
+	const channelW = 36;
+	const channelL = 92;
+	const channelInset = 6;
 
-/** Lower basin */
-function drawLowerBasinStructure() {
-	// Base
-	fill(0);
-	beginShape();
-	vertex(sx(960), sy(830));
-	bezierVertex(sx(1136.73), sy(830), sx(1280), sy(686.731), sx(1280), sy(510));
-	vertex(sx(640), sy(510));
-	bezierVertex(sx(640), sy(686.731), sx(783.269), sy(830), sx(960), sy(830));
-	endShape(CLOSE);
-	// Rim
-	fill('#2F2F2F');
-	ellipse(sx(960), sy(510), 640 * scaleFactor, 320 * scaleFactor);
-	fill(0);
-	// Inner ellipse
-	ellipse(sx(960), sy(505), 600 * scaleFactor, 290 * scaleFactor);
-}
-
-/** Lower basin water */
-function drawLowerBasinWater() {
-	if (!stage3StartTime) stage3StartTime = millis();
-	const progress = min(1, (millis() - stage3StartTime) / STAGE3_DURATION);
-	let rx = LOWER_WATER_RX * progress;
-	let ry = LOWER_WATER_RY * progress;
-
-	if (progress >= 1) {
-		const t = millis() * WATER_WAVE_SPEED;
-		ry *= 1 + sin(t) * WATER_WAVE_AMOUNT;
-		rx *= 1 + sin(t * 0.7 + 1) * WATER_WAVE_AMOUNT;
-	}
-
-	fill(WATER_COLOR);
-	ellipse(sx(960), sy(LOWER_DARK_BOTTOM - ry), rx * 2 * scaleFactor, ry * 2 * scaleFactor);
-}
-
-/** Upper basin */
-function drawUpperBasinStructure() {
-	// Base
-	fill(0);
-	beginShape();
-	vertex(sx(960), sy(550));
-	bezierVertex(sx(1070.46), sy(550), sx(1160), sy(460.457), sx(1160), sy(350));
-	vertex(sx(760), sy(350));
-	bezierVertex(sx(760), sy(460.457), sx(849.543), sy(550), sx(960), sy(550));
-	endShape(CLOSE);
-	// Rim
-	fill('#2F2F2F');
-	ellipse(sx(960), sy(350), 400 * scaleFactor, 200 * scaleFactor);
-	fill(0);
-	// Inner ellipse
-	ellipse(sx(960), sy(345), 360 * scaleFactor, 170 * scaleFactor);
-}
-
-/** Creak */
-function drawCreak() {
-	fill(0, 128);
-	rect(sx(921), sy(428), 78 * scaleFactor, 24 * scaleFactor);
-	fill(0, 191);
-	rect(sx(999), sy(428), 4 * scaleFactor, 24 * scaleFactor);
-	rect(sx(917), sy(428), 4 * scaleFactor, 24 * scaleFactor);
-}
-
-// Spout stream - not used in current stages, kept for future use
-// function drawSpout(streamHeight, useFluctuation = false) {
-// 	blendMode(SCREEN);
-// 	fill(WATER_COLOR);
-// 	let top = 429 - streamHeight;
-// 	if (useFluctuation) {
-// 		const spoutBob = (noise(millis() * 0.0008) - 0.5) * 2 * SPOUT_FLUCTUATION;
-// 		top = STREAM_TOP + spoutBob;
-// 		streamHeight = 429 - top;
-// 	}
-// 	rect(sx(STREAM_X), sy(top), STREAM_WIDTH * scaleFactor, streamHeight * scaleFactor, ...CORNERS_TOP);
-// 	blendMode(BLEND);
-// }
-
-/** Stage 1 */
-function drawStage1() {
-	// Stage 1 animation
-	if (!stage1StartTime) stage1StartTime = millis();
-	const elapsed = millis() - stage1StartTime;
-	const progress = min(1, elapsed / STAGE1_DURATION);
-	let rx = UPPER_WATER_RX * progress;
-	let ry = UPPER_WATER_RY * progress;
-
-	// Stage 2 water wave animation
-	if (waterStage >= 2 && progress >= 1) {
-		const t = millis() * WATER_WAVE_SPEED;
-		ry *= 1 + sin(t * 1.2) * WATER_WAVE_AMOUNT;
-		rx *= 1 + sin(t * 0.8 + 2) * WATER_WAVE_AMOUNT;
-	}
-
-	fill(WATER_COLOR);
-	ellipse(sx(960), sy(UPPER_DARK_BOTTOM - ry), rx * 2 * scaleFactor, ry * 2 * scaleFactor);
-
-	if (elapsed >= STAGE1_DURATION) waterStage = 2;
-}
-
-/** Center stream */
-function drawCenterStream() {
-	// Stage 2 animation
-	if (!stage2StartTime) stage2StartTime = millis();
-	const elapsed = millis() - stage2StartTime;
-	const progress = min(1, elapsed / CENTER_STREAM_DURATION);
-	let streamHeight = CENTER_STREAM_HEIGHT * progress;
-
-	// Stage 3 animation
-	if (waterStage >= 3) {
-		if (!stage3StartTime) stage3StartTime = millis();
-		const stage3Progress = min(1, (millis() - stage3StartTime) / STAGE3_DURATION);
-		streamHeight = lerp(CENTER_STREAM_HEIGHT, CENTER_STREAM_HEIGHT_STAGE3, stage3Progress);
-		// Stage 3 water wave animation
-		if (stage3Progress >= 1) {
-			streamHeight *= 1 + sin(millis() * WATER_WAVE_SPEED * 1.5) * WATER_WAVE_AMOUNT;
-		}
-	}
-
-	blendMode(SCREEN);
-	fill(WATER_COLOR);
-	rect(
-		sx(CENTER_STREAM_X),
-		sy(CENTER_STREAM_TOP),
-		CENTER_STREAM_WIDTH * scaleFactor,
-		streamHeight * scaleFactor,
-		...CORNERS_BOTTOM
-	);
-	blendMode(BLEND);
-}
-
-/** Stage 2 */
-function updateStage2() {
-	if (!stage2StartTime) stage2StartTime = millis();
-	const elapsed = millis() - stage2StartTime;
-	if (elapsed >= CENTER_STREAM_DURATION) waterStage = 3;
-}
-
-function sx(x) {
-	return offsetX + x * scaleFactor;
-}
-
-function sy(y) {
-	return offsetY + y * scaleFactor;
-}
-
-function svgX(screenX) {
-	return (screenX - offsetX) / scaleFactor;
-}
-
-function svgY(screenY) {
-	return (screenY - offsetY) / scaleFactor;
-}
-
-function isPointInEllipse(px, py, cx, cy, rx, ry) {
-	return pow((px - cx) / rx, 2) + pow((py - cy) / ry, 2) <= 1;
-}
-
-function clampPointToEllipse(px, py, cx, cy, rx, ry) {
-	const d = pow((px - cx) / rx, 2) + pow((py - cy) / ry, 2);
-	if (d <= 1) return { x: px, y: py };
-	const scale = 1 / sqrt(d);
-	return { x: cx + (px - cx) * scale, y: cy + (py - cy) * scale };
-}
-
-function getUpperWaterEllipse() {
-	if (!stage1StartTime) return null;
-	const elapsed = millis() - stage1StartTime;
-	const progress = min(1, elapsed / STAGE1_DURATION);
-	let rx = UPPER_WATER_RX * progress;
-	let ry = UPPER_WATER_RY * progress;
-	if (waterStage >= 2 && progress >= 1) {
-		const t = millis() * WATER_WAVE_SPEED;
-		ry *= 1 + sin(t * 1.2) * WATER_WAVE_AMOUNT;
-		rx *= 1 + sin(t * 0.8 + 2) * WATER_WAVE_AMOUNT;
-	}
-	return { cx: 960, cy: UPPER_DARK_BOTTOM - ry, rx, ry };
-}
-
-function getLowerWaterEllipse() {
-	if (waterStage < 3 || !stage3StartTime) return null;
-	const progress = min(1, (millis() - stage3StartTime) / STAGE3_DURATION);
-	let rx = LOWER_WATER_RX * progress;
-	let ry = LOWER_WATER_RY * progress;
-	if (progress >= 1) {
-		const t = millis() * WATER_WAVE_SPEED;
-		ry *= 1 + sin(t) * WATER_WAVE_AMOUNT;
-		rx *= 1 + sin(t * 0.7 + 1) * WATER_WAVE_AMOUNT;
-	}
-	return { cx: 960, cy: LOWER_DARK_BOTTOM - ry, rx, ry };
-}
-
-/** Click interaction - Coin toss */
-function mouseClicked() {
-	if (waterStage < 3) return;
-
-	const px = svgX(mouseX);
-	const py = svgY(mouseY);
-
-	const upper = getUpperWaterEllipse();
-	if (upper && isPointInEllipse(px, py, upper.cx, upper.cy, upper.rx, upper.ry)) {
-		launchCoin(px, py, 'upper');
-		return;
-	}
-
-	const lower = getLowerWaterEllipse();
-	if (lower && isPointInEllipse(px, py, lower.cx, lower.cy, lower.rx, lower.ry)) {
-		launchCoin(px, py, 'lower');
-		return;
-	}
-}
-
-function launchCoin(targetX, targetY, basin) {
-	const inner = basin === 'upper' ? UPPER_INNER : LOWER_INNER;
-	const sinkDest = clampPointToEllipse(
-		targetX,
-		inner.cy + inner.ry,
-		inner.cx,
-		inner.cy,
-		inner.rx,
-		inner.ry
-	);
-
-	const color = random(COIN_COLORS);
-	coins.push({
-		x: 960,
-		y: COIN_LAUNCH_Y,
-		targetX,
-		targetY,
-		sinkX: sinkDest.x,
-		sinkY: sinkDest.y,
-		basin,
-		color,
-		opacity: 255,
-		startTime: millis(),
-		state: 'flying'
-	});
-}
-
-function updateCoins() {
+	// Animation progress
 	const now = millis();
-	for (let i = coins.length - 1; i >= 0; i--) {
-		const c = coins[i];
-		const elapsed = now - c.startTime;
+	const elapsed = now - t0;
 
-		if (c.state === 'flying') {
-			const t = min(1, elapsed / COIN_FLY_DURATION);
-			c.x = lerp(960, c.targetX, t);
-			c.y = lerp(COIN_LAUNCH_Y, c.targetY, t);
-			c.rotation = elapsed * COIN_SPIN_SPEED;
-			if (t >= 1) {
-				c.state = 'sinking';
-				c.startTime = now;
-			}
-		} else if (c.state === 'sinking') {
-			const t = min(1, elapsed / COIN_SINK_DURATION);
-			const inner = c.basin === 'upper' ? UPPER_INNER : LOWER_INNER;
-			let px = lerp(c.targetX, c.sinkX, t);
-			let py = lerp(c.targetY, c.sinkY, t);
-			const clamped = clampPointToEllipse(px, py, inner.cx, inner.cy, inner.rx, inner.ry);
-			c.x = clamped.x;
-			c.y = clamped.y;
-			c.opacity = 255 * (1 - t);
-			if (t >= 1) coins.splice(i, 1);
+	// Stage transitions
+	if (stage === 0) stage = 1;
+	if (stage === 1 && elapsed >= DUR_UPPER_FILL) stage = 2;
+	if (stage === 2 && elapsed >= DUR_UPPER_FILL + DUR_CHANNEL_FLOW) stage = 3;
+
+	const pUpper = stage >= 2 ? 1 : clamp(elapsed / DUR_UPPER_FILL, 0, 1);
+	const pChan = stage >= 3 ? 1 : clamp((elapsed - DUR_UPPER_FILL) / DUR_CHANNEL_FLOW, 0, 1);
+	const pLower = clamp((elapsed - (DUR_UPPER_FILL + DUR_CHANNEL_FLOW)) / DUR_LOWER_FILL, 0, 1);
+
+	// Draw order
+	drawLowerStructure(cx, cy, s, lowerOuter, lowerRim, lowerCavity);
+	if (stage >= 3) drawLowerWater(cx, cy, s, lowerCavity, pLower);
+
+	drawChannels(cx, cy, s, channelW, channelL, channelInset);
+	if (stage >= 2) drawChannelWater(cx, cy, s, channelW, channelL, channelInset, pChan);
+
+	drawUpperStructure(cx, cy, s, upperRim, upperCavity);
+	drawSpout(cx, cy, s, stage, pUpper);
+	if (stage >= 1) drawUpperWater(cx, cy, s, upperCavity, pUpper, stage);
+}
+
+function drawLowerStructure(cx, cy, s, outer, rim, cavity) {
+	// Outer base ring (circle)
+	fill(STONE_OUTER);
+	circle(cx, cy, outer.rx * 2 * s);
+
+	// Rim ellipse
+	fill(STONE_INNER);
+	ellipse(cx, cy, rim.rx * 2 * s, rim.ry * 2 * s);
+
+	// Inner cavity
+	fill(STONE_CAVITY);
+	ellipse(cx, cy, cavity.rx * 2 * s, cavity.ry * 2 * s);
+
+	// Notches / highlights (subtle)
+	fill(255, 22);
+	const notchW = 28 * s;
+	const notchH = 10 * s;
+	// top
+	rect(cx - notchW / 2, cy - rim.ry * s - notchH * 0.65, notchW, notchH, 999);
+	// bottom
+	rect(cx - notchW / 2, cy + rim.ry * s - notchH * 0.35, notchW, notchH, 999);
+	// left
+	push();
+	translate(cx - rim.ry * s, cy);
+	rotate(HALF_PI);
+	rect(-notchW / 2, -notchH / 2, notchW, notchH, 999);
+	pop();
+	// right
+	push();
+	translate(cx + rim.ry * s, cy);
+	rotate(HALF_PI);
+	rect(-notchW / 2, -notchH / 2, notchW, notchH, 999);
+	pop();
+}
+
+function drawUpperStructure(cx, cy, s, rim, cavity) {
+	// Upper base shape (kept abstract: just rim + cavity)
+	fill(STONE_INNER);
+	ellipse(cx, cy, rim.rx * 2 * s, rim.ry * 2 * s);
+	fill(STONE_CAVITY);
+	ellipse(cx, cy, cavity.rx * 2 * s, cavity.ry * 2 * s);
+}
+
+function drawChannels(cx, cy, s, w, l, inset) {
+	// 4 channels as rounded capsules between upper and lower basins
+	fill(STONE_INNER);
+
+	// top
+	drawCapsule(cx, cy - (85 + l / 2) * s, w * s, l * s, 999);
+	// bottom
+	drawCapsule(cx, cy + (85 + l / 2) * s, w * s, l * s, 999);
+	// left
+	push();
+	translate(cx - (180 + l / 2) * s, cy);
+	rotate(HALF_PI);
+	drawCapsule(0, 0, w * s, l * s, 999);
+	pop();
+	// right
+	push();
+	translate(cx + (180 + l / 2) * s, cy);
+	rotate(HALF_PI);
+	drawCapsule(0, 0, w * s, l * s, 999);
+	pop();
+}
+
+function drawChannelWater(cx, cy, s, w, l, inset, p) {
+	// Water inside channels
+	const innerW = (w - inset * 2) * s;
+	const innerL = (l - inset * 2) * s;
+	const fillL = innerL * easeOutCubic(p);
+
+	push();
+	blendMode(SCREEN);
+
+	function channelFill(x, y, rot) {
+		push();
+		translate(x, y);
+		rotate(rot);
+
+		// background glow
+		fill(77, 166, 255, 18);
+		rect(-innerW / 2 - 6 * s, -innerL / 2 - 6 * s, innerW + 12 * s, innerL + 12 * s, 999);
+
+		// filled portion (from top of channel down)
+		const yy = -innerL / 2;
+		fillGradientRect(-innerW / 2, yy, innerW, fillL);
+
+		// shimmer stripe
+		const t = millis() * 0.0022;
+		fill(255, 18);
+		rect(-innerW / 2, yy + (sin(t) * 0.5 + 0.5) * max(0, fillL - 12 * s), innerW, 10 * s, 999);
+		pop();
+	}
+
+	// top (flows outward)
+	channelFill(cx, cy - (85 + l / 2) * s, 0);
+	// bottom
+	channelFill(cx, cy + (85 + l / 2) * s, PI);
+	// left
+	channelFill(cx - (180 + l / 2) * s, cy, HALF_PI);
+	// right
+	channelFill(cx + (180 + l / 2) * s, cy, -HALF_PI);
+
+	blendMode(BLEND);
+	pop();
+}
+
+function drawSpout(cx, cy, s, stage, pUpper) {
+	// Central output (blue circle) + subtle pulse when filling
+	const r = 26 * s;
+	const pulse = 1 + (stage < 3 ? sin(millis() * 0.004) * 0.06 : sin(millis() * 0.0032) * 0.035);
+
+	push();
+	blendMode(SCREEN);
+	fill(77, 166, 255, 26);
+	circle(cx, cy, r * 2.8 * pulse);
+	blendMode(BLEND);
+
+	fill('#1670D1');
+	circle(cx, cy, r * 2);
+
+	fill(255, 28);
+	circle(cx - r * 0.18, cy - r * 0.22, r * 0.65);
+	pop();
+}
+
+function drawUpperWater(cx, cy, s, cavity, p, stage) {
+	// Radial fill: ellipse grows from center
+	let rx = cavity.rx * easeOutCubic(p);
+	let ry = cavity.ry * easeOutCubic(p);
+
+	// After full: subtle ripple
+	if (p >= 1) {
+		const t = millis() * 0.003;
+		rx *= 1 + sin(t * 0.9 + 1.2) * 0.012;
+		ry *= 1 + sin(t * 1.2) * 0.016;
+	}
+
+	push();
+	// Clip to cavity by drawing water first, then cavity mask effect via dark rim already
+	blendMode(BLEND);
+	fillWater();
+	ellipse(cx, cy, rx * 2 * s, ry * 2 * s);
+
+	// Highlights / ripples
+	if (p > 0.35) {
+		blendMode(SCREEN);
+		fill(255, 18);
+		const t = millis() * 0.0024;
+		ellipse(cx, cy - 10 * s, rx * 1.55 * s, ry * 1.25 * s);
+		fill(255, 10);
+		ellipse(
+			cx + 8 * s,
+			cy + 2 * s,
+			rx * (1.25 + sin(t) * 0.03) * s,
+			ry * (1.1 + sin(t * 1.2) * 0.03) * s
+		);
+		blendMode(BLEND);
+	}
+	pop();
+}
+
+function drawLowerWater(cx, cy, s, cavity, p) {
+	let rx = cavity.rx * easeOutCubic(p);
+	let ry = cavity.ry * easeOutCubic(p);
+
+	if (p >= 1) {
+		const t = millis() * 0.003;
+		rx *= 1 + sin(t * 0.7 + 0.8) * 0.012;
+		ry *= 1 + sin(t * 1.05) * 0.015;
+	}
+
+	push();
+	fillWater();
+	ellipse(cx, cy, rx * 2 * s, ry * 2 * s);
+
+	// Ripple rings
+	if (p >= 1) {
+		blendMode(SCREEN);
+		noFill();
+		stroke(255, 12);
+		strokeWeight(2 * s);
+		const t = millis() * 0.0012;
+		for (let i = 0; i < 3; i++) {
+			const k = (t + i * 0.33) % 1;
+			const rr = 0.25 + k * 0.75;
+			ellipse(cx, cy, rx * 2 * rr * s, ry * 2 * rr * s);
 		}
+		noStroke();
+		blendMode(BLEND);
+	}
+	pop();
+}
+
+// Helpers
+function drawCapsule(x, y, w, h, r) {
+	rectMode(CENTER);
+	rect(x, y, w, h, r);
+	rectMode(CORNER);
+}
+
+function fillWater() {
+	// Approx gradient by layering a few translucent ellipses
+	// Base
+	fill(WATER_B);
+	// Add soft top highlight
+	push();
+	blendMode(SCREEN);
+	fill(77, 166, 255, 30);
+	pop();
+}
+
+function fillGradientRect(x, y, w, h) {
+	// small vertical gradient approximation
+	const steps = 10;
+	for (let i = 0; i < steps; i++) {
+		const t = i / (steps - 1);
+		const yy = y + t * h;
+		const hh = h / steps + 0.5;
+		const col = lerpColor(color(WATER_A), color(WATER_C), t);
+		fill(red(col), green(col), blue(col), 170);
+		rect(x, yy, w, hh, 999);
 	}
 }
 
-function drawCoins() {
-	noStroke();
-	for (const c of coins) {
-		const col = color(c.color);
-		fill(red(col), green(col), blue(col), c.opacity !== undefined ? c.opacity : 255);
-		const d = COIN_DIAMETER * scaleFactor;
-		if (c.state === 'flying' && c.rotation !== undefined) {
-			push();
-			translate(sx(c.x), sy(c.y));
-			rotate(c.rotation);
-			ellipse(0, 0, d * (0.15 + 0.85 * abs(cos(c.rotation))), d);
-			pop();
-		} else {
-			circle(sx(c.x), sy(c.y), d);
-		}
-	}
+function easeOutCubic(t) {
+	return 1 - pow(1 - t, 3);
+}
+
+function clamp(v, a, b) {
+	return min(b, max(a, v));
 }
