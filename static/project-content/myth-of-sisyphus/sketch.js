@@ -38,14 +38,13 @@ function setup() {
 		flipped: true
 	});
 	video.size(windowWidth, windowHeight);
-	// video.style('position', 'absolute');
-	// video.style('top', '0');
-	// video.style('left', '0');
-	// video.style('width', `${windowWidth}px`);
-	// video.style('height', `${windowHeight}px`);
+	// video.style('position', 'fixed');
+	// video.style('inset', '0');
+	// video.style('width', '100vw');
+	// video.style('height', '100vh');
 	// video.style('object-fit', 'cover');
-	// video.style('opacity', '0.4');
 	// video.style('pointer-events', 'none');
+	// video.style('opacity', '0.4');
 	// video.style('z-index', '10');
 	video.hide();
 	handPose.detectStart(video, gotHands);
