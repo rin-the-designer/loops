@@ -2,8 +2,7 @@ import MarkdownIt from 'markdown-it';
 import anchor from 'markdown-it-anchor';
 import footnote from 'markdown-it-footnote';
 import markdownItHighlightjs from 'markdown-it-highlightjs';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import documentationSource from './documentation.md?raw';
 
 const md = new MarkdownIt({ html: true, linkify: true, typographer: true })
 	.use(anchor)
@@ -14,8 +13,6 @@ const md = new MarkdownIt({ html: true, linkify: true, typographer: true })
 function fixStaticPaths(markdown: string): string {
 	return markdown.replace(/\]\(static\//g, '](/');
 }
-
-const DOC_MARKDOWN_PATH = join(process.cwd(), 'static/documentation/documentation.md');
 
 /** Remove leading # Loops + byline; body title is rendered in +page.svelte */
 function stripDocTitlePreamble(src: string): string {
@@ -65,7 +62,7 @@ function buildSidebarNav(flat: { level: number; text: string; slug: string }[]):
 }
 
 export const load = () => {
-	const raw = readFileSync(DOC_MARKDOWN_PATH, 'utf-8');
+	const raw = documentationSource;
 	const markdown = fixStaticPaths(stripDocTitlePreamble(raw));
 	const toc = extractToc(markdown);
 	const html = md.render(markdown);
