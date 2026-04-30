@@ -137,18 +137,18 @@ function draw() {
 			let indices = [0, 1, 5, 9, 13, 17]; // wrist + fingertips
 			let sumX = 0;
 			let sumY = 0;
-			let count = 0;
+			let keypointCount = 0;
 			for (let i of indices) {
 				let point = keypoints[i];
 				if (point && !isNaN(point.x) && !isNaN(point.y)) {
 					sumX += point.x;
 					sumY += point.y;
-					count++;
+					keypointCount++;
 				}
 			}
-			if (count > 0) {
-				let avgX = Math.round(sumX / count);
-				let avgY = Math.round(sumY / count);
+			if (keypointCount > 0) {
+				let avgX = Math.round(sumX / keypointCount);
+				let avgY = Math.round(sumY / keypointCount);
 				console.log('Average X:', avgX, 'Average Y:', avgY);
 				if (smoothedHandX === null || smoothedHandY === null) {
 					smoothedHandX = avgX;

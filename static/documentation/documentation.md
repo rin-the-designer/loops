@@ -2,21 +2,40 @@
 
 ## Concept
 
-> #### The struggle itself toward the heights is enough to fill a man’s heart. One must imagine Sisyphus happy.
+> #### The struggle itself toward the heights is enough to fill a man’s heart.</br>One must imagine Sisyphus happy.
 >
-> _Myth of Sisyphus_, Albert Camus (1942)
+> _The Myth of Sisyphus_</br>Albert Camus, 1942
 
-This project is an interactive artwork that reveals the tension between involuntary loops[^1] that we are placed in and the chosen thresholds[^2], actions that we choose to take. The form of the work is a multi-screen installation // rewrite the setup part // composed of mini touch displays, each presenting unique interactive artworks. Alongside touch interactions, each display has a camera that enables motion-capture interactions, transforming viewer’s gestures into a subtle part of the experience. By situating multiple loops side by side, the piece underscores the paradox of repetition: while endless cycles may feel absurd, they can also hold meaning and possibility when reframed.
+_Loops_ is a collection of interactive digital artworks that explore the tension between involuntary repetition and chosen thresholds. In this documentation, _involuntary repetition_ refers to the continuous cycle of activities and circumstances people feel compelled to engage in or accept, and _chosen thresholds_ refers to the autonomy to shape actions and interpretations inside those patterns.
 
-[^1]: Continuous cycle of activities and circumstances that we were compelled to engage in or adhere to.
+The collection currently holds nine interactive pieces. Each one ties to absurdism and to finding agency, the sense that people still have room to steer events even inside cycles that start to feel meaningless. Ordinary objects or actions sit behind each sketch, they are abstracted enough that viewers focus on the concept rather than the visuals.
 
-[^2]: Autonomy to determine our actions and interpretations.
+_Loops_ runs in web browsers, so viewers can view it on their own devices, larger monitors, or projections scaled for installs. The layout is responsive, so interaction stays workable from handheld widths through room-sized setups. Displays nearer human scale (roughly 65 to 85 inches on the diagonal) deepen immersion, the feeling that viewers stand closer to the gestures and visuals on-screen. Because each piece borrows glimpses from reality, change of context and environment in which each piece is installed will alter the experience. > will revise last sentence.
 
-Within the context of interactive art, this project distinguishes itself because it positions interactivity not only as a physical engagement but also as a way to critically examine one's thoughts on repetition and absurdity. When viewers mentally engage with the artwork, I hope that they will take a moment to interpret and respond. The work suggests that rather than resisting these loops, we can accept their presence, embrace their absurdity, and ultimately regain a sense of agency.
+The goal of this project is to invite viewers to reflect on their own loops and thresholds. The project suggests that, rather than resisting these loops, their presence might be accepted, their absurdity embraced, and agency reclaimed in the encounter. Individual pieces withhold a stipulated beginning, midpoint, or end, so viewers can engage and withdraw on their own terms. Though the sketches were designed with particular interactions in mind, nothing in their structure requires viewers to follow that script. Openness to exploration and reflection takes priority.
+
+<!-- This project is an interactive artwork that reveals the tension between involuntary loops[^1] that we are placed in and the chosen thresholds[^2], actions that we choose to take. The form of the work is a multi-screen installation // rewrite the setup part // composed of mini touch displays, each presenting unique interactive artworks. Alongside touch interactions, each display has a camera that enables motion-capture interactions, transforming viewer’s gestures into a subtle part of the experience. By situating multiple loops side by side, the piece underscores the paradox of repetition: while endless cycles may feel absurd, they can also hold meaning and possibility when reframed.
+
+Within the context of interactive art, this project distinguishes itself because it positions interactivity not only as a physical engagement but also as a way to critically examine one's thoughts on repetition and absurdity. When viewers mentally engage with the artwork, I hope that they will take a moment to interpret and respond. The work suggests that rather than resisting these loops, we can accept their presence, embrace their absurdity, and ultimately regain a sense of agency. -->
 
 ## Impetus
 
-This project was born from a period of personal reflection following an intense phase of creative work. I felt caught in daily repetitions that seemed meaningless. Over time, I began to see these loops differently, I embraced them. It reminded me again of my personal motto: live like water. Water adapts to its environment, sometimes soft and yielding, sometimes forceful and unyielding. It follows the paths carved before it, yet over time it reshapes stone, carving out new directions. In the same way, I move through the loops of life that are given to me, but at every threshold I choose how to adapt, when to resist, and when to transform. This metaphor drives my motivation and also frames my goal for the audience. By experiencing these digital loops, viewers are invited to reflect on their own patterns and consider how subtle thresholds might open up new interpretations of their routines. Rather than resisting repetition, the work encourages acceptance, play, and the regaining of agency.
+This project was born from a period of personal reflection following an intense phase of creative work.
+
+I felt caught in daily repetitions that seemed meaningless. Over time, I began to see these loops differently, I embraced them. It reminded me again of my personal motto: live like water. Water adapts to its environment, sometimes soft and yielding, sometimes forceful and unyielding. It follows the paths carved before it, yet over time it reshapes stone, carving out new directions. In the same way, I move through the loops of life that are given to me, but at every threshold I choose how to adapt, when to resist, and when to transform. This metaphor drives my motivation and also frames my goal for the audience. By experiencing these digital loops, viewers are invited to reflect on their own patterns and consider how subtle thresholds might open up new interpretations of their routines. Rather than resisting repetition, the work encourages acceptance, play, and the regaining of agency.
+
+## Medium
+
+```js
+// a for loop in JavaScript
+for (let i = 0; i < 5; i++) {
+	console.log(i);
+}
+```
+
+Computation is literally built out of repetition. In code, the same instructions run again and again until a condition shifts, exactly the kind of repetitions and thresholds this work is about. Code was chosen as the medium because it does not merely illustrate and visualize loops, it _performs_ them. The sketches in this piece are loops you can control, gestures you can steer, and rhythms that persist until someone crosses a boundary and changes what happens next.
+
+The act of coding itself also aligns with the project. Writing code is an act of repetition: write code, run, revise errors, run, and iterate. By using code, the medium of the project also becomes another layer of repetition.
 
 ## Significance
 
@@ -26,7 +45,12 @@ This project was born from a period of personal reflection following an intense 
 
 ## Research
 
-Albert Camus's philosophical essay "The Myth of Sisyphus" was my primary inspiration, as it examines the absurdity of endless repetition while suggesting that meaning can still exist within it. This text helped me recognize the absurdity in my own life, opening a path toward reclaiming my sense of agency. Precedents in fine art such as the works by Seo-bo Park, Nam June Paik, and Hyunki Park helped me understand how repetition and absurdity have been explored in art form. Digital contemporary artworks by Rafaël Rozendaal and Zach Lieberman helped me imagine code as a medium to depict interactive loops. // Experienced the work first hand. Being in the same room with the art. Something that I saw in real life. //
+Readings
+
+- Albert Camus: Le Mythe de Sisyphe, L'Étranger
+- Gilles Deleuze: Difference and Repetition
+
+<!-- Albert Camus's philosophical essay "The Myth of Sisyphus" was my primary inspiration, as it examines the absurdity of endless repetition while suggesting that meaning can still exist within it. This text helped me recognize the absurdity in my own life, opening a path toward reclaiming my sense of agency. Precedents in fine art such as the works by Seo-bo Park, Nam June Paik, and Hyunki Park helped me understand how repetition and absurdity have been explored in art form. Digital contemporary artworks by Rafaël Rozendaal and Zach Lieberman helped me imagine code as a medium to depict interactive loops. // Experienced the work first hand. Being in the same room with the art. Something that I saw in real life. //
 
 Two primary research were conducted to narrow down the scope of the concept. // Grammar //
 
@@ -36,13 +60,41 @@ The results -
 
 The second research was diary study where subjects were asked to log what they’ve noticed themselves repeating unconsciously. They were asked to record at least 3 events per day for a total of 3 days. They were given a prompt to record the date and time, the event, emotion that emerged from realizing the repetitive action, and their thoughts on it. // They showed me what repetition people go through, they didn't directly influence my pieces but gave me ideas and areas to think of. //
 
-The results -
+The results - -->
 
 ## Precedents
+
+Digital
+
+- Rafaël Rozendaal
+- Zach Lieberman
+
+Physical
+
+- Seo-bo Park
+- Tschang-yeul Kim
+- Josef Albers
+- Vera Molnár
+
+Conceptual
+
+- Nam June Paik
+- Hyunki Park
+
+Game
+
+- Getting Over It with Bennett Foddy
+- Only Up!
 
 <br><br>
 
 # Project
+
+## Overivew
+
+<!-- All projects were specifically designed to achieve simplicity by abstracting the visuals. This was in order to take out the unnecessary visuals that will
+capture the attention. The purpose of the project is to make viewers think about the concept of loops, rather than focus on the visuals.
+All projects were designed for simplicity by abstracting the visuals. Busy detail is kept low so attention stays on the idea of loops instead of on decorative graphics. The point is to invite thinking about loops, not to spotlight rich or flashy pictures. -->
 
 ## Installation
 
@@ -252,6 +304,14 @@ There is no direct user control. Instead, the piece responds as a presence:
 
 _Incense_ makes a loop out of something that normally marks time. Watching it burn turns repetition into a kind of measuring: the same action, the same pace, the same ending—followed by a return. The reset doesn’t erase what happened; it reframes the burn as a recurring ritual. Over time, the work becomes less about the image of incense and more about how attention changes when nothing “new” arrives, only the steady continuation of the same disappearing act.
 
+## #6 - Playground Spinner
+
+### Interaction
+
+### Technical Overview
+
+### Reflections
+
 ## #7 - Meaning
 
 ![Meaning artwork showing two canvases: one with an orange dot moving in a structured loop and one wandering unpredictably](static/documentation/images/meaning.jpg)
@@ -288,7 +348,7 @@ This piece clarified how much viewers want coherence. When the titles contradict
 
 It also set a direction for the larger project: the strongest part of the prototype is how quickly it produces reflection with minimal form. The open challenge is translating that same “label vs. perception” tension into a multi-screen installation where the body participates, not just the eyes.
 
-## Meaning (Prototype Version Text)
+<!-- ## Meaning (Prototype Version Text)
 
 ![image.png](static/documentation/images/meaning.jpg)
 
@@ -300,7 +360,23 @@ This prototype was set up on a large TV in a room, framed like a gallery space. 
 
 The prototype demonstrates a few clear strengths. Its simplicity and abstractness makes the metaphor accessible, and the reversal of labels provokes reflection. The dual structure of canvases helps viewers compare their interpretations of meaningfulness and meaninglessness. However, the prototype also leaves important questions open. How can interaction move beyond passive observation to embody thresholds? How might the experience scale to multiple screens without losing its reflective quality? And what forms, beyond circles and wandering dots, might loops and thresholds take?
 
-Feedback from this testing session was intriguing. -
+Feedback from this testing session was intriguing. - -->
+
+## #8 - Not the Same Sun
+
+### Interaction
+
+### Technical Overview
+
+### Reflections
+
+## #9 - Fountain
+
+### Interaction
+
+### Technical Overview
+
+### Reflections
 
 ## Technological Stack
 
@@ -327,6 +403,8 @@ Rinchong Kim. 2026. The Loops: An Interactive Artwork on Reclaiming Agency in In
 ## Special Thanks
 
 Special thanks to Harpreet Sareen, Namreta Kumar, Mani Nilchiani, Ethan Silverman and Andrew Zornoza for guiding me throuh this project.
+
+And to my classmates who participated in user testings and provided me with constructional feedbacks.
 
 ## Use of Generative AI
 

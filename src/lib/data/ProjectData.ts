@@ -221,7 +221,7 @@ export const projectData: Project[] = [
 			<p>
 			As the drawings continue, the repeated path can begin to feel trapped inside its own logic, while the drifting line invites anticipation, interpretation, and projection. What first appears chaotic may begin to feel alive, what first appears coherent may begin to feel empty. Rather than deciding which side is correct, the work keeps that judgment open and turns meaning into something unstable, relational, and continuously negotiated by the viewer.
 			</p>`
-	}
+	},
 	// {
 	// 	title: 'Large Loop Model',
 	// 	slug: 'large-loop-model',
@@ -234,30 +234,30 @@ export const projectData: Project[] = [
 	// 		Text Work In Progress.
 	// 	</p>`
 	// },
-	// {
-	// 	title: 'Not the Same Sun',
-	// 	slug: 'not-the-same-sun',
-	// 	route: '/projects/not-the-same-sun',
-	// 	thumbnail: '/project-content/not-the-same-sun/thumb.png',
-	// 	guide: '',
-	// 	interaction: [],
-	// 	excerpt: 'Work In Progress.',
-	// 	description: `<p style="margin-block-start: 0;">
-	// 		"In a foreign country, the sun bathing the houses on a hill in golden light.
-	// 		A more intense emotion than that produced by the same sight in one's own country.
-	// 		It is not the same sun. I know perfectly well that it is not the same sun."
-	// 	</p>`
-	// },
-	// {
-	// 	title: 'Fountain',
-	// 	slug: 'fountain',
-	// 	route: '/projects/fountain',
-	// 	thumbnail: '/project-content/fountain/thumb.png',
-	// 	guide: '',
-	// 	interaction: [],
-	// 	excerpt: 'Work In Progress.',
-	// 	description: `<p style="margin-block-start: 0;">
-	// 		Text work in progress.
-	// 	</p>`
-	// }
+	{
+		title: 'Not the Same Sun',
+		slug: 'not-the-same-sun',
+		route: '/projects/not-the-same-sun',
+		thumbnail: '/project-content/not-the-same-sun/thumb.png',
+		guide: '',
+		interaction: [],
+		excerpt: 'Work In Progress.',
+		description: `<p style="margin-block-start: 0;">
+			"In a foreign country, the sun bathing the houses on a hill in golden light.
+			A more intense emotion than that produced by the same sight in one's own country.
+			It is not the same sun. I know perfectly well that it is not the same sun."
+		</p>`
+	},
+	{
+		title: 'Fountain',
+		slug: 'fountain',
+		route: '/projects/fountain',
+		thumbnail: '/project-content/fountain/thumb.png',
+		guide: '',
+		interaction: [],
+		excerpt: 'Work In Progress.',
+		description: `<p style="margin-block-start: 0;">
+			Text work in progress.
+		</p>`
+	}
 ];
