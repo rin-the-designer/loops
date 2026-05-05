@@ -1,3 +1,5 @@
+# Abstract
+
 # Introduction
 
 ## Concept
@@ -10,6 +12,8 @@ _Loops_ is a collection of interactive digital artworks that explore the tension
 
 The collection currently holds nine interactive pieces. Each one ties to absurdism and to finding agency, the sense that people still have room to steer events even inside cycles that start to feel meaningless. Ordinary objects or actions sit behind each sketch, they are abstracted enough that viewers focus on the concept rather than the visuals.
 
+<!-- Each piece connects to absurdism while finding agency. -->
+
 _Loops_ runs in web browsers, so viewers can view it on their own devices, larger monitors, or projections scaled for installs. The layout is responsive, so interaction stays workable from handheld widths through room-sized setups. Displays nearer human scale (roughly 65 to 85 inches on the diagonal) deepen immersion, the feeling that viewers stand closer to the gestures and visuals on-screen. Because each piece borrows glimpses from reality, change of context and environment in which each piece is installed will alter the experience. > will revise last sentence.
 
 The goal of this project is to invite viewers to reflect on their own loops and thresholds. The project suggests that, rather than resisting these loops, their presence might be accepted, their absurdity embraced, and agency reclaimed in the encounter. Individual pieces withhold a stipulated beginning, midpoint, or end, so viewers can engage and withdraw on their own terms. Though the sketches were designed with particular interactions in mind, nothing in their structure requires viewers to follow that script. Openness to exploration and reflection takes priority.
@@ -20,9 +24,15 @@ Within the context of interactive art, this project distinguishes itself because
 
 ## Impetus
 
-This project was born from a period of personal reflection following an intense phase of creative work.
+For a stretch of time during an intense phase of creative work, everything started to feel meaningless. The same questions kept circling: what is the meaning of any of this? What is the meaning of the products around us that promise a better experience, or claim to solve a problem we did not know we had? Are we just lazy beings who need a tool for everything? These existential loops became their own kind of trap, with no clear way through.
 
-I felt caught in daily repetitions that seemed meaningless. Over time, I began to see these loops differently, I embraced them. It reminded me again of my personal motto: live like water. Water adapts to its environment, sometimes soft and yielding, sometimes forceful and unyielding. It follows the paths carved before it, yet over time it reshapes stone, carving out new directions. In the same way, I move through the loops of life that are given to me, but at every threshold I choose how to adapt, when to resist, and when to transform. This metaphor drives my motivation and also frames my goal for the audience. By experiencing these digital loops, viewers are invited to reflect on their own patterns and consider how subtle thresholds might open up new interpretations of their routines. Rather than resisting repetition, the work encourages acceptance, play, and the regaining of agency.
+At some point, a different question surfaced: why not make a project out of this? Rather than resisting the feeling, the instinct became to confront it and build an interpretation of it.
+
+That is when Camus returned. _Le Mythe de Sisyphe_ and _L'Étranger_, read in the original French during undergraduate coursework, are the two texts that remained most vividly from those years. Camus's absurdist philosophy had resonated then, though it slipped away as design took over. Feeling stuck pulled those readings back into focus, and they offered a frame for what was happening: not an answer, but a way to sit with the question.
+
+The project began with a single interactive sketch, an abstracted version of the myth of Sisyphus rendered in a personal visual language. It became a natural intersection of three backgrounds carried separately until then: a BA in French, a BFA in Visual Design, and now an MFA in Design and Technology, which added code and interaction as a third layer.
+
+The first prototype was spontaneous, written during a studio class. It did not take long to get something running. But the moment a hand moved and the sketch responded, something shifted. This could be a way to confront absurdity rather than escape it, to embrace meaninglessness by giving it a form that could be touched.
 
 ## Medium
 
@@ -33,9 +43,9 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-Computation is literally built out of repetition. In code, the same instructions run again and again until a condition shifts, exactly the kind of repetitions and thresholds this work is about. Code was chosen as the medium because it does not merely illustrate and visualize loops, it _performs_ them. The sketches in this piece are loops you can control, gestures you can steer, and rhythms that persist until someone crosses a boundary and changes what happens next.
+Computation is literally built out of repetition. In code, the same instructions run again and again until a condition shifts. That is exactly the kind of repetitions and thresholds this work is about. Code was chosen as the medium because it does not merely illustrate and visualize loops, it _performs_ them. The sketches in this piece are loops you can control, gestures you can steer, and rhythms you can interrupt.
 
-The act of coding itself also aligns with the project. Writing code is an act of repetition: write code, run, revise errors, run, and iterate. By using code, the medium of the project also becomes another layer of repetition.
+The act of coding itself also aligns with the project. Writing code is an act of repetition: write, run, hit errors, revise, run again. By using code, the medium of the project also becomes another layer of repetition.
 
 ## Significance
 
@@ -64,33 +74,59 @@ The results - -->
 
 ## Precedents
 
-Digital
+### Digital Art
 
-- Rafaël Rozendaal
-- Zach Lieberman
+**[_Internet_](https://www.newrafael.com/internet), ongoing — Rafaël Rozendaal**
 
-Physical
+Rozendaal's internet artworks exist as single-URL experiences — minimal, looping, and built entirely for the browser. Each piece reduces interaction to a small set of inputs that loop indefinitely: no levels, no progress, no ending. The works are publicly accessible to anyone with a link, treating the browser itself as a gallery. This approach — simple system, open-ended repetition, work that lives on the web — was a direct model for how _Loops_ is structured.
 
-- Seo-bo Park
-- Tschang-yeul Kim
-- Josef Albers
-- Vera Molnár
+**[_Circles, Blobs, Ripples_](https://www.artsy.net/show/unit-london-zach-lieberman-circles-blobs-ripples), 2023 — Zach Lieberman**
 
-Conceptual
+Lieberman's practice sits at the intersection of code, performance, and visual systems. His generative works treat movement and form as ongoing processes rather than fixed images, showing how a simple rule applied repeatedly can produce something that feels alive. Lieberman's approach demonstrated that code can generate visual experience without narrative or resolution — just continuous unfolding.
 
-- Nam June Paik
-- Hyunki Park
+### Canvas Art
 
-Game
+**_Écriture_ series, 1967–present — Seo-bo Park**
 
-- Getting Over It with Bennett Foddy
-- Only Up!
+Park's Écriture series consists of thousands of canvases made through the same gesture repeated: a pencil or crayon drawn slowly across wet paint, leaving behind fine parallel lines. The work is less about the image produced than the discipline of the act itself. Each pass is slightly different; each canvas is a record of sustained attention. This kind of non-productive repetition is a precedent for how _Loops_ treats its own loops — not as a means to an end, but as the material itself.
+
+**_Water Drops_ series, 1972–2021 — Tschang-yeul Kim**
+
+Kim's Water Drops series spans decades of paintings depicting the same subject: a single water drop, rendered with near-photographic stillness. The works accumulate across time — hundreds, eventually thousands, of repetitions of the same image. Kim described the practice as a form of healing and forgetting after the trauma of the Korean War, returning to the same form until it released its charge. The repetition is not sameness but a slow working-through: a loop that changes even when the image does not.
+
+**_Homage to the Square_ series, 1950–1976 — Josef Albers**
+
+Albers applied the same compositional format — nested squares — to hundreds of canvases over decades, changing only the colors. The format never changed; the discoveries came entirely from within the constraint. This kind of repetition-as-investigation, where the loop is fixed and variation lives inside it, is a structural parallel to several pieces in _Loops_.
+
+**_(Dés)Ordres_, 1974 — Vera Molnár**
+
+Molnár is among the earliest artists to use computers as a tool for generating visual form. Her work is built from simple rules applied iteratively, producing grids, curves, and structures that feel both systematic and restless. Crucially, she introduced deliberate errors into her algorithms — what she called _désordre_ — to observe what randomness did to order. This tension between system and deviation maps directly onto the distinction this project draws between involuntary loops and chosen thresholds.
+
+### Conceptual
+
+**_TV Buddha_, 1974 — Nam June Paik**
+
+A statue of the Buddha sits before a closed-circuit television showing a live feed of itself: the Buddha watching the Buddha, endlessly. Paik places an ancient symbol of stillness in front of a live feedback loop, collapsing the distance between the meditative and the technological. The loop here is not decorative — it is the subject. This work established a precedent for treating repetition and presence as the same question.
+
+**_Untitled (TV Stone Tower)_, 1979 — Hyunki Park**
+
+Park's video installations use the loop as both form and content. Monitors in stacked arrangements run footage that is itself cyclical — images that return without resolving. The works are quiet and durational, asking viewers to sit with repetition long enough to notice what shifts inside it. Park's practice treats the loop as a meditative form rather than a limitation of the medium.
+
+### Game
+
+**_Getting Over It with Bennett Foddy_, 2017 — Bennett Foddy**
+
+A man in a cauldron, equipped only with a hammer, climbs an impossible mountain. Every fall can return the player to the beginning. The game is designed to frustrate, and Foddy narrates throughout, reflecting on failure, patience, and the psychology of repetition. It is one of the clearest contemporary parallels to the myth of Sisyphus: a purposeless task, endless return, and the question of whether the person doing it can find something in the repetition rather than against it.
+
+**_Only Up!_, 2023 — SCKR Games**
+
+A single upward climb with no checkpoints — falling from near the top returns the player to the ground. Like _Getting Over It_, the game strips away progress systems and leaves only the loop: attempt, fall, start again. The contrast with conventional game design, where progress always accumulates, makes the absence of that accumulation feel pointed. Both games ask what it means to keep trying when nothing carries forward.
 
 <br><br>
 
 # Project
 
-## Overivew
+## Overview
 
 <!-- All projects were specifically designed to achieve simplicity by abstracting the visuals. This was in order to take out the unnecessary visuals that will
 capture the attention. The purpose of the project is to make viewers think about the concept of loops, rather than focus on the visuals.
@@ -402,9 +438,9 @@ Rinchong Kim. 2026. The Loops: An Interactive Artwork on Reclaiming Agency in In
 
 ## Special Thanks
 
-Special thanks to Harpreet Sareen, Namreta Kumar, Mani Nilchiani, Ethan Silverman and Andrew Zornoza for guiding me throuh this project.
+Special thanks to Harpreet Sareen, Namreta Kumar, Mani Nilchiani, Ethan Silverman and Andrew Zornoza for guiding me through this project.
 
-And to my classmates who participated in user testings and provided me with constructional feedbacks.
+And to my classmates who participated in user testings and provided me with constructive feedbacks.
 
 ## Use of Generative AI
 
