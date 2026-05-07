@@ -12,15 +12,9 @@ _Loops_ is a collection of interactive digital artworks that explore the tension
 
 The collection currently holds nine interactive pieces. Each one ties to absurdism and to finding agency, the sense that people still have room to steer events even inside cycles that start to feel meaningless. Ordinary objects or actions sit behind each sketch, they are abstracted enough that viewers focus on the concept rather than the visuals.
 
-<!-- Each piece connects to absurdism while finding agency. -->
-
-_Loops_ runs in web browsers, so viewers can view it on their own devices, larger monitors, or projections scaled for installs. The layout is responsive, so interaction stays workable from handheld widths through room-sized setups. Displays nearer human scale (roughly 65 to 85 inches on the diagonal) deepen immersion, the feeling that viewers stand closer to the gestures and visuals on-screen. Because each piece borrows glimpses from reality, change of context and environment in which each piece is installed will alter the experience. > will revise last sentence.
+_Loops_ runs in web browsers, so viewers can view it on their own devices, larger monitors, or projections scaled for installs. The layout is responsive, so interaction stays workable from handheld widths through room-sized setups. Displays nearer human scale (roughly 65 to 85 inches on the diagonal) deepen immersion, the feeling that viewers stand closer to the gestures and visuals on-screen. Because each piece borrows from familiar spaces and rituals, the context of installation shapes the experience. A piece installed in the environment it references will carry a different weight than the same work shown on a neutral screen.
 
 The goal of this project is to invite viewers to reflect on their own loops and thresholds. The project suggests that, rather than resisting these loops, their presence might be accepted, their absurdity embraced, and agency reclaimed in the encounter. Individual pieces withhold a stipulated beginning, midpoint, or end, so viewers can engage and withdraw on their own terms. Though the sketches were designed with particular interactions in mind, nothing in their structure requires viewers to follow that script. Openness to exploration and reflection takes priority.
-
-<!-- This project is an interactive artwork that reveals the tension between involuntary loops[^1] that we are placed in and the chosen thresholds[^2], actions that we choose to take. The form of the work is a multi-screen installation // rewrite the setup part // composed of mini touch displays, each presenting unique interactive artworks. Alongside touch interactions, each display has a camera that enables motion-capture interactions, transforming viewer’s gestures into a subtle part of the experience. By situating multiple loops side by side, the piece underscores the paradox of repetition: while endless cycles may feel absurd, they can also hold meaning and possibility when reframed.
-
-Within the context of interactive art, this project distinguishes itself because it positions interactivity not only as a physical engagement but also as a way to critically examine one's thoughts on repetition and absurdity. When viewers mentally engage with the artwork, I hope that they will take a moment to interpret and respond. The work suggests that rather than resisting these loops, we can accept their presence, embrace their absurdity, and ultimately regain a sense of agency. -->
 
 ## Impetus
 
@@ -33,6 +27,8 @@ That is when Camus returned. _Le Mythe de Sisyphe_ and _L'Étranger_, read in th
 The project began with a single interactive sketch, an abstracted version of the myth of Sisyphus rendered in a personal visual language. It became a natural intersection of three backgrounds carried separately until then: a BA in French, a BFA in Visual Design, and now an MFA in Design and Technology, which added code and interaction as a third layer.
 
 The first prototype was spontaneous, written during a studio class. It did not take long to get something running. But the moment a hand moved and the sketch responded, something shifted. This could be a way to confront absurdity rather than escape it, to embrace meaninglessness by giving it a form that could be touched.
+
+The initial conceptual frame was broader than where the project eventually landed. Loops were first connected to life and death: life as the space where involuntary repetitions are imposed, and death as the point where they end. From an eastern cultural perspective, that cycle of life and death is itself another loop, which opened the frame further. Two axes emerged from this thinking (human and code, life and death), and from their intersection four areas to explore: the interaction of life and death, loops from computer code, the death of computer code, and the translation of human loops into coded ones. Early research activities tested whether this framing resonated with others. The findings suggested that the life and death angle, while generative, was too broad and too dependent on individual and cultural background to anchor the work clearly. The focus narrowed to the loop itself, which is where the project has remained.
 
 ## Medium
 
@@ -47,80 +43,125 @@ Computation is literally built out of repetition. In code, the same instructions
 
 The act of coding itself also aligns with the project. Writing code is an act of repetition: write, run, hit errors, revise, run again. By using code, the medium of the project also becomes another layer of repetition.
 
+The decisive quality that separates code from other media is interactivity. A loop rendered in video or animation runs on its own timeline, independent of whoever watches it. A loop written in code can wait, respond, and change based on the presence and actions of the person in front of it. This distinction is central to what _Loops_ is trying to do. The work is not asking viewers to observe repetition from a distance; it is placing them inside it, letting their gestures become part of the cycle. Motion sensing, touch input, and mouse interaction are not decorative features; they are the mechanism through which the question of agency becomes something that can be felt rather than only read about.
+
+The browser was chosen as the delivery platform because it makes this possible at any scale, from a personal screen to a room-sized projection, without requiring specialized hardware or a controlled installation environment.
+
 ## Significance
+
+Repetition is one of the most ordinary features of contemporary life, yet in the flow of daily experience it is rarely paused over on its own terms. Daily routines, work schedules, and the looping structure of digital habits (feeds, notifications, queues) organize most of the day without being chosen in any meaningful sense. When these cycles become visible, they can feel empty or compulsory, and it is difficult to see where agency might reappear inside them.
+
+_Loops_ matters because it makes this question tangible rather than abstract. By turning the loop into something that can be touched, steered, and reflected on, the collection invites viewers to notice the cycles they are already in and to consider what it might mean to act deliberately within them. This is not a therapeutic project or a productivity tool. It is closer to applied philosophy: a set of situations designed to make a normally invisible structure of experience available for thought.
+
+The work also sits at an intersection that is still underexplored in design practice. Interactive art has tended to emphasize novelty, responsiveness, and feedback, while philosophical inquiry into repetition and absurdity has remained largely textual. _Loops_ occupies the space between those two traditions, using the formal properties of code (loops, conditions, thresholds) as both its medium and its argument. The fact that repetition is structurally embedded in the technology used to represent it is not incidental; it is the point.
+
+For communities of practice in interaction design, media art, and applied philosophy, the project contributes a working example of what it looks like to treat reflection, rather than efficiency or entertainment, as a primary design outcome.
 
 <br><br>
 
 # Context
 
+## Philosophy
+
+Albert Camus's _Le Mythe de Sisyphe_ (1942) is the philosophical foundation of this project. Camus opens with the claim that the only truly serious philosophical question is whether life is worth living in the absence of any ultimate meaning. His answer is not despair but defiance: the absurd hero recognizes the futility of the task and continues anyway, finding sufficiency in the struggle itself. This is the logic that runs beneath _Loops_. Each sketch presents a task with no resolution, a cycle with no reward, and leaves the question of whether to continue entirely to the viewer. Camus's reading of Sisyphus also introduced the specific image that became the first piece in the collection: the boulder, the hill, and the endless return.
+
+_L'Étranger_ (1942) contributed a different register of the same thinking. Meursault's detachment, his refusal to perform meaning he does not feel, and his confrontation with indifference in the world around him resonated with the emotional starting point of the project. Where _Le Mythe de Sisyphe_ is argument, _L'Étranger_ is atmosphere. Together they shaped both the conceptual frame and the affective tone the work aims to produce.
+
+Gilles Deleuze's _Difference and Repetition_ (1968) offered a structural counterpoint to Camus. Where Camus treats repetition as a fact to be accepted, Deleuze argues that repetition is never simply the same thing recurring. Each iteration carries difference within it; what returns is not identical but transformed by the act of returning. This distinction informed how the individual pieces in _Loops_ were designed. The loops do not simply cycle; they accumulate, shift, and respond. The viewer who pushes the boulder a second time is not doing the same thing as the first time, even if the screen looks the same.
+
 ## Research
 
-Readings
+### Semi-Structured Interviews
 
-- Albert Camus: Le Mythe de Sisyphe, L'Étranger
-- Gilles Deleuze: Difference and Repetition
+A total of nine individuals participated in semi-structured interviews, each asked five fixed questions about how they perceive death. Questions included: "How would you define death?" and "In your cultural context, what does the concept of death entail?" The interviews were designed to explore whether the initial framing of loops through life and death connected with how others understood those concepts, and whether they intuitively related that cycle to the idea of repetition.
 
-<!-- Albert Camus's philosophical essay "The Myth of Sisyphus" was my primary inspiration, as it examines the absurdity of endless repetition while suggesting that meaning can still exist within it. This text helped me recognize the absurdity in my own life, opening a path toward reclaiming my sense of agency. Precedents in fine art such as the works by Seo-bo Park, Nam June Paik, and Hyunki Park helped me understand how repetition and absurdity have been explored in art form. Digital contemporary artworks by Rafaël Rozendaal and Zach Lieberman helped me imagine code as a medium to depict interactive loops. // Experienced the work first hand. Being in the same room with the art. Something that I saw in real life. //
+![Semi-structured interview documentation](static/documentation/images/interview.jpg)
 
-Two primary research were conducted to narrow down the scope of the concept. // Grammar //
+The responses were varied. Some participants readily described life and death as a kind of loop, drawing on religious, cultural, or philosophical frameworks. Others did not make that connection at all, finding the link between mortality and repetition abstract or forced. The honest spread of responses was itself a finding: the life and death framing was too contingent on individual and cultural background to serve as a stable foundation for the work. This pushed the project toward the loop as a concept in its own right, separating it from its original anchor in mortality.
 
-First was a drawing elicitation workshop where testers were asked to visualize abstract concepts as patterns. This research examined whether similar patterns would emerge in the sketches of the participants, and explored different forms of visualizing the given concept. Participants were presented with four words, _absurdity_, _meaningful_, _error_, and _success_, along with their dictionary definitions. They were then asked to intuitively draw patterns that came to mind.
+### Drawing as Elicitation
 
-The results -
+A group drawing session was conducted with six participants. Each was asked to draw shapes, groups of shapes, or objects that immediately came to mind when presented with the words "Death," "Life," and "Loops," in that order. The session was designed to gather visual rather than verbal intuitions about these concepts, and to observe whether shared visual languages emerged across participants.
 
-The second research was diary study where subjects were asked to log what they’ve noticed themselves repeating unconsciously. They were asked to record at least 3 events per day for a total of 3 days. They were given a prompt to record the date and time, the event, emotion that emerged from realizing the repetitive action, and their thoughts on it. // They showed me what repetition people go through, they didn't directly influence my pieces but gave me ideas and areas to think of. //
+![Participant drawings](static/documentation/images/elicitation-1.jpg)
 
-The results - -->
+The drawings revealed how differently people visualize the same words. "Death" and "Life" produced a wide range of imagery, personal, symbolic, and cultural, with little overlap between participants. "Loops," by contrast, produced more convergent responses: circular forms, spirals, and returning paths appeared across multiple drawings. This confirmed that the loop, as a visual and conceptual form, was more legible and more universally accessible than the life and death framing that had initially motivated it. The session directly reinforced the decision to center the project on the loop itself.
+
+### Diary Study
+
+Thirteen individuals were invited to participate in a diary study. Ten completed the prompt accurately, logging a total of 79 activities over at least three days. Participants were asked to observe and record things they noticed themselves repeating unconsciously: physical habits such as tapping or doodling, digital behaviors such as refreshing apps or checking notifications, and daily activities such as drinking coffee or going for a walk. Each entry included a date and time, a category (routine or habit), the action itself, associated emotions, and a short paragraph of thoughts.
+
+<iframe src="https://thesis.rin.kim/research/diary-study/index.html" style="width= 100%; aspect-ratio: 16/9; border-radius: 4px;"></iframe>
+
+The logged entries were then grouped into an affinity diagram organized across three clusters: emotions (ranging from boredom and stress to calm and joy), activity context (academic, digital, bodily, transit, and home), and activity type (consumption, digital interaction, fidgeting, physical routine, and self-maintenance). The diagram is available at [thesis.rin.kim/research/diary-study](https://thesis.rin.kim/research/diary-study/index.html).
+
+The study revealed the range and texture of involuntary repetition in everyday life. Most logged activities were not dramatic or distressing; they were quiet, background behaviors that participants had rarely paused to notice until the prompt asked them to. The dominant emotions attached to these loops were neutral or calm rather than negative, suggesting that involuntary repetition is not inherently felt as a burden. It simply goes unexamined. This finding reinforced the project's focus on awareness and reflection rather than resistance or resolution. The affinity diagram also revealed that digital habits (scrolling, refreshing, checking) clustered heavily alongside bodily fidgeting, pointing toward the loops that feel most automatic and least chosen.
+
+The study also surfaced a methodological insight: participants who were briefed in person logged more accurately and reflectively than those contacted remotely. The category distinction between routine and habit proved too narrow, as the two terms overlapped considerably and may have constrained how participants described their behavior.
+
+### Drawing as Elicitation (Second Iteration)
+
+Building on an earlier group drawing session, a second iteration was conducted with five participants working individually rather than collectively. The change in format was deliberate: in the first session, participants drew together in a shared space, which raised the possibility that visual choices were influenced by what others around them were drawing. By isolating each participant, this iteration aimed to examine whether similar patterns would emerge independently.
+
+Participants were presented with four words in sequence, _absurdity_, _meaningful_, _error_, and _success_, each accompanied by its dictionary definition. They were asked to draw a pattern, rather than an object or scene, that came to mind for each word. After completing all four drawings, participants were asked to explain their intentions.
+
+![Drawing session documentation](static/documentation/images/drawing.jpg)
+
+![Participant drawings](static/documentation/images/elicitation-2.jpg)
+
+The results were telling. For _absurdity_, participants consistently produced open, non-repeating, and visually irregular marks, even though their stated reasoning differed: one described randomness as freedom, another as an absence of rules, another as disruption of an existing pattern. For _meaningful_, most participants drew structured or layered forms, concentric circles, symmetrical arrangements, or patterns with a clear center. _Error_ and _success_ produced more varied responses, ranging from disconnected lines to mountain peaks to exclamation marks.
+
+The key finding was that despite receiving identical definitions, participants arrived at visually similar patterns through distinctly different interpretations. The absurd looked roughly the same across participants even when the reasoning behind it did not. This gap between shared visual language and individual conceptual intent became the direct basis for the _Meaning_ piece in the collection, which takes that shared visual stereotype and inverts its labels.
 
 ## Precedents
 
 ### Digital Art
 
-**[_Internet_](https://www.newrafael.com/internet), ongoing — Rafaël Rozendaal**
+Rafaël Rozendaal's internet artworks exist as single-URL experiences: minimal, looping, and built entirely for the browser. Each piece reduces interaction to a small set of inputs that loop indefinitely, with no levels, no progress, and no ending. The works are publicly accessible to anyone with a link, treating the browser itself as a gallery. This approach (simple system, open-ended repetition, work that lives on the web) was a direct model for how _Loops_ is structured.[^1]
 
-Rozendaal's internet artworks exist as single-URL experiences — minimal, looping, and built entirely for the browser. Each piece reduces interaction to a small set of inputs that loop indefinitely: no levels, no progress, no ending. The works are publicly accessible to anyone with a link, treating the browser itself as a gallery. This approach — simple system, open-ended repetition, work that lives on the web — was a direct model for how _Loops_ is structured.
-
-**[_Circles, Blobs, Ripples_](https://www.artsy.net/show/unit-london-zach-lieberman-circles-blobs-ripples), 2023 — Zach Lieberman**
-
-Lieberman's practice sits at the intersection of code, performance, and visual systems. His generative works treat movement and form as ongoing processes rather than fixed images, showing how a simple rule applied repeatedly can produce something that feels alive. Lieberman's approach demonstrated that code can generate visual experience without narrative or resolution — just continuous unfolding.
+Zach Lieberman's practice sits at the intersection of code, performance, and visual systems. His generative works treat movement and form as ongoing processes rather than fixed images, showing how a simple rule applied repeatedly can produce something that feels alive. Lieberman's approach demonstrated that code can generate visual experience without narrative or resolution, just continuous unfolding.[^2]
 
 ### Canvas Art
 
-**_Écriture_ series, 1967–present — Seo-bo Park**
+Seo-bo Park's _Écriture_ series consists of thousands of canvases made through the same gesture repeated: a pencil or crayon drawn slowly across wet paint, leaving behind fine parallel lines. The work is less about the image produced than the discipline of the act itself. Each pass is slightly different; each canvas is a record of sustained attention. This kind of non-productive repetition is a precedent for how _Loops_ treats its own loops, not as a means to an end, but as the material itself.[^3]
 
-Park's Écriture series consists of thousands of canvases made through the same gesture repeated: a pencil or crayon drawn slowly across wet paint, leaving behind fine parallel lines. The work is less about the image produced than the discipline of the act itself. Each pass is slightly different; each canvas is a record of sustained attention. This kind of non-productive repetition is a precedent for how _Loops_ treats its own loops — not as a means to an end, but as the material itself.
+Tschang-yeul Kim's _Water Drops_ series spans decades of paintings depicting the same subject: a single water drop, rendered with near-photographic stillness. The works accumulate across time, with hundreds, eventually thousands, of repetitions of the same image. Kim described the practice as a form of healing and forgetting after the trauma of the Korean War, returning to the same form until it released its charge. The repetition is not sameness but a slow working-through: a loop that changes even when the image does not.[^4]
 
-**_Water Drops_ series, 1972–2021 — Tschang-yeul Kim**
+Josef Albers applied the same compositional format (nested squares) to hundreds of canvases over decades in his _Homage to the Square_ series, changing only the colors. The format never changed; the discoveries came entirely from within the constraint. This kind of repetition-as-investigation, where the loop is fixed and variation lives inside it, is a structural parallel to several pieces in _Loops_.[^5]
 
-Kim's Water Drops series spans decades of paintings depicting the same subject: a single water drop, rendered with near-photographic stillness. The works accumulate across time — hundreds, eventually thousands, of repetitions of the same image. Kim described the practice as a form of healing and forgetting after the trauma of the Korean War, returning to the same form until it released its charge. The repetition is not sameness but a slow working-through: a loop that changes even when the image does not.
-
-**_Homage to the Square_ series, 1950–1976 — Josef Albers**
-
-Albers applied the same compositional format — nested squares — to hundreds of canvases over decades, changing only the colors. The format never changed; the discoveries came entirely from within the constraint. This kind of repetition-as-investigation, where the loop is fixed and variation lives inside it, is a structural parallel to several pieces in _Loops_.
-
-**_(Dés)Ordres_, 1974 — Vera Molnár**
-
-Molnár is among the earliest artists to use computers as a tool for generating visual form. Her work is built from simple rules applied iteratively, producing grids, curves, and structures that feel both systematic and restless. Crucially, she introduced deliberate errors into her algorithms — what she called _désordre_ — to observe what randomness did to order. This tension between system and deviation maps directly onto the distinction this project draws between involuntary loops and chosen thresholds.
+Vera Molnár is among the earliest artists to use computers as a tool for generating visual form. Her work is built from simple rules applied iteratively, producing grids, curves, and structures that feel both systematic and restless. Crucially, she introduced deliberate errors into her algorithms (what she called _désordre_) to observe what randomness did to order. This tension between system and deviation maps directly onto the distinction this project draws between involuntary loops and chosen thresholds.[^6]
 
 ### Conceptual
 
-**_TV Buddha_, 1974 — Nam June Paik**
+Nam June Paik's _TV Buddha_ places a statue of the Buddha before a closed-circuit television showing a live feed of itself: the Buddha watching the Buddha, endlessly. Paik collapses the distance between the meditative and the technological, positioning an ancient symbol of stillness inside a live feedback loop. The loop here is not decorative; it is the subject. This work established a precedent for treating repetition and presence as the same question.[^7]
 
-A statue of the Buddha sits before a closed-circuit television showing a live feed of itself: the Buddha watching the Buddha, endlessly. Paik places an ancient symbol of stillness in front of a live feedback loop, collapsing the distance between the meditative and the technological. The loop here is not decorative — it is the subject. This work established a precedent for treating repetition and presence as the same question.
-
-**_Untitled (TV Stone Tower)_, 1979 — Hyunki Park**
-
-Park's video installations use the loop as both form and content. Monitors in stacked arrangements run footage that is itself cyclical — images that return without resolving. The works are quiet and durational, asking viewers to sit with repetition long enough to notice what shifts inside it. Park's practice treats the loop as a meditative form rather than a limitation of the medium.
+Hyunki Park's video installations use the loop as both form and content. Monitors in stacked arrangements run footage that is itself cyclical, images that return without resolving. The works are quiet and durational, asking viewers to sit with repetition long enough to notice what shifts inside it. Park's practice treats the loop as a meditative form rather than a limitation of the medium.[^8]
 
 ### Game
 
-**_Getting Over It with Bennett Foddy_, 2017 — Bennett Foddy**
+Bennett Foddy's _Getting Over It_ places a man in a cauldron, equipped only with a hammer, climbing an impossible mountain. Every fall can return the player to the beginning. The game is designed to frustrate, and Foddy narrates throughout, reflecting on failure, patience, and the psychology of repetition. It is one of the clearest contemporary parallels to the myth of Sisyphus: a purposeless task, endless return, and the question of whether the person doing it can find something in the repetition rather than against it.[^9]
 
-A man in a cauldron, equipped only with a hammer, climbs an impossible mountain. Every fall can return the player to the beginning. The game is designed to frustrate, and Foddy narrates throughout, reflecting on failure, patience, and the psychology of repetition. It is one of the clearest contemporary parallels to the myth of Sisyphus: a purposeless task, endless return, and the question of whether the person doing it can find something in the repetition rather than against it.
+SCKR Games' _Only Up!_ presents a single upward climb with no checkpoints. Falling from near the top returns the player to the ground. Like _Getting Over It_, the game strips away progress systems and leaves only the loop: attempt, fall, start again. The contrast with conventional game design, where progress always accumulates, makes the absence of that accumulation feel pointed. Both games ask what it means to keep trying when nothing carries forward.[^10]
 
-**_Only Up!_, 2023 — SCKR Games**
+[^1]: Rozendaal, Rafaël. _Internet Artworks_. Ongoing. www.newrafael.com/internet.
 
-A single upward climb with no checkpoints — falling from near the top returns the player to the ground. Like _Getting Over It_, the game strips away progress systems and leaves only the loop: attempt, fall, start again. The contrast with conventional game design, where progress always accumulates, makes the absence of that accumulation feel pointed. Both games ask what it means to keep trying when nothing carries forward.
+[^2]: Lieberman, Zach. _Circles, Blobs, Ripples_. 2023, Unit London, London.
+
+[^3]: Park, Seo-bo. _Écriture_ series. 1967–present.
+
+[^4]: Kim, Tschang-yeul. _Water Drops_ series. 1972–2021.
+
+[^5]: Albers, Josef. _Homage to the Square_ series. 1950–1976.
+
+[^6]: Molnár, Vera. _(Dés)Ordres_. 1974.
+
+[^7]: Paik, Nam June. _TV Buddha_. 1974, Galerie Bonino, New York.
+
+[^8]: Park, Hyunki. _Untitled (TV Stone Tower)_. 1979.
+
+[^9]: Foddy, Bennett. _Getting Over It with Bennett Foddy_. Bennett Foddy, 2017.
+
+[^10]: SCKR Games. _Only Up!_ SCKR Games, 2023.
 
 <br><br>
 
@@ -128,9 +169,11 @@ A single upward climb with no checkpoints — falling from near the top returns 
 
 ## Overview
 
-<!-- All projects were specifically designed to achieve simplicity by abstracting the visuals. This was in order to take out the unnecessary visuals that will
-capture the attention. The purpose of the project is to make viewers think about the concept of loops, rather than focus on the visuals.
-All projects were designed for simplicity by abstracting the visuals. Busy detail is kept low so attention stays on the idea of loops instead of on decorative graphics. The point is to invite thinking about loops, not to spotlight rich or flashy pictures. -->
+The Project section presents the nine pieces that make up _Loops_. Each piece is a self-contained interactive sketch, but the collection is designed to be read together. Across the nine works, repetition is approached from different angles: as struggle (_Myth of Sisyphus_), as transition (_Doors_), as quiet build-up (_Accumulation_), as ritual maintenance (_Zen Garden_), as slow disappearance (_Incense_), as play (_Playground Spinner_), as interpretation (_Meaning_), as cycle of light (_Not the Same Sun_), and as continuous flow (_Fountain_). No piece is meant to be definitive on its own. The argument lives in the overlap, in how repetition takes a different shape each time the question is asked.
+
+A few principles run across the collection. Each piece is built from a deliberately reduced visual language, abstracted enough that attention stays on the concept rather than on imagery or decoration. Each piece runs as an open loop, without a beginning, midpoint, or ending that signals when to engage or disengage. And each piece is paired with at least one mode of interaction (mouse, touch, hand tracking, body or face tracking, or simple presence) chosen to match the gesture the work is asking the viewer to consider. None of the pieces require interaction to function; the loops continue regardless. Interaction is offered, not demanded.
+
+Each entry below follows the same structure: a brief introduction to the concept and visual logic of the piece, a description of how it can be interacted with, a technical overview of how it is built, and a reflection drawn from observation and testing. The pieces are presented in roughly the order they were developed, beginning with _Myth of Sisyphus_, the first sketch, and ending with the two most recent works in progress.
 
 ## Installation
 
@@ -383,20 +426,6 @@ This prototype has no direct physical interaction. The threshold happens through
 This piece clarified how much viewers want coherence. When the titles contradict the visuals, people rarely dismiss it—they start searching for an explanation, re-reading the motion until it “fits.” That interpretive effort becomes the loop.
 
 It also set a direction for the larger project: the strongest part of the prototype is how quickly it produces reflection with minimal form. The open challenge is translating that same “label vs. perception” tension into a multi-screen installation where the body participates, not just the eyes.
-
-<!-- ## Meaning (Prototype Version Text)
-
-![image.png](static/documentation/images/meaning.jpg)
-
-The first prototype, available at [https://thesis.rin.kim/prototype-01/index.html](https://thesis.rin.kim/prototype-01/index.html), explores the findings from the drawing elicitation research. A pattern that emerged from participants’ drawing was the consistent depiction of absurdity as random scribbles and meaningfulness as symmetrical or structured sketches. To challenge this expectation, these patterns were digitalized with the titles reversed. The canvas resembling participants’ “_meaningful_” sketches was titled **Meaningless(무의미)**, while the one resembling “_absurd_” sketches was titled **Meaningful(유의미)**. By defamiliarizing and reversing common assumptions, the artwork triggers viewers to think “what really is meaningful?”
-
-In the **Meaningless** canvas, a blue dot(🔵) circles a stadium shape. At first, this movement appears meaningful and controlled, but its endless repetition soon produces a sense of discomfort, as if trapped in an unbreakable loop. In the **Meaningful** canvas, the blue dot wanders randomly across the screen. Its unpredictable movement initially feels absurd, but over time it draws the viewer’s attention as they begin to wonder where it will go next. Together, the two pieces metaphorically connect the workshop sketches to life itself: the white canvas becomes a metaphor for life, the black lines symbolize the trails we leave behind, and the blue dot represents ourselves. The work questions which path carries more meaning, staying within a structured pattern or breaking free in to chaos.
-
-This prototype was set up on a large TV in a room, framed like a gallery space. Viewers were asked to engage with it as they would in a gallery, by reading the descriptions and observing the canvases. Although the prototype had no physically interactive component, the presentation itself emphasized the tension between title, description, and the visual form.
-
-The prototype demonstrates a few clear strengths. Its simplicity and abstractness makes the metaphor accessible, and the reversal of labels provokes reflection. The dual structure of canvases helps viewers compare their interpretations of meaningfulness and meaninglessness. However, the prototype also leaves important questions open. How can interaction move beyond passive observation to embody thresholds? How might the experience scale to multiple screens without losing its reflective quality? And what forms, beyond circles and wandering dots, might loops and thresholds take?
-
-Feedback from this testing session was intriguing. - -->
 
 ## #8 - Not the Same Sun
 
