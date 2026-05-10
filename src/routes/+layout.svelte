@@ -5,9 +5,10 @@
 	export let data;
 
 	$: isProjectPage = $page.url.pathname.startsWith('/projects/');
+	$: isExhibitionPage = $page.url.pathname.startsWith('/exhibition/');
 </script>
 
-{#if !isProjectPage}
+{#if !isProjectPage && !isExhibitionPage}
 	<Header projects={data.projects} />
 {/if}
 
