@@ -336,7 +336,8 @@
 	.doc-content :global(code) {
 		font-size: 1rem;
 		padding: 0.12em 0.35em;
-		background: rgba(255, 255, 255, 0.08);
+		border-radius: 4px;
+		background: rgba(255, 255, 255, 0.2);
 	}
 
 	.doc-content :global(pre) {
