@@ -1,0 +1,16 @@
+{
+	"name": "Loops Exhibition",
+	"short_name": "Loops",
+	"start_url": "/exhibition/tablet",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#000000",
+	"orientation": "portrait",
+	"icons": [
+		{
+			"src": "/favicon.png",
+			"sizes": "any",
+			"type": "image/png"
+		}
+	]
+}

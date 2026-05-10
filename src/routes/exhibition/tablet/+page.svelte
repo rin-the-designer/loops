@@ -76,6 +76,10 @@
 	}
 
 	onMount(async () => {
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/exhibition-sw.js');
+		}
+
 		const room = new URLSearchParams(window.location.search).get('room') ?? 'default';
 		channel = await getExhibitionChannel(room);
 
@@ -105,6 +109,14 @@
 		destroyChannel();
 	});
 </script>
+
+<svelte:head>
+	<link rel="manifest" href="/exhibition-manifest.json" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-title" content="Loops" />
+	<meta name="theme-color" content="#000000" />
+</svelte:head>
 
 <div class="tablet">
 	<!-- Connection status -->
