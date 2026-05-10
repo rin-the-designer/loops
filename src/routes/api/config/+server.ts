@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
 
 // SvelteKit API route to serve client configuration
 export const GET: RequestHandler = async ({ setHeaders }) => {
@@ -11,8 +12,8 @@ export const GET: RequestHandler = async ({ setHeaders }) => {
 	});
 
 	// Get Supabase credentials from environment variables
-	const SUPABASE_URL = process.env.SUPABASE_URL;
-	const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+	const SUPABASE_URL = env.SUPABASE_URL;
+	const SUPABASE_ANON_KEY = env.SUPABASE_ANON_KEY;
 
 	if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 		return json({ error: 'Supabase credentials not configured' }, { status: 500 });
