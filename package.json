@@ -60,6 +60,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"@supabase/supabase-js": "^2.105.4",
 		"highlight.js": "^11.11.1",
 		"markdown-it": "^14.1.1",
 		"markdown-it-anchor": "^9.2.0",
