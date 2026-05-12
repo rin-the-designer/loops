@@ -50,7 +50,7 @@
 		const room = new URLSearchParams(window.location.search).get('room') ?? 'default';
 		channel = await getExhibitionChannel(room);
 
-		channel
+		channel!
 			.on('broadcast', { event: 'select_project' }, ({ payload }) => {
 				handleSelectProject(payload as SelectProjectPayload);
 			})
@@ -81,13 +81,26 @@
 </script>
 
 <div class="tv-display">
-	<!-- Ambient loop (always rendered, hidden when project active) -->
-	<div class="layer ambient" class:hidden={state !== 'idle'}>
-		<iframe
-			src="/project-content/_ambient/index.html"
-			title="Ambient loop"
-			allow="fullscreen"
-		></iframe>
+	<!-- Idle state: 2-column grid with ambient visual + text -->
+	<div class="layer idle" class:hidden={state !== 'idle'}>
+		<div class="idle-grid">
+			<div class="idle-visual">
+				<iframe src="/project-content/_ambient/index.html" title="Ambient loop" allow="fullscreen"
+				></iframe>
+			</div>
+			<div class="idle-text">
+				<div class="idle-header">
+					<div class="idle-title">The Loops<span class="dot">.</span></div>
+					<div class="idle-subtitle">by Rin Kim</div>
+				</div>
+				<div class="idle-diagram">
+					<video src="/exhibition/diagram.mp4" autoplay loop muted playsinline></video>
+				</div>
+				<div class="idle-instruction">
+					Use the <span style="color: #fff;">tablet</span> on the desk to select a piece and begin.
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- Active project -->
@@ -130,13 +143,77 @@
 		border: none;
 	}
 
-	.ambient {
+	.idle {
 		opacity: 1;
 	}
 
-	.ambient.hidden {
+	.idle.hidden {
 		opacity: 0;
 		pointer-events: none;
+	}
+
+	.idle-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		width: 100%;
+		height: 100%;
+		background: #ffffff40;
+		gap: 1px;
+	}
+
+	.idle-visual {
+		position: relative;
+		background: #000;
+	}
+
+	.idle-visual iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+
+	.idle-text {
+		background: #000;
+		display: flex;
+		flex-direction: column;
+		padding: 2rem;
+	}
+
+	.idle-header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.idle-title {
+		font-size: 6vw;
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	.dot {
+		color: #ff8800;
+	}
+
+	.idle-subtitle {
+		font-size: 2vw;
+		opacity: 0.8;
+	}
+
+	.idle-diagram {
+		margin-top: auto;
+	}
+
+	.idle-diagram video {
+		max-height: 20vh;
+		object-fit: contain;
+	}
+
+	.idle-instruction {
+		font-size: 5vw;
+		color: rgba(255, 255, 255, 0.3);
 	}
 
 	.project {
