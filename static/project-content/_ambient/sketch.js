@@ -1,51 +1,174 @@
-// Ambient loop: slowly evolving concentric rings
-// Minimal, meditative, runs indefinitely without memory leaks
+// Ambient loop: wandering thick white line with "The Loops." text
+// Accumulative drawing — new segments cover old content on overlap
+// Recent characters are redrawn each frame so the line doesn't cover them
+// Cycle: draw for 1 min → pause & dissolve for 5s → renew
 
-let rings = [];
-const MAX_RINGS = 12;
-let time = 0;
+let ribbonText = 'The Loops. ';
+let dotColor = '#ff8800';
+let textSize_ = 48;
+let speed = 1.5;
+let charSpacing;
+let strokeW;
+
+// Ribbon head
+let headX, headY;
+let prevX, prevY;
+let angle;
+let turnSpeed = 0;
+let targetTurn = 0;
+let turnTimer = 0;
+
+// Tracking
+let distSinceLastChar = 0;
+let charIndex = 0;
+
+// Recent characters that need redrawing each frame
+let recentChars = [];
+let RECENT_COUNT = 5;
+
+// Cycle timing
+let phase = 'drawing'; // 'drawing' | 'dissolving'
+let drawDuration = 60 * 60; // 1 minute at 60fps
+let dissolveDuration = 5 * 60; // 5 seconds at 60fps
+let phaseTimer = 0;
+let dissolveOpacity = 0;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	noFill();
-	strokeWeight(1);
+	strokeW = textSize_ + 12;
+	charSpacing = textSize_ * 0.7;
+
+	textSize(textSize_);
+	textAlign(CENTER, CENTER);
+
+	resetRibbon();
+	background(0);
+
+	noLoop();
+	document.fonts.ready.then(() => {
+		textFont('Inter');
+		loop();
+	});
+}
+
+function resetRibbon() {
+	headX = width / 2;
+	headY = height / 2;
+	prevX = headX;
+	prevY = headY;
+	angle = random(TWO_PI);
+	turnSpeed = 0;
+	targetTurn = 0;
+	turnTimer = 0;
+	distSinceLastChar = 0;
+	charIndex = 0;
+	recentChars = [];
 }
 
 function draw() {
-	background(0, 12);
-	translate(width / 2, height / 2);
+	phaseTimer++;
 
-	time += 0.003;
+	if (phase === 'drawing') {
+		drawRibbon();
 
-	// Draw concentric rings with slowly shifting radii
-	for (let i = 0; i < MAX_RINGS; i++) {
-		let baseRadius = map(i, 0, MAX_RINGS, 50, min(width, height) * 0.42);
-		let wobble = sin(time + i * 0.5) * 20 + cos(time * 0.7 + i * 0.3) * 15;
-		let radius = baseRadius + wobble;
-
-		let alpha = map(i, 0, MAX_RINGS, 60, 15);
-		stroke(255, alpha);
-
-		beginShape();
-		for (let a = 0; a <= TWO_PI; a += 0.02) {
-			let noise_val = noise(cos(a) * 0.5 + 1, sin(a) * 0.5 + 1, time + i * 0.1);
-			let r = radius + noise_val * 30 - 15;
-			let x = cos(a) * r;
-			let y = sin(a) * r;
-			vertex(x, y);
+		if (phaseTimer >= drawDuration) {
+			phase = 'dissolving';
+			phaseTimer = 0;
+			dissolveOpacity = 0;
 		}
-		endShape(CLOSE);
+	} else if (phase === 'dissolving') {
+		// Fade to black
+		dissolveOpacity = map(phaseTimer, 0, dissolveDuration, 0, 255);
+		fill(0, dissolveOpacity);
+		noStroke();
+		rect(0, 0, width, height);
+
+		if (phaseTimer >= dissolveDuration) {
+			// Renew
+			phase = 'drawing';
+			phaseTimer = 0;
+			background(0);
+			resetRibbon();
+		}
+	}
+}
+
+function drawRibbon() {
+	// Update turn behavior
+	turnTimer--;
+	if (turnTimer <= 0) {
+		targetTurn = random(-0.03, 0.03);
+		turnTimer = floor(random(60, 200));
 	}
 
-	// Slowly rotating central point
-	let dotAlpha = map(sin(time * 2), -1, 1, 30, 100);
-	fill(255, dotAlpha);
+	turnSpeed = lerp(turnSpeed, targetTurn, 0.05);
+	angle += turnSpeed;
+
+	prevX = headX;
+	prevY = headY;
+
+	// Steer away from edges
+	let edgeMargin = strokeW * 2;
+	let desiredX = 0, desiredY = 0;
+
+	if (headX < edgeMargin) desiredX = 1;
+	else if (headX > width - edgeMargin) desiredX = -1;
+
+	if (headY < edgeMargin) desiredY = 1;
+	else if (headY > height - edgeMargin) desiredY = -1;
+
+	if (desiredX !== 0 || desiredY !== 0) {
+		let desiredAngle = atan2(desiredY, desiredX);
+		let diff = desiredAngle - angle;
+		while (diff > PI) diff -= TWO_PI;
+		while (diff < -PI) diff += TWO_PI;
+		angle += diff * 0.08;
+	}
+
+	headX += cos(angle) * speed;
+	headY += sin(angle) * speed;
+	headX = constrain(headX, strokeW, width - strokeW);
+	headY = constrain(headY, strokeW, height - strokeW);
+
+	// Draw new white line segment
+	stroke(255);
+	strokeWeight(strokeW);
+	strokeCap(ROUND);
+	line(prevX, prevY, headX, headY);
+
+	// Stamp character when enough distance traveled
+	distSinceLastChar += dist(prevX, prevY, headX, headY);
+
+	if (distSinceLastChar >= charSpacing) {
+		distSinceLastChar = 0;
+
+		let ch = ribbonText[charIndex % ribbonText.length];
+		recentChars.push({ ch: ch, x: headX, y: headY, angle: angle });
+		charIndex++;
+
+		// Keep only recent chars in the redraw list
+		if (recentChars.length > RECENT_COUNT) {
+			recentChars.shift();
+		}
+	}
+
+	// Redraw all recent characters on top of the line
 	noStroke();
-	let dotSize = map(sin(time * 1.5), -1, 1, 3, 8);
-	ellipse(0, 0, dotSize, dotSize);
-	noFill();
+	for (let i = 0; i < recentChars.length; i++) {
+		let s = recentChars[i];
+		fill(s.ch === '.' ? dotColor : 0);
+		push();
+		translate(s.x, s.y);
+		rotate(s.angle);
+		text(s.ch, 0, 0);
+		pop();
+	}
 }
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
+	background(0);
+	resetRibbon();
+	phase = 'drawing';
+	phaseTimer = 0;
 }

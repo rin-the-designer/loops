@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { getExhibitionChannel, destroyChannel, getSupabase } from '$lib/exhibition/supabase';
 	import { exhibitionProjects } from '$lib/exhibition/ExhibitionData';
+	import List from '$lib/components/List.svelte';
 	import type { TvStatusPayload } from '$lib/exhibition/types';
 	import type { RealtimeChannel } from '@supabase/supabase-js';
 	import type { Project } from '$lib/data/ProjectData';
@@ -19,7 +20,7 @@
 	let currentSessionId: string | null = null;
 
 	function getProjectMode(slug: string): string {
-		return exhibitionProjects.find((p) => p.slug === slug)?.mode ?? 'ambient';
+		return exhibitionProjects.find((p: { slug: string; mode: string }) => p.slug === slug)?.mode ?? 'ambient';
 	}
 
 	async function selectProject(project: Project) {
@@ -83,7 +84,7 @@
 		const room = new URLSearchParams(window.location.search).get('room') ?? 'default';
 		channel = await getExhibitionChannel(room);
 
-		channel
+		channel!
 			.on('broadcast', { event: 'tv_status' }, ({ payload }) => {
 				const status = payload as TvStatusPayload;
 				tvState = status.state;
@@ -128,21 +129,17 @@
 	{#if view === 'grid'}
 		<!-- Grid view -->
 		<div class="grid-view">
-			<div class="grid-header">
-				<h1>Loops</h1>
-				<p class="subtitle">Select a piece to view</p>
-			</div>
-			<div class="project-grid">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<div class="gallery-grid" on:click|preventDefault={(e) => {
+				const anchor = (e.target as HTMLElement)?.closest('.gallery-item');
+				if (!anchor) return;
+				const slug = anchor.getAttribute('href')?.replace('/projects/', '');
+				const project = data.projects.find(p => p.slug === slug);
+				if (project) selectProject(project);
+			}}>
 				{#each data.projects as project}
-					<button class="grid-item" on:click={() => selectProject(project)}>
-						<div class="thumb-container">
-							<img src={project.thumbnail} alt={project.title} />
-						</div>
-						<div class="grid-caption">
-							<span class="grid-title">{project.title}</span>
-							<span class="grid-mode">{getProjectMode(project.slug)}</span>
-						</div>
-					</button>
+					<List {project} />
 				{/each}
 			</div>
 		</div>
@@ -160,10 +157,7 @@
 					<div class="interaction-icons">
 						{#each selectedProject.interaction as interaction}
 							<div class="interaction-badge" class:optional={interaction.optional}>
-								<img
-									src="/icons/{interaction.type}.svg"
-									alt="{interaction.type}"
-								/>
+								<img src="/icons/{interaction.type}.svg" alt={interaction.type} />
 								<span>{interaction.type}{interaction.optional ? ' (optional)' : ''}</span>
 							</div>
 						{/each}
@@ -191,9 +185,7 @@
 				{/if}
 			</div>
 
-			<button class="exit-button" on:click={exitProject}>
-				Exit
-			</button>
+			<button class="exit-button" on:click={exitProject}> Exit </button>
 		</div>
 	{/if}
 </div>
@@ -240,78 +232,18 @@
 	.grid-view {
 		flex: 1;
 		overflow-y: auto;
-		padding: 1.5rem;
 	}
 
-	.grid-header {
-		margin-bottom: 1.5rem;
-	}
-
-	.grid-header h1 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin: 0;
-	}
-
-	.subtitle {
-		font-size: 0.875rem;
-		opacity: 0.5;
-		margin: 0.25rem 0 0;
-	}
-
-	.project-grid {
+	.gallery-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1rem;
+		background: #ffffff40;
+		gap: 1px;
+		grid-template-columns: repeat(4, 1fr);
+		padding: 0 0 1px 0;
 	}
 
-	.grid-item {
-		background: #181818;
-		border: none;
-		color: #fff;
+	.gallery-grid :global(.gallery-item) {
 		cursor: pointer;
-		padding: 0;
-		text-align: left;
-		transition: background 0.2s;
-		overflow: hidden;
-	}
-
-	.grid-item:active {
-		background: #333;
-	}
-
-	.thumb-container {
-		width: 100%;
-		aspect-ratio: 1;
-		background: #111;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.thumb-container img {
-		width: 60%;
-		aspect-ratio: 1;
-		object-fit: cover;
-	}
-
-	.grid-caption {
-		padding: 0.75rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
-	}
-
-	.grid-title {
-		font-size: 0.875rem;
-		font-weight: 500;
-	}
-
-	.grid-mode {
-		font-size: 0.7rem;
-		opacity: 0.4;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
 	}
 
 	/* Detail view */
@@ -335,7 +267,7 @@
 	}
 
 	.detail-description {
-		font-size: 0.95rem;
+		font-size: 1rem;
 		line-height: 1.6;
 		opacity: 0.85;
 		margin-bottom: 1.5rem;
@@ -421,13 +353,27 @@
 	}
 
 	@keyframes pulse {
-		0%, 100% { transform: scale(1); opacity: 1; }
-		50% { transform: scale(1.5); opacity: 0.5; }
+		0%,
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.5);
+			opacity: 0.5;
+		}
 	}
 
 	@keyframes breathe {
-		0%, 100% { transform: scale(1); opacity: 0.3; }
-		50% { transform: scale(1.8); opacity: 0.8; }
+		0%,
+		100% {
+			transform: scale(1);
+			opacity: 0.3;
+		}
+		50% {
+			transform: scale(1.8);
+			opacity: 0.8;
+		}
 	}
 
 	.tv-loading {
@@ -456,9 +402,9 @@
 		background: #ccc;
 	}
 
-	@media (min-width: 768px) {
-		.project-grid {
-			grid-template-columns: repeat(3, 1fr);
+	@media (max-width: 768px) {
+		.gallery-grid {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 </style>

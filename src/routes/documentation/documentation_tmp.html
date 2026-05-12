@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="abstract">Abstract</h1>
+<h1 id="introduction">Introduction</h1>
+<h2 id="concept">Concept</h2>
+<blockquote>
+<h4 id="the-struggle-itself-toward-the-heights-is-enough-to-fill-a-mans-heartbrone-must-imagine-sisyphus-happy">The struggle itself toward the heights is enough to fill a man’s heart.</br>One must imagine Sisyphus happy.</h4>
+<p><em>The Myth of Sisyphus</em></br>Albert Camus, 1942</p>
+</blockquote>
+<p><em>Loops</em> is a collection of interactive digital artworks that explore the tension between involuntary repetition and chosen thresholds. In this documentation, <em>involuntary repetition</em> refers to the continuous cycle of activities and circumstances people feel compelled to engage in or accept, and <em>chosen thresholds</em> refers to the autonomy to shape actions and interpretations inside those patterns.</p>
+<p>The collection currently holds nine interactive pieces. Each one ties to absurdism and to finding agency, the sense that people still have room to steer events even inside cycles that start to feel meaningless. Ordinary objects or actions sit behind each sketch, they are abstracted enough that viewers focus on the concept rather than the visuals.</p>
+<p><em>Loops</em> runs in web browsers, so viewers can view it on their own devices, larger monitors, or projections scaled for installs. The layout is responsive, so interaction stays workable from handheld widths through room-sized setups. Displays nearer human scale (roughly 65 to 85 inches on the diagonal) deepen immersion, the feeling that viewers stand closer to the gestures and visuals on-screen. Because each piece borrows from familiar spaces and rituals, the context of installation shapes the experience. A piece installed in the environment it references will carry a different weight than the same work shown on a neutral screen.</p>
+<p>The goal of this project is to invite viewers to reflect on their own loops and thresholds. The project suggests that, rather than resisting these loops, their presence might be accepted, their absurdity embraced, and agency reclaimed in the encounter. Individual pieces withhold a stipulated beginning, midpoint, or end, so viewers can engage and withdraw on their own terms. Though the sketches were designed with particular interactions in mind, nothing in their structure requires viewers to follow that script. Openness to exploration and reflection takes priority.</p>
+<h2 id="impetus">Impetus</h2>
+<p>For a stretch of time during an intense phase of creative work, everything started to feel meaningless. The same questions kept circling: what is the meaning of any of this? What is the meaning of the products around us that promise a better experience, or claim to solve a problem we did not know we had? Are we just lazy beings who need a tool for everything? These existential loops became their own kind of trap, with no clear way through.</p>
+<p>At some point, a different question surfaced: why not make a project out of this? Rather than resisting the feeling, the instinct became to confront it and build an interpretation of it.</p>
+<p>That is when Camus returned. <em>Le Mythe de Sisyphe</em> and <em>L'Étranger</em>, read in the original French during undergraduate coursework, are the two texts that remained most vividly from those years. Camus's absurdist philosophy had resonated then, though it slipped away as design took over. Feeling stuck pulled those readings back into focus, and they offered a frame for what was happening: not an answer, but a way to sit with the question.</p>
+<p>The project began with a single interactive sketch, an abstracted version of the myth of Sisyphus rendered in a personal visual language. It became a natural intersection of three backgrounds carried separately until then: a BA in French, a BFA in Visual Design, and now an MFA in Design and Technology, which added code and interaction as a third layer.</p>
+<p>The first prototype was spontaneous, written during a studio class. It did not take long to get something running. But the moment a hand moved and the sketch responded, something shifted. This could be a way to confront absurdity rather than escape it, to embrace meaninglessness by giving it a form that could be touched.</p>
+<p>The initial conceptual frame was broader than where the project eventually landed. Loops were first connected to life and death: life as the space where involuntary repetitions are imposed, and death as the point where they end. From an eastern cultural perspective, that cycle of life and death is itself another loop, which opened the frame further. Two axes emerged from this thinking (human and code, life and death), and from their intersection four areas to explore: the interaction of life and death, loops from computer code, the death of computer code, and the translation of human loops into coded ones. Early research activities tested whether this framing resonated with others. The findings suggested that the life and death angle, while generative, was too broad and too dependent on individual and cultural background to anchor the work clearly. The focus narrowed to the loop itself, which is where the project has remained.</p>
+<h2 id="medium">Medium</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">// a for loop in JavaScript</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+	<span class="hljs-built_in">console</span>.log(i);
+}
+</div></code></pre>
+<p>Computation is literally built out of repetition. In code, the same instructions run again and again until a condition shifts. That is exactly the kind of repetitions and thresholds this work is about. Code was chosen as the medium because it does not merely illustrate and visualize loops, it <em>performs</em> them. The sketches in this piece are loops you can control, gestures you can steer, and rhythms you can interrupt.</p>
+<p>The act of coding itself also aligns with the project. Writing code is an act of repetition: write, run, hit errors, revise, run again. By using code, the medium of the project also becomes another layer of repetition.</p>
+<p>The decisive quality that separates code from other media is interactivity. A loop rendered in video or animation runs on its own timeline, independent of whoever watches it. A loop written in code can wait, respond, and change based on the presence and actions of the person in front of it. This distinction is central to what <em>Loops</em> is trying to do. The work is not asking viewers to observe repetition from a distance; it is placing them inside it, letting their gestures become part of the cycle. Motion sensing, touch input, and mouse interaction are not decorative features; they are the mechanism through which the question of agency becomes something that can be felt rather than only read about.</p>
+<p>The browser was chosen as the delivery platform because it makes this possible at any scale, from a personal screen to a room-sized projection, without requiring specialized hardware or a controlled installation environment.</p>
+<h2 id="significance">Significance</h2>
+<p>Repetition is one of the most ordinary features of contemporary life, yet in the flow of daily experience it is rarely paused over on its own terms. Daily routines, work schedules, and the looping structure of digital habits (feeds, notifications, queues) organize most of the day without being chosen in any meaningful sense. When these cycles become visible, they can feel empty or compulsory, and it is difficult to see where agency might reappear inside them.</p>
+<p><em>Loops</em> matters because it makes this question tangible rather than abstract. By turning the loop into something that can be touched, steered, and reflected on, the collection invites viewers to notice the cycles they are already in and to consider what it might mean to act deliberately within them. This is not a therapeutic project or a productivity tool. It is closer to applied philosophy: a set of situations designed to make a normally invisible structure of experience available for thought.</p>
+<p>The work also sits at an intersection that is still underexplored in design practice. Interactive art has tended to emphasize novelty, responsiveness, and feedback, while philosophical inquiry into repetition and absurdity has remained largely textual. <em>Loops</em> occupies the space between those two traditions, using the formal properties of code (loops, conditions, thresholds) as both its medium and its argument. The fact that repetition is structurally embedded in the technology used to represent it is not incidental; it is the point.</p>
+<p>For communities of practice in interaction design, media art, and applied philosophy, the project contributes a working example of what it looks like to treat reflection, rather than efficiency or entertainment, as a primary design outcome.</p>
+<p><br><br></p>
+<h1 id="context">Context</h1>
+<h2 id="philosophy">Philosophy</h2>
+<p>Albert Camus's <em>Le Mythe de Sisyphe</em> (1942) is the philosophical foundation of this project. Camus opens with the claim that the only truly serious philosophical question is whether life is worth living in the absence of any ultimate meaning. His answer is not despair but defiance: the absurd hero recognizes the futility of the task and continues anyway, finding sufficiency in the struggle itself. This is the logic that runs beneath <em>Loops</em>. Each sketch presents a task with no resolution, a cycle with no reward, and leaves the question of whether to continue entirely to the viewer. Camus's reading of Sisyphus also introduced the specific image that became the first piece in the collection: the boulder, the hill, and the endless return.</p>
+<p><em>L'Étranger</em> (1942) contributed a different register of the same thinking. Meursault's detachment, his refusal to perform meaning he does not feel, and his confrontation with indifference in the world around him resonated with the emotional starting point of the project. Where <em>Le Mythe de Sisyphe</em> is argument, <em>L'Étranger</em> is atmosphere. Together they shaped both the conceptual frame and the affective tone the work aims to produce.</p>
+<h2 id="research">Research</h2>
+<h3 id="semi-structured-interviews">Semi-Structured Interviews</h3>
+<p>A total of nine individuals participated in semi-structured interviews, each asked five fixed questions about how they perceive death. Questions included: &quot;How would you define death?&quot; and &quot;In your cultural context, what does the concept of death entail?&quot; The interviews were designed to explore whether the initial framing of loops through life and death connected with how others understood those concepts, and whether they intuitively related that cycle to the idea of repetition.</p>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/interview.jpg" alt="Semi-structured interview documentation"></p>
+<p>The responses were varied. Some participants readily described life and death as a kind of loop, drawing on religious, cultural, or philosophical frameworks. Others did not make that connection at all, finding the link between mortality and repetition abstract or forced. The honest spread of responses was itself a finding: the life and death framing was too contingent on individual and cultural background to serve as a stable foundation for the work. This pushed the project toward the loop as a concept in its own right, separating it from its original anchor in mortality.</p>
+<h3 id="drawing-as-elicitation">Drawing as Elicitation</h3>
+<p>A group drawing session was conducted with six participants. Each was asked to draw shapes, groups of shapes, or objects that immediately came to mind when presented with the words &quot;Death,&quot; &quot;Life,&quot; and &quot;Loops,&quot; in that order. The session was designed to gather visual rather than verbal intuitions about these concepts, and to observe whether shared visual languages emerged across participants.</p>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/elicitation-1.jpg" alt="Participant drawings"></p>
+<p>The drawings revealed how differently people visualize the same words. &quot;Death&quot; and &quot;Life&quot; produced a wide range of imagery, personal, symbolic, and cultural, with little overlap between participants. &quot;Loops,&quot; by contrast, produced more convergent responses: circular forms, spirals, and returning paths appeared across multiple drawings. This confirmed that the loop, as a visual and conceptual form, was more legible and more universally accessible than the life and death framing that had initially motivated it. The session directly reinforced the decision to center the project on the loop itself.</p>
+<h3 id="diary-study">Diary Study</h3>
+<p>Thirteen individuals were invited to participate in a diary study. Ten completed the prompt accurately, logging a total of 79 activities over at least three days. Participants were asked to observe and record things they noticed themselves repeating unconsciously: physical habits such as tapping or doodling, digital behaviors such as refreshing apps or checking notifications, and daily activities such as drinking coffee or going for a walk. Each entry included a date and time, a category (routine or habit), the action itself, associated emotions, and a short paragraph of thoughts.</p>
+<iframe src="https://thesis.rin.kim/research/diary-study/index.html" style="width= 100%; aspect-ratio: 16/9; border-radius: 4px;"></iframe>
+<p>The most frequently logged activities fell into two broad categories: bodily habits (hair twirling, leg bouncing, nail biting, fidgeting with jewelry) and digital behaviors (scrolling, checking notifications, refreshing apps, clearing tabs). What struck most participants was not the content of these loops but the moment of noticing them. Several expressed genuine surprise at how automatic their actions had become, one participant wrote that they did not realize how often they bit their nails until they began recording it.</p>
+<p>The emotional texture of the logged loops was more varied than expected. Stress and anxiety appeared frequently, but so did calm, contentment, and even joy. The same action carried different emotional weight depending on the person: one participant found their morning coffee routine grounding; another logged it as something done out of necessity. Most loops sat quietly in the background of daily life, neither deeply felt nor consciously chosen, and the act of logging them was itself a threshold, making visible what had previously been automatic.</p>
+<h3 id="drawing-as-elicitation-second-iteration">Drawing as Elicitation (Second Iteration)</h3>
+<p>Building on an earlier group drawing session, a second iteration was conducted with five participants working individually rather than collectively. The change in format was deliberate: in the first session, participants drew together in a shared space, which raised the possibility that visual choices were influenced by what others around them were drawing. By isolating each participant, this iteration aimed to examine whether similar patterns would emerge independently.</p>
+<p>Participants were presented with four words in sequence, <em>absurdity</em>, <em>meaningful</em>, <em>error</em>, and <em>success</em>, each accompanied by its dictionary definition. They were asked to draw a pattern, rather than an object or scene, that came to mind for each word. After completing all four drawings, participants were asked to explain their intentions.</p>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/drawing.jpg" alt="Drawing session documentation"></p>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/elicitation-2.jpg" alt="Participant drawings"></p>
+<p>The results were telling. For <em>absurdity</em>, participants consistently produced open, non-repeating, and visually irregular marks, even though their stated reasoning differed: one described randomness as freedom, another as an absence of rules, another as disruption of an existing pattern. For <em>meaningful</em>, most participants drew structured or layered forms, concentric circles, symmetrical arrangements, or patterns with a clear center. <em>Error</em> and <em>success</em> produced more varied responses, ranging from disconnected lines to mountain peaks to exclamation marks.</p>
+<p>The key finding was that despite receiving identical definitions, participants arrived at visually similar patterns through distinctly different interpretations. The absurd looked roughly the same across participants even when the reasoning behind it did not. This gap between shared visual language and individual conceptual intent became the direct basis for the <em>Meaning</em> piece in the collection, which takes that shared visual stereotype and inverts its labels.</p>
+<h2 id="precedents">Precedents</h2>
+<h3 id="digital-art">Digital Art</h3>
+<p>Rafaël Rozendaal's internet artworks and Zach Lieberman's generative practice both shaped the approach taken in <em>Loops</em>. Rozendaal's works exist as single-URL browser experiences: minimal, looping, with no levels or endings, treating the web itself as a gallery.[^1] Lieberman's practice showed how simple rules applied repeatedly through code can produce something that feels alive, generating visual experience without narrative or resolution.[^2] Together they established that a coded loop can be a complete artwork, and that the browser is a legitimate medium for it.</p>
+<h3 id="canvas-art">Canvas Art</h3>
+<p>Seo-bo Park's <em>Écriture</em> series and Tschang-yeul Kim's <em>Water Drops</em> series both use repetition as the primary material of the work. Park's canvases are made through the same gesture repeated thousands of times: a pencil or crayon drawn slowly across wet paint, each pass slightly different, each canvas a record of sustained attention.[^3] Kim returned to the same subject, a single water drop, across decades of painting. He described the practice as a form of healing after the trauma of the Korean War, returning to the same form until it released its charge.[^4] Both practices treat repetition not as a means to an end but as the work itself.</p>
+<p>Josef Albers and Vera Molnár approached repetition through constraint and system. Albers applied the same compositional format, nested squares, to hundreds of canvases over decades, changing only the colors, finding discovery entirely within the fixed structure.[^5] Molnár, among the earliest artists to use computers for visual form, built her work from simple rules applied iteratively, and deliberately introduced errors into her algorithms, what she called <em>désordre</em>, to observe what randomness did to order.[^6] This tension between system and deviation maps directly onto the distinction this project draws between involuntary loops and chosen thresholds.</p>
+<h3 id="conceptual">Conceptual</h3>
+<p>Nam June Paik's <em>TV Buddha</em> places a statue of the Buddha before a closed-circuit television showing a live feed of itself: the Buddha watching the Buddha, endlessly.[^7] The loop here is not decorative, it is the subject. This work established a precedent for treating repetition and presence as the same question.</p>
+<h3 id="game">Game</h3>
+<p>Bennett Foddy's <em>Getting Over It</em> and SCKR Games' <em>Only Up!</em> are the clearest contemporary parallels to the myth of Sisyphus in interactive form. In <em>Getting Over It</em>, a man in a cauldron climbs an impossible mountain; every fall can return the player to the beginning, and Foddy narrates throughout, reflecting on failure and the psychology of repetition.[^9] <em>Only Up!</em> strips away checkpoints entirely, making the absence of accumulated progress the central experience.[^10] Both games ask what it means to keep trying when nothing carries forward, and both served as a reference point for thinking about how repeated failure and return can provoke reflection rather than just frustration.</p>
+<p>[^1]: Rozendaal, Rafaël. <em>Internet Artworks</em>. Ongoing. www.newrafael.com/internet.</p>
+<p>[^2]: Lieberman, Zach. <em>Circles, Blobs, Ripples</em>. 2023, Unit London, London.</p>
+<p>[^3]: Park, Seo-bo. <em>Écriture</em> series. 1967–present.</p>
+<p>[^4]: Kim, Tschang-yeul. <em>Water Drops</em> series. 1972–2021.</p>
+<p>[^5]: Albers, Josef. <em>Homage to the Square</em> series. 1950–1976.</p>
+<p>[^6]: Molnár, Vera. <em>(Dés)Ordres</em>. 1974.</p>
+<p>[^7]: Paik, Nam June. <em>TV Buddha</em>. 1974, Galerie Bonino, New York.</p>
+<p>[^8]: Park, Hyunki. <em>Untitled (TV Stone Tower)</em>. 1979.</p>
+<p>[^9]: Foddy, Bennett. <em>Getting Over It with Bennett Foddy</em>. Bennett Foddy, 2017.</p>
+<p>[^10]: SCKR Games. <em>Only Up!</em> SCKR Games, 2023.</p>
+<p><br><br></p>
+<h1 id="project">Project</h1>
+<h2 id="overview">Overview</h2>
+<p>The Project section presents the seven pieces that make up <em>Loops</em>. Each piece is a self-contained interactive sketch, but the collection is designed to be read together. Across the seven works, repetition is approached from different angles: as struggle (<em>Myth of Sisyphus</em>), as transition (<em>Doors</em>), as quiet build-up (<em>Accumulation</em>), as ritual maintenance (<em>Zen Garden</em>), as slow disappearance (<em>Incense</em>), as play (<em>Playground Spinner</em>), and as interpretation (<em>Meaning</em>). No piece is meant to be definitive on its own. The argument lives in the overlap, in how repetition takes a different shape each time the question is asked.</p>
+<p>A few principles run across the collection. Each piece is built from a deliberately reduced visual language, abstracted enough that attention stays on the concept rather than on imagery or decoration. Each piece runs as an open loop, without a beginning, midpoint, or ending that signals when to engage or disengage. And each piece is paired with at least one mode of interaction (mouse, touch, hand tracking, body or face tracking, or simple presence) chosen to match the gesture the work is asking the viewer to consider. None of the pieces require interaction to function; the loops continue regardless. Interaction is offered, not demanded.</p>
+<p>Each entry below follows the same structure: a brief introduction to the concept and visual logic of the piece, a description of how it can be interacted with, a technical overview of how it is built, and a reflection drawn from observation and testing. The pieces are presented in roughly the order they were developed.</p>
+<!-- ## Installation
+
+![Diagram of installation setup](static/documentation/images/setup.png) -->
+<h2 id="1---myth-of-sisyphus">#1 - Myth of Sisyphus</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/myth-of-sisyphus.jpg" alt="Myth of Sisyphus artwork showing an orange circle representing the boulder on a black triangular slope"></p>
+<p>In Camus's retelling, Sisyphus is condemned to push a boulder up a hill only to watch it roll back down, endlessly. Camus finds in this not tragedy but defiance: the absurd hero continues anyway, finding sufficiency in the act itself rather than in any outcome. The essay ends with a provocation: one must imagine Sisyphus happy.</p>
+<p><em>Myth of Sisyphus</em> is a direct translation of that logic into an interactive form. An orange circle represents the boulder on a dark triangular slope. Viewers can push it upward with a mouse or with their hand tracked through the webcam. When it reaches the top, the hill flips and the cycle continues. There is no score, no reward, and no ending.</p>
+<p>The piece holds the loop open and leaves every decision to the viewer: keep pushing, stop, or find a third option. That space between the system's pull and the viewer's response is where the work lives.</p>
+<h3 id="interaction">Interaction</h3>
+<p>The piece offers two modes of control:</p>
+<ul>
+<li>
+<p><strong>Mouse input</strong><br>
+The user clicks and drags the orange circle (the rock) up the black triangular slope.</p>
+</li>
+<li>
+<p><strong>Hand-tracking camera input</strong><br>
+Using a webcam, the system detects user's hand and replaces the cursor with a small circle that follows their motion.</p>
+</li>
+</ul>
+<h3 id="technical-overview">Technical Overview</h3>
+<p>The sketch is built on JavaScript, p5.js for visual rendering and ml5.js for hand tracking through camera feed.</p>
+<ul>
+<li>
+<p><strong>Hand tracking</strong><br>
+Uses <code>ml5.handPose()</code> with a single-hand model (maxHands: 1, flipped: true). The function gotHands receives pose results and computes the average position of 6 keypoints (wrist and finger bases) to estimate hand center.</p>
+</li>
+<li>
+<p><strong>Motion smoothing</strong><br>
+Hand coordinates are filtered with a lerp-based smoothing factor <code>handSmoothingFactor = 0.2</code> to prevent jitter and create fluid motion.</p>
+</li>
+<li>
+<p><strong>Spatial bounds</strong><br>
+The hand position is constrained with screen insets (<code>handBoundsInsetX/Y = 0.08</code>, meaning 8% of the windowWidth/Height) to maintain consistent control regardless of camera framing.</p>
+</li>
+<li>
+<p><strong>Physics simulation</strong><br>
+Gravity (0.5) acts on the rock's velocity. The hill geometry flips direction at the end of each iteration, forming an endless repetition. The rock's position updates along the slope equation to simulate rolling motion.</p>
+</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<p>In testing, people inhabited this loop in noticeably different ways. One participant tried hard to reach the peak, failed several times, finally succeeded, watched the rock fall, and immediately walked away. Another kept going, pushing the rock again and again as a small challenge. A third held the rock still in the middle of the slope and said that was where they wanted it to stay.</p>
+<p>These responses clarified what the piece is really asking. The system defines the hill, gravity, and the inevitability of return, but agency shows up in how someone chooses to stay with the repetition, resist it, pause it, or leave. Reaching the top does not resolve the loop; it only reveals it. The work becomes less about the boulder and more about noticing what it feels like to keep choosing to push.</p>
+<h2 id="2---doors">#2 - Doors</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/doors.jpg" alt="Doors artwork showing an endless corridor of alternating black and white thresholds in 3D space"></p>
+<p>A door is one of the most ordinary objects we encounter, yet every doorway marks a small shift in role and identity. Stepping into work, returning home, moving from one phase of life to the next: each passage carries a quiet transformation that goes largely unnoticed because it happens so often.</p>
+<p><em>Doors</em> extends this everyday ritual into an infinite sequence. The piece presents an endless corridor of alternating black and white thresholds in 3D space, advancing forward at a steady pace as if the viewer is walking through it. Each door gives way to another. There is no destination, no final room, only the corridor continuing.</p>
+<p>The alternating colors represent the dualities that structure the cycle: light and dark, presence and absence, beginning and ending. The loop never resolves because transition itself never ends.</p>
+<h3 id="interaction">Interaction</h3>
+<ul>
+<li>
+<p><strong>Body and face input</strong><br>
+The webcam tracks the viewer's face and upper body using the <code>ml5.bodyPose()</code> model. As the viewer moves left or right, the corridor rotates to face them, as if the space responds to their presence.</p>
+</li>
+<li>
+<p><strong>Autonomous movement</strong><br>
+The environment advances on its own. The viewer does not need to act for the loop to continue.</p>
+</li>
+</ul>
+<h3 id="technical-overview">Technical Overview</h3>
+<p>The sketch is built in JavaScript, using p5.js (WEBGL) for 3D rendering and ml5.js for upper body and face tracking.</p>
+<ul>
+<li>
+<p><strong>Rendering and motion</strong><br>
+The environment is constructed from box primitives forming stairs, walls, and a floor plane. The camera advances forward using interpolated offsets <code>currentOffset</code> and <code>targetOffset</code> for smooth motion.</p>
+</li>
+<li>
+<p><strong>Step sequencing</strong><br>
+The motion progresses in timed increments <code>MOVE_INTERVAL</code>, <code>STEP_SIZE, SMOOTH_SPEED</code> for <code>MAX_MOVES</code> cycles before entering a final long transition <code>FINAL_MOVEMENT</code>, <code>FINAL_DURATION</code>.</p>
+</li>
+<li>
+<p><strong>Scene inversion and face tracking</strong><br>
+The color scheme inverts between passages. Face position data from ml5.js shifts the corridor's perspective to follow the viewer.</p>
+</li>
+</ul>
+<!-- ### Audio Source
+
+An ambient soundtrack accompanies the piece, reinforcing the sense of forward motion and spatial depth.
+
+Source: _Feel_ by Master Minded, [artlist.io](https://artlist.io/royalty-free-music/song/feel/132927). -->
+<h3 id="reflections">Reflections</h3>
+<p>Testing made it clear that <em>Doors</em> invites projection. One visitor began moving their legs in place, trying to sync their steps with the advancing stairs, assuming their movement was driving the scene. That misreading was revealing: it showed how quickly people invent a sense of control even when none is actually available.</p>
+<p>Others sat still and waited, then expressed frustration at how slowly the corridor moved, reflecting that they had grown accustomed to fast-paced media. A simple, slow loop was enough to surface those expectations and make them available for reflection.</p>
+<h2 id="3---accumulation">#3 - Accumulation</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/accumulation.jpg" alt="Accumulation artwork showing a minimal canvas with a DOM counter tracking invisible layered growth"></p>
+<p><em>Accumulation</em> started as a physical exercise: drawing black circles on a canvas, covering them with white paint, and repeating until the surface looked blank but had grown visibly heavier with each layer. The canvas appeared the same as when it started, but it was not.</p>
+<p>The digital piece recreates that logic in the browser. Every second, a new element is added to the page without removing anything: sometimes a circle, sometimes a full-screen overlay. The surface oscillates between presence and erasure, but the system only ever grows. Two counters make this visible, one tracking DOM size, one counting lines of accumulated code.</p>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/blank-canvas.jpg" alt="Blank canvas process documentation"></p>
+<p>The work frames repetition as a process that builds weight beneath an apparently static surface, asking what it means to accumulate without a visible record.</p>
+<h3 id="interaction">Interaction</h3>
+<ul>
+<li><strong>Click anywhere</strong>
+<ul>
+<li>Flips the color scheme (white to black or black to white).</li>
+<li>Resizes the next circle based on distance from the click to the center of the screen.</li>
+</ul>
+</li>
+</ul>
+<h3 id="technical-overview">Technical Overview</h3>
+<ul>
+<li>
+<p><strong>Timed layering</strong><br>
+The work runs on a simple timer. It continuously adds new layers at fixed intervals, alternating between a centered circle and a full-screen overlay. The layers stack indefinitely and are never removed.</p>
+</li>
+<li>
+<p><strong>Accumulation made visible</strong><br>
+The interface displays two indicators that reflect the ongoing buildup:</p>
+<ul>
+<li>a rough estimate of page weight (DOM size)</li>
+<li>a line counter that increases each time a new layer is added</li>
+</ul>
+</li>
+<li>
+<p><strong>Layered composition</strong><br>
+The visuals are built from two repeating element types:</p>
+<ul>
+<li>a centered circle whose size is controlled by a CSS variable</li>
+<li>a full-screen overlay that covers the entire viewport</li>
+</ul>
+</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<p>Without explanation, most viewers treated <em>Accumulation</em> as a non-interactive animation and never discovered that clicking changes the structure. The idea of DOM growth as digital weight was most legible to people familiar with HTML.</p>
+<p>Once the premise was explained, many said it resonated with their own sense of hidden build-up: stress, habits, routines, accumulation that does not read as change until it is named. That gap between initial perception and later understanding became part of the piece.</p>
+<h2 id="4---zen-garden">#4 - Zen Garden</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/zen-garden.jpg" alt="Zen Garden artwork showing repeated raked sand-like arcs and lines forming a continuous pattern"></p>
+<p>The dry landscape garden is built on the practice of raking. The same gesture, drawn across sand again and again, produces lines that are both marks of labor and objects of contemplation. Nothing is planted and nothing grows. The work is maintenance, and the maintenance is the point.</p>
+<p><em>Zen Garden</em> takes that gesture as its material. The screen draws a field of curved lines that resemble raked sand, band by band, from top to bottom. When the pattern completes it holds briefly, fades, and begins again from the top. The loop does not progress toward anything.</p>
+<p>The piece offers no intervention point. There is no interaction other than the choice of how long to stay.</p>
+<h3 id="interaction">Interaction</h3>
+<p>This piece runs autonomously. There is no direct user control. The only interaction is duration: choosing to watch, drifting away, and returning as the loop repeats.</p>
+<h3 id="technical-overview">Technical Overview</h3>
+<ul>
+<li>
+<p><strong>Progressive drawing</strong><br>
+The animation is constructed as a continuous rake-like path: straight segments that flow into rounded turns. Marks appear gradually over time rather than all at once.</p>
+</li>
+<li>
+<p><strong>Layered bands</strong><br>
+As one band completes, the system shifts downward and draws the next, building a full field of repeated marks.</p>
+</li>
+<li>
+<p><strong>Fade and reset</strong><br>
+After a full pass, the screen fades toward blankness, pauses, and restarts, returning to the beginning without resolving the loop.</p>
+</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<p><em>Zen Garden</em> shifts the threshold away from choice and toward attention. With no moment to intervene, the piece asks what it means to stay with a repetitive act that never completes. The reset is not a clean slate; it is the return of the same task. Over time the work becomes less about the pattern and more about the viewer's willingness to remain with it.</p>
+<h2 id="5---incense">#5 - Incense</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/incense.jpg" alt="Incense artwork showing a single vertical incense stick with a glowing tip and drifting smoke particles"></p>
+<p>In many East Asian cultural practices, incense is burned during ceremonies and rituals as a way of connecting the living with those who have passed. The smoke is read as a presence: when it drifts toward someone, it is sometimes understood as a sign that an ancestor has arrived. The act of burning is itself a kind of loop, the same ritual repeated across generations, across occasions, across time.</p>
+<p><em>Incense</em> renders that loop digitally. A single stick fades into view, its tip begins to glow, and it burns downward at a steady pace. Particles rise from the ember like smoke. When the stick finishes burning, the scene pauses briefly and the cycle starts again.</p>
+<p>The smoke shifts direction in response to the viewer's position, as real smoke would shift with the movement of a body nearby. The piece treats the viewer's presence not as input but as something the work already knows about.</p>
+<h3 id="interaction">Interaction</h3>
+<p>There is no direct user control. The smoke responds to the viewer's position through face tracking, drifting in the direction of the face on screen. The primary interaction is duration: choosing to stay and watch the burn, the drift, and the reset.</p>
+<h3 id="technical-overview">Technical Overview</h3>
+<ul>
+<li>
+<p><strong>Phased loop</strong><br>
+The cycle moves through four states: the stick appears, the ember fades in, the burn progresses downward, and the scene pauses briefly before restarting.</p>
+</li>
+<li>
+<p><strong>Burn progression</strong><br>
+The burning tip is a moving point along the stick that advances gradually over time, making the loss feel continuous rather than sudden.</p>
+</li>
+<li>
+<p><strong>Particle smoke</strong><br>
+Particles are emitted from the glowing tip and rise upward with slight randomness, creating a soft, constantly changing texture.</p>
+</li>
+<li>
+<p><strong>Subtle responsiveness</strong><br>
+The smoke's horizontal drift is gently influenced by the viewer's face position, keeping the loop mostly autonomous while still acknowledging the body in front of it.</p>
+</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<p>The reset in <em>Incense</em> does not erase what happened. It reframes the burn as a recurring ritual: the same disappearance, again. Over time the work becomes less about the image of incense and more about how attention changes when nothing new arrives, only the steady continuation of the same act.</p>
+<h2 id="6---playground-spinner">#6 - Playground Spinner</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/playground-spinner.jpg" alt="Playground Spinner artwork showing a 3D rendered merry-go-round spinner"></p>
+<p>The playground spinner, also known as a playground merry-go-round, is one of those objects whose entire purpose is the act itself. There is no goal in spinning it, no score, no destination, only the spin. For a lot of people it is also a shared childhood memory: you ran toward it, grabbed a handle, and pushed. The spinning was the point.</p>
+<p><em>Playground Spinner</em> renders that object digitally. A 3D spinner fills the screen, built from a central pole, a base disk, and six handles arranged radially. It is rendered without lights, which gives it an intentionally flat, almost diagrammatic quality despite being a 3D form. The object reads as simple and abstract, familiar in shape but stripped of texture and shadow.</p>
+<p>The piece spins when a hand moves in front of the webcam, regardless of direction. The speed decays naturally after each gesture, slowing the way a real spinner would slow, and comes to rest until the next movement arrives. A new hand appearing changes the color scheme, cycling through seven palettes. The loop has no purpose beyond its own continuation.</p>
+<h3 id="interaction">Interaction</h3>
+<ul>
+<li>
+<p><strong>Hand swipe via webcam</strong><br>
+The <code>ml5.handPose()</code> model tracks wrist position. Any lateral movement above a threshold (10 pixels) triggers a spin. The speed is proportional to the speed of the swipe, capped at a maximum. Direction does not matter: any movement spins the spinner clockwise.</p>
+</li>
+<li>
+<p><strong>Color change on new hand detection</strong><br>
+When a hand enters the frame after being absent, the color scheme changes to a randomly selected palette from a set of seven. The color applies to both the background and the spinner body.</p>
+</li>
+</ul>
+<h3 id="technical-overview">Technical Overview</h3>
+<p>The sketch is built in JavaScript using p5.js in WEBGL mode and ml5.js for hand tracking.</p>
+<ul>
+<li>
+<p><strong>3D rendered as 2D</strong><br>
+The spinner is drawn with <code>noStroke()</code>, <code>fill()</code>, and no lighting calls. The result is a flat-colored 3D object that reads visually as 2D. This is a deliberate choice: the form is recognizable, but the absence of light removes depth cues and keeps the focus on the shape and its motion rather than its materiality.</p>
+</li>
+<li>
+<p><strong>Spinner geometry</strong><br>
+The object is constructed from three components: a base disk (<code>cylinder</code> with low height), a central vertical pole, and six handles arranged radially. Each handle has a vertical segment and a horizontal segment connecting it to the center, built from rotated and translated cylinders.</p>
+</li>
+<li>
+<p><strong>Physics decay</strong><br>
+Spin speed decreases each frame by a factor of 0.99, producing a gradual natural slowdown without a hard stop.</p>
+</li>
+<li>
+<p><strong>Hand tracking and speed mapping</strong><br>
+Wrist X position is tracked frame by frame. The delta between frames is mapped to spin speed using <code>constrain(abs(dx) * 0.2, 0, 10)</code>, giving responsive but bounded control.</p>
+</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<p>For viewers who grew up with playground spinners, the response was immediate. They saw the object and started spinning it without hesitation, the same way they would have as a child. There was no learning curve, no moment of figuring out what to do. The object already carried its own instructions.</p>
+<p>That directness was one of the clearest moments of recognition across the entire collection: a piece of shared physical memory, translated into code, producing the same gesture it always produced. The loop here is not just on the screen. It runs from childhood to now, the same spinning, the same pointless purpose, repeated across time.</p>
+<h2 id="7---meaning">#7 - Meaning</h2>
+<p><img src="file:///Users/rinchongkim/Coding/rinchong.kim/loops/src/routes/documentation/static/documentation/images/meaning.jpg" alt="Meaning artwork showing two canvases: one with an orange dot moving in a structured loop and one wandering unpredictably"></p>
+<p>During the drawing elicitation workshop, a consistent pattern emerged: participants drew meaningfulness as symmetry and structure, and absurdity as randomness and disorder. The visual language was shared even when the reasoning behind it differed. <em>Meaning</em> takes that finding and reverses it: the structured sketch is titled Meaningless (무의미) and the wandering sketch is titled Meaningful (유의미).</p>
+<p>In Meaningless, an orange dot circles a fixed stadium-shaped track. The motion appears controlled and intentional, but its endless repetition gradually suggests being locked in place rather than moving through something. In Meaningful, the dot drifts freely across the screen. Its path is unpredictable and initially reads as aimless, but over time it draws curiosity: where will it go next, and what might the traces left behind eventually form.</p>
+<p>The two canvases sit side by side, asking viewers to notice which one holds their attention and why. Meaning, the piece suggests, is not in the form but in the looking.</p>
+<h3 id="interaction">Interaction</h3>
+<p>There is no direct physical interaction. The threshold is the act of reading and comparing:</p>
+<ul>
+<li>The titles shape first impressions.</li>
+<li>Meaning emerges by watching both canvases over time and noticing how perception shifts.</li>
+</ul>
+<h3 id="technical-overview">Technical Overview</h3>
+<ul>
+<li>
+<p><strong>Two-canvas structure</strong><br>
+The work presents two sketches side by side to encourage comparison rather than progression.</p>
+</li>
+<li>
+<p><strong>Contrasting motion systems</strong><br>
+One sketch constrains the dot to a looped path, while the other allows it to wander with non-repeating movement logic. The contrast is designed to feel controlled versus uncontrolled, even before the labels intervene.</p>
+</li>
+<li>
+<p><strong>Title reversal as the main mechanism</strong><br>
+The simplest change, naming, acts like an interface. It redirects interpretation without changing the motion itself.</p>
+</li>
+</ul>
+<h3 id="reflections">Reflections</h3>
+<p>Viewers rarely dismissed the contradiction between the titles and the visuals. Most started searching for an explanation, re-reading the motion until it fit. That interpretive effort is the loop the piece is actually running.</p>
+<p>The work also confirmed that reflection can emerge from very minimal form. The open question it leaves behind is how that same tension between label and perception could be extended into a multi-screen installation where the body, not just the eyes, participates.</p>
+<h2 id="technological-stack">Technological Stack</h2>
+<ul>
+<li>Framework: SvelteKit</li>
+<li>Deployment: Vercel</li>
+<li>DNS: CloudFlare</li>
+<li>Canvas: p5.js or vanilla js</li>
+<li>Motion Sensing: ml5.js</li>
+</ul>
+<p><br><br></p>
+<h1 id="evaluation">Evaluation</h1>
+<h2 id="reflection">Reflection</h2>
+<h3 id="status">Status</h3>
+<p>This documentation captures <em>Loops</em> as a collection of seven completed interactive pieces. Two additional works, <em>Not the Same Sun</em> and <em>Fountain</em>, are in progress and not included in this submission. The collection in its current form has been published at ACM TEI '26, which marks its first formal academic presentation.</p>
+<p>Several aspects of the project remain unresolved. Testing across the seven pieces was informal, conducted with small groups of participants in semi-controlled settings, and the resulting findings are indicative rather than representative of how a broader audience would respond. The work also runs on a limited set of screen-based setups and depends on webcam tracking and browser performance, which constrains where it can be installed and makes it sensitive to hardware and network conditions. <em>Accumulation</em> continues to depend on familiarity with concepts such as the DOM to be fully understood, which narrows the audience that can access its intended meaning without additional explanation. None of the pieces have yet been installed in the site-specific contexts that would most extend their meaning. The collection is documented and presentable in its current state, but its evaluation in real-world settings remains a future step.</p>
+<h3 id="future-prospects">Future Prospects</h3>
+<p>The most immediate direction is the evaluation of the work in real contexts. The Concept section proposes that the context of installation shapes the experience of each piece, but this remains a hypothesis that has not yet been tested. Installing <em>Doors</em> in an elevator lobby, <em>Zen Garden</em> in or near an actual garden, and <em>Incense</em> in a quiet ritual space would allow that hypothesis to be evaluated and would situate the work within environments that resonate with its content.</p>
+<p>The second direction is the continued growth of the collection. <em>Loops</em> is intended as an ongoing project, expanded whenever a new instance of involuntary repetition is recognized, whether in personal experience or in the looping nature of an object or event. <em>Not the Same Sun</em> and <em>Fountain</em> are already underway, and additional pieces will follow. The collection has no planned endpoint and is meant to remain open, mirroring the structure of the loops it examines.</p>
+<p>The third direction is consolidation. The pieces currently share a conceptual frame but not a unified visual or technical foundation. Some are flat in style, others are dimensional. Some are built with p5.js, others with ml5.js, and others with vanilla JavaScript and direct DOM manipulation. A subsequent phase of development will focus on establishing a coherent visual language and a consistent coding stack across the collection, allowing the pieces to read as members of a single body of work rather than as discrete experiments. This consistency will also support more reliable site-specific installation and future expansion.</p>
+<h2 id="publication">Publication</h2>
+<p>Rinchong Kim. 2026. The Loops: An Interactive Artwork on Reclaiming Agency in Involuntary Repetition. In Proceedings of the Twentieth International Conference on Tangible, Embedded, and Embodied Interaction (TEI '26). Association for Computing Machinery, New York, NY, USA, Article 134, 1–5. https://doi.org/10.1145/3731459.3786210</p>
+<p><br><br></p>
+<h1 id="acknowledgements">Acknowledgements</h1>
+<h2 id="special-thanks">Special Thanks</h2>
+<p>Special thanks to Harpreet Sareen, Namreta Kumar, Mani Nilchiani, Ethan Silverman and Andrew Zornoza for guiding me through this project.</p>
+<p>And to my classmates who participated in user testings and provided me with constructive feedbacks.</p>
+<h2 id="use-of-generative-ai">Use of Generative AI</h2>
+<p>Generative AI (Model: Cursor Composer 1, Cursor Composer 2) was used for code cleanup and simplification purposes throughout these digital sketches.</p>
+<!-- ## License -->
+<p><br><br></p>
+<h1 id="references">References</h1>
+
+</body>
+</html>
