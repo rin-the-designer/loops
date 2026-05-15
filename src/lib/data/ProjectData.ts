@@ -23,35 +23,8 @@ export const projectData: Project[] = [
 		excerpt:
 			'A visual represenation of a philosophical essay that explores the concept of the absurd and the human search for meaning in a meaningless world.',
 		description: `<p style="margin-block-start: 0;">
-          <a
-            href="https://www.google.com/books/edition/The_Myth_of_Sisyphus/zG9wDwAAQBAJ?hl=en&gbpv=0"
-            target="_blank"
-            style="color: #fff; text-decoration: underline;"
-            >Myth of Sisyphus</a
-          >, written by
-          <a
-            href="https://www.britannica.com/biography/Albert-Camus"
-            target="_blank"
-            style="color: #fff; text-decoration: underline;"
-            >Albert Camus</a
-          >, is a philosophical essay that explores the concept of the absurd
-          and the human search for meaning in a meaningless world. This abstract
-          representation of Sisyphus' eternal task examines the nature of
-          repetitive actions in our own lives. Like Sisyphus pushing his
-          boulder, we find ourselves in daily loops, yet through these cycles we
-          can discover purpose and even joy in the simplest of actions.
-        </p>
-        <p>There are two ways to interact with this project.</p>
-        <ol type="1">
-          <li>
-            With mouse: Drag the <span style="color: #ff8800;">●</span> with your mouse.
-          </li>
-          <li>
-            With hand (Recommended): Use your webcam to control the
-            <span style="color: #ff8800;">●</span>. There will be a small circle on the
-            screen as the indicator for your hand position.
-          </li>
-        </ol>`
+			In Camus's retelling of the Greek myth, Sisyphus is condemned to push a boulder up a hill, only to watch it roll back down, endlessly. Camus finds in this not tragedy but defiance: the act of pushing becomes its own purpose. This piece translates the myth into something you can touch. Push the boulder up the slope with your hand or mouse; when it reaches the top, the hill flips and the cycle continues. There is no score, no ending. The choice of whether to keep pushing, stop, or hold the boulder still belongs entirely to you.
+		</p>`
 	},
 	{
 		title: 'Doors',
@@ -64,20 +37,7 @@ export const projectData: Project[] = [
 		excerpt:
 			'A continuous cylce of black and white doors representing the transitions we experience in life.',
 		description: `<p style="margin-block-start: 0;">
-			<span style="font-style: italic;">Doors</span> act as gateways that allow us to move through space, much like
-			the transitions we experience in life. We enter and exit different
-			phases, and each doorway transforms who we are. Just as an infinite
-			stairway ascends through these transitions, we progress from child to
-			adult, student to professional, and beyond as each role shapes our
-			identity with every step.
-		</p>
-		<p>
-			The alternating black and white doors symbolize the ongoing cycle and
-			duality of existence, such as life and death, light and darkness, and
-			beginnings and endings. As we walk through this unending corridor of
-			doors, we witness how each transition reshapes us and guides us toward
-			our next transformation. The journey continues infinitely, reminding
-			us that every ending is simply the start of a new beginning.
+			A door is one of the most ordinary objects we encounter, yet every doorway marks a small shift: from work to home, from public to private, from one phase of life to another. <span style="font-style: italic;">Doors</span> stretches this quiet transformation into an infinite corridor. Black and white thresholds alternate as the viewer drifts forward, the colors standing in for the dualities that frame any transition: light and dark, presence and absence, beginning and ending. There is no final room. The loop continues because transition itself never ends.
 		</p>`
 	},
 	{
@@ -91,28 +51,8 @@ export const projectData: Project[] = [
 		excerpt:
 			'A digital reflection of the accumulation of small, repetitive actions, adding up to a larger pattern.',
 		description: `<p style="margin-block-start: 0;">
-			<span style="font-style: italic;">Accumulation</span> is a digital reflection of a physical process: drawing a black circle,
-			covering it with white, and repeating. What seems like a simple, meaningless loop
-			gradually builds weight — both literally on a canvas, and metaphorically in code.
-			Each iteration leaves behind traces, even if partially erased, creating layers of
-			hidden history beneath the surface. This work explores how small, repetitive
-			actions accumulate over time, carrying subtle changes and quiet narratives within
-			cycles that feel monotonous on the surface.
-		</p>
-		<p>
-			Inspired by my painting project <a
-            href="https://mfadt.rinchong.kim/spring-2025/pgte-5201/ms2-08"
-            target="_blank"
-            style="color: #fff; text-decoration: underline;"
-            >Blank Canvas</a
-          >, this piece asks the viewer to consider
-			what's happening beneath repetition — how mistakes, adjustments, and tiny decisions
-			compound. Even when actions feel routine or insignificant, they leave behind marks
-			that shape what follows. Through code, I recreate that weight and persistence,
-			inviting the audience to slow down and notice how loops, though seemingly
-			meaningless, become records of patience, curiosity, and quiet transformation.
-		</p>
-		`
+			This piece began as a painting exercise: drawing black circles on a canvas, covering them with white paint, and repeating until the canvas appeared blank again. From a distance, nothing seemed to have changed. Up close, the surface had grown heavier with every layer. <span style="font-style: italic;">Accumulation</span> recreates that logic on screen. Layers stack invisibly, one each second, never erased, only added. The work asks what it means to accumulate without leaving a visible record, and how much of who we become is built from cycles that quietly pile up beneath the surface.
+		</p>`
 	},
 	{
 		title: 'Zen Garden',
@@ -124,16 +64,7 @@ export const projectData: Project[] = [
 		excerpt:
 			'A visualized graphic of a Karesansui, focusing on the tranquility and patterns of the raking.',
 		description: `<p style="margin-block-start: 0;">
-			Zen garden, originally called かれさんすい(枯山水) 'Karesansui', is a traditional
-			Japanese landscape art that features a dry landscape design with rocks, sand,
-			and plants. These gardens are raked continuously to create its patterns and designs.
-			Just like the raking, we all have our daily routines and patterns. Sometimes they
-			feel like a loop, and almost meaningless when seen from afar.
-		</p>
-		<p>
-			However, when we look closely, we can see the beauty and the patterns in the
-			small details. Like the karesansui, altough we feel like we are in a loop,
-			we have the agency to the details and the changes we make within these loops.
+			The dry landscape garden is built on the practice of raking. The same gesture, drawn across sand again and again, produces lines that are both marks of labor and objects of contemplation. Nothing is planted and nothing grows. The work is the maintenance, and the maintenance is the point. <span style="font-style: italic;">Zen Garden</span> takes that ritual as its material. Curved lines appear band by band across the screen, hold for a moment, fade, and begin again. There is nothing to do here, only the choice of how long to stay.
 		</p>`
 	},
 	{
@@ -146,14 +77,7 @@ export const projectData: Project[] = [
 		excerpt:
 			'A visualization of a burning incense, changing directions through human interaction, representing the connection between life and death.',
 		description: `<p style="margin-block-start: 0;">
-			In the asian culture, incense sticks are use for ceremonies and rituals, connecting
-			the spirits of the living and the deceased. All loops in life comes to an end at the end
-			of your life. Or, it could be a start of another loop in some cultural context.
-		</p>
-		<p>
-			<span style="font-style: italic;">Incense</span> is a digital representation of a burning incense stick as a connection
-			between life and death. The smoke changes directions based on the position of the
-			viewer, just as it would change direction based on the wind of people moving by.
+			In many East Asian cultural practices, incense is burned during ceremonies and rituals as a way of connecting the living with those who have passed. The smoke is read as presence: when it drifts toward someone, it is sometimes understood as a sign that an ancestor has arrived. The act of burning is itself a kind of loop, the same ritual repeated across generations. <span style="font-style: italic;">Incense</span> renders that loop digitally. A stick fades in, glows, burns down, and the cycle begins again. The smoke shifts in response to the viewer's position, as real smoke would.
 		</p>`
 	},
 	{
@@ -166,10 +90,8 @@ export const projectData: Project[] = [
 		interaction: [{ type: 'camera' }, { type: 'flash' }],
 		excerpt: 'A revisit to a childhood playground memory.',
 		description: `<p style="margin-block-start: 0;">
-			<span style="font-style: italic;">Playground Spinner</span> is a nostalgic trip down memory lane. It is a simple
-			playground ride. Yet, looking at it from an adult's perspective, it was
-			a ride that looped endlessly, but also under control of the kids riding it.
-			</p>`
+			The playground spinner, also known as a merry-go-round, is one of those objects whose entire purpose is the act itself. There is no goal in spinning it, no score, no destination, only the spin. For many people it is also a shared childhood memory: you ran toward it, grabbed a handle, and pushed. <span style="font-style: italic;">Playground Spinner</span> renders that object digitally. Move your hand in front of the screen and it spins, slows, and waits for the next push. The loop has no purpose beyond its own continuation, much like the spinning we did as children.
+		</p>`
 	},
 	// {
 	// 	title: 'The Continuance',
@@ -216,11 +138,8 @@ export const projectData: Project[] = [
 		excerpt:
 			'Reflection on how repetition, structure, and unpredictability shape our sense of meaning.',
 		description: `<p style="margin-block-start: 0;">
-			<span style="font-style: italic;">Meaning</span> presents two contrasting moving drawings: one confined to a fixed, repeating path and one wandering freely across the surface. The structured side appears orderly and stable, while the other seems erratic and unresolved. Yet the work resists that first reading. By placing <span style="font-style: italic;">Meaningful</span> and <span style="font-style: italic;">Meaningless</span> in tension, the piece asks whether meaning comes from order, freedom, repetition, or the attention we bring to what unfolds over time.
-			</p>
-			<p>
-			As the drawings continue, the repeated path can begin to feel trapped inside its own logic, while the drifting line invites anticipation, interpretation, and projection. What first appears chaotic may begin to feel alive, what first appears coherent may begin to feel empty. Rather than deciding which side is correct, the work keeps that judgment open and turns meaning into something unstable, relational, and continuously negotiated by the viewer.
-			</p>`
+			This piece grew out of a simple observation. When asked to draw "meaningful" and "absurd," people consistently drew structure for the first and randomness for the second, even when their reasoning differed. <span style="font-style: italic;">Meaning</span> takes that finding and reverses it: the structured canvas, an orange dot circling a fixed track, is titled Meaningless. The chaotic canvas, an orange dot drifting unpredictably, is titled Meaningful. The piece asks how quickly meaning is assigned to a form, and what happens when the labels don't match what the eye expects. Meaning, it suggests, is less in the form than in the looking.
+		</p>`
 	}
 	// {
 	// 	title: 'Large Loop Model',

@@ -108,7 +108,7 @@ function drawRibbon() {
 	prevY = headY;
 
 	// Steer away from edges
-	let edgeMargin = strokeW * 2;
+	let edgeMargin = strokeW * 0.5;
 	let desiredX = 0, desiredY = 0;
 
 	if (headX < edgeMargin) desiredX = 1;
@@ -127,8 +127,8 @@ function drawRibbon() {
 
 	headX += cos(angle) * speed;
 	headY += sin(angle) * speed;
-	headX = constrain(headX, strokeW, width - strokeW);
-	headY = constrain(headY, strokeW, height - strokeW);
+	headX = constrain(headX, 0, width);
+	headY = constrain(headY, 0, height);
 
 	// Draw new white line segment
 	stroke(255);
