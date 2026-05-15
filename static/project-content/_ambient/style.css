@@ -3,6 +3,7 @@ html, body {
 	padding: 0;
 	overflow: hidden;
 	background: #000;
+	cursor: none;
 }
 
 main {

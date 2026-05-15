@@ -20,7 +20,10 @@
 	let currentSessionId: string | null = null;
 
 	function getProjectMode(slug: string): string {
-		return exhibitionProjects.find((p: { slug: string; mode: string }) => p.slug === slug)?.mode ?? 'ambient';
+		return (
+			exhibitionProjects.find((p: { slug: string; mode: string }) => p.slug === slug)?.mode ??
+			'ambient'
+		);
 	}
 
 	async function selectProject(project: Project) {
@@ -112,6 +115,8 @@
 </script>
 
 <svelte:head>
+	<link rel="preconnect" href="https://rsms.me/" />
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 	<link rel="manifest" href="/exhibition-manifest.json" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -131,61 +136,65 @@
 		<div class="grid-view">
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div class="gallery-grid" on:click|preventDefault={(e) => {
-				const anchor = (e.target as HTMLElement)?.closest('.gallery-item');
-				if (!anchor) return;
-				const slug = anchor.getAttribute('href')?.replace('/projects/', '');
-				const project = data.projects.find(p => p.slug === slug);
-				if (project) selectProject(project);
-			}}>
+			<div
+				class="gallery-grid"
+				on:click|preventDefault={(e) => {
+					const anchor = (e.target as HTMLElement)?.closest('.gallery-item');
+					if (!anchor) return;
+					const slug = anchor.getAttribute('href')?.replace('/projects/', '');
+					const project = data.projects.find((p) => p.slug === slug);
+					if (project) selectProject(project);
+				}}
+			>
 				{#each data.projects as project}
 					<List {project} />
 				{/each}
 			</div>
 		</div>
 	{:else if view === 'detail' && selectedProject}
-		<!-- Detail view -->
+		<!-- Detail view: horizontal 2-col layout -->
 		<div class="detail-view">
-			<div class="detail-content">
-				<h2>{selectedProject.title}</h2>
-
-				<div class="detail-description">
-					{@html selectedProject.description}
-				</div>
-
-				<div class="interaction-info">
-					<div class="interaction-icons">
-						{#each selectedProject.interaction as interaction}
-							<div class="interaction-badge" class:optional={interaction.optional}>
-								<img src="/icons/{interaction.type}.svg" alt={interaction.type} />
-								<span>{interaction.type}{interaction.optional ? ' (optional)' : ''}</span>
-							</div>
-						{/each}
+			<div class="detail-grid">
+				<div class="detail-left">
+					<h2>{selectedProject.title}</h2>
+					<div class="detail-description">
+						{@html selectedProject.description}
 					</div>
-
-					{#if selectedMode === 'camera'}
-						<div class="guide-animation camera-guide">
-							<div class="guide-icon">
-								<div class="camera-pulse"></div>
-							</div>
-							<p>Stand in front of the screen to interact</p>
-						</div>
-					{:else}
-						<div class="guide-animation ambient-guide">
-							<div class="guide-icon">
-								<div class="ambient-pulse"></div>
-							</div>
-							<p>Observe the piece on the screen</p>
-						</div>
-					{/if}
 				</div>
+				<div class="detail-right">
+					<div class="interaction-info">
+						<div class="interaction-icons">
+							{#each selectedProject.interaction.filter((i) => i.type !== 'click') as interaction}
+								<div class="interaction-badge" class:optional={interaction.optional}>
+									<img src="/icons/{interaction.type}.svg" alt={interaction.type} />
+									<span>{interaction.type}{interaction.optional ? ' (optional)' : ''}</span>
+								</div>
+							{/each}
+						</div>
 
-				{#if tvState === 'loading'}
-					<div class="tv-loading">Loading on TV...</div>
-				{/if}
+						{#if selectedMode === 'camera'}
+							<div class="guide-animation camera-guide">
+								<div class="guide-icon">
+									<div class="camera-pulse"></div>
+								</div>
+								<p>Stand in front of the screen to interact</p>
+							</div>
+						{:else}
+							<div class="guide-animation ambient-guide">
+								<div class="guide-icon">
+									<div class="ambient-pulse"></div>
+								</div>
+								<p>Observe the piece on the screen</p>
+							</div>
+						{/if}
+
+						{#if tvState === 'loading'}
+							<div class="tv-loading">Loading on TV...</div>
+						{/if}
+					</div>
+					<button class="exit-button" on:click={exitProject}>⌫ Exit</button>
+				</div>
 			</div>
-
-			<button class="exit-button" on:click={exitProject}> Exit </button>
 		</div>
 	{/if}
 </div>
@@ -231,7 +240,7 @@
 	/* Grid view */
 	.grid-view {
 		flex: 1;
-		overflow-y: auto;
+		overflow: hidden;
 	}
 
 	.gallery-grid {
@@ -239,38 +248,53 @@
 		background: #ffffff40;
 		gap: 1px;
 		grid-template-columns: repeat(4, 1fr);
-		padding: 0 0 1px 0;
+		grid-template-rows: 1fr 1fr;
+		height: 100%;
+		padding: 0;
 	}
 
 	.gallery-grid :global(.gallery-item) {
 		cursor: pointer;
 	}
 
+	.gallery-grid :global(.excerpt) {
+		display: none;
+	}
+
+	.gallery-grid :global(.caption) {
+		font-size: 1.125rem;
+	}
+
 	/* Detail view */
 	.detail-view {
 		flex: 1;
-		display: flex;
-		flex-direction: column;
 		overflow: hidden;
 	}
 
-	.detail-content {
-		flex: 1;
-		overflow-y: auto;
-		padding: 1.5rem;
+	.detail-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		height: 100%;
+		gap: 1px;
+		background: rgba(255, 255, 255, 0.15);
 	}
 
-	.detail-content h2 {
-		font-size: 1.5rem;
+	.detail-left {
+		background: #000;
+		padding: 1.5rem;
+		overflow-y: auto;
+	}
+
+	.detail-left h2 {
+		font-size: 3rem;
 		font-weight: 600;
-		margin: 0 0 1rem;
+		margin: 0 0 3rem;
 	}
 
 	.detail-description {
-		font-size: 1rem;
+		font-size: 1.5rem;
 		line-height: 1.6;
 		opacity: 0.85;
-		margin-bottom: 1.5rem;
 	}
 
 	.detail-description :global(p) {
@@ -281,10 +305,16 @@
 		color: #9ec5ff;
 	}
 
+	.detail-right {
+		background: #000;
+		display: grid;
+		grid-template-rows: 1fr 1fr;
+	}
+
 	/* Interaction info */
 	.interaction-info {
-		border-top: 1px solid rgba(255, 255, 255, 0.15);
-		padding-top: 1rem;
+		padding: 1.5rem;
+		overflow-y: auto;
 	}
 
 	.interaction-icons {
@@ -386,20 +416,20 @@
 	/* Exit button */
 	.exit-button {
 		flex-shrink: 0;
-		background: #fff;
-		color: #000;
+		background: rgba(255, 255, 255, 0.1);
+		color: #fff;
 		border: none;
-		font-size: 1.5rem;
+		font-size: 2.5rem;
 		font-weight: 600;
 		padding: 1.25rem;
 		cursor: pointer;
-		width: 100%;
 		transition: background 0.2s;
 		font-family: 'Inter', sans-serif;
+		align-self: stretch;
 	}
 
 	.exit-button:active {
-		background: #ccc;
+		background: rgba(255, 255, 255, 0.2);
 	}
 
 	@media (max-width: 768px) {

@@ -32,10 +32,18 @@
 		broadcastStatus();
 	}
 
-	function handleIframeLoad() {
+	function handleIframeLoad(e: Event) {
 		iframeLoaded = true;
 		state = 'active';
 		broadcastStatus();
+		try {
+			const doc = (e.target as HTMLIFrameElement).contentDocument;
+			if (doc) {
+				const style = doc.createElement('style');
+				style.textContent = '* { cursor: none !important; }';
+				doc.head.appendChild(style);
+			}
+		} catch {}
 	}
 
 	function resetTabletHeartbeat() {
@@ -124,6 +132,10 @@
 </div>
 
 <style>
+	:global(*) {
+		cursor: none !important;
+	}
+
 	.tv-display {
 		position: fixed;
 		inset: 0;
