@@ -3,6 +3,8 @@ export type ExhibitionMode = 'camera' | 'ambient';
 export interface ExhibitionProject {
 	slug: string;
 	mode: ExhibitionMode;
+	guide: string;
+	video?: string;
 }
 
 export type TabletToTvEvent = 'select_project' | 'exit_project';
