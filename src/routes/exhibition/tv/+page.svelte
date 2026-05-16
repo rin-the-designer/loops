@@ -100,6 +100,7 @@
 				<div class="idle-header">
 					<div class="idle-title">The Loops<span class="dot">.</span></div>
 					<div class="idle-subtitle">by Rin Kim</div>
+					<div class="idle-link">https://loops.rin.kim</div>
 				</div>
 				<div class="idle-diagram">
 					<video src="/exhibition/diagram.mp4" autoplay loop muted playsinline></video>
@@ -212,6 +213,13 @@
 	.idle-subtitle {
 		font-size: 2vw;
 		opacity: 0.8;
+	}
+
+	.idle-link {
+		font-size: 2vw;
+		font-weight: 400;
+		color: #ff8800;
+		text-decoration: underline;
 	}
 
 	.idle-diagram {

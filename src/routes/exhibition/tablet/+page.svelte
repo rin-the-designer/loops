@@ -12,6 +12,8 @@
 	let view: 'grid' | 'detail' = 'grid';
 	let selectedProject: Project | null = null;
 	let selectedMode: string | null = null;
+	let selectedGuide: string = '';
+	let selectedVideo: string | null = null;
 	let channel: RealtimeChannel | null = null;
 	let tvConnected = false;
 	let tvState: TvStatusPayload['state'] = 'idle';
@@ -26,9 +28,15 @@
 		);
 	}
 
+	function getProjectGuide(slug: string): string {
+		return exhibitionProjects.find((p) => p.slug === slug)?.guide ?? '';
+	}
+
 	async function selectProject(project: Project) {
 		selectedProject = project;
 		selectedMode = getProjectMode(project.slug);
+		selectedGuide = getProjectGuide(project.slug);
+		selectedVideo = exhibitionProjects.find((p) => p.slug === project.slug)?.video ?? null;
 		view = 'detail';
 
 		channel?.send({
@@ -172,19 +180,24 @@
 							{/each}
 						</div>
 
-						{#if selectedMode === 'camera'}
+						{#if selectedVideo}
+							<div class="guide-animation">
+								<video src={selectedVideo} autoplay loop muted playsinline class="guide-video"></video>
+								<p>{selectedGuide}</p>
+							</div>
+						{:else if selectedMode === 'camera'}
 							<div class="guide-animation camera-guide">
 								<div class="guide-icon">
 									<div class="camera-pulse"></div>
 								</div>
-								<p>Stand in front of the screen to interact</p>
+								<p>{selectedGuide}</p>
 							</div>
 						{:else}
 							<div class="guide-animation ambient-guide">
 								<div class="guide-icon">
 									<div class="ambient-pulse"></div>
 								</div>
-								<p>Observe the piece on the screen</p>
+								<p>{selectedGuide}</p>
 							</div>
 						{/if}
 
@@ -313,7 +326,8 @@
 
 	/* Interaction info */
 	.interaction-info {
-		padding: 1.5rem;
+		padding: 1.2rem;
+		text-align: center;
 		overflow-y: auto;
 	}
 
@@ -352,8 +366,16 @@
 		padding: 1.5rem;
 	}
 
+	.guide-video {
+		height: 160px;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 0.5rem;
+	}
+
 	.guide-animation p {
-		font-size: 0.875rem;
+		font-size: 1.5rem;
+		line-height: 1.4;
 		opacity: 0.6;
 		margin: 0;
 	}
