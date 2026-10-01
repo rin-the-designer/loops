@@ -142,6 +142,30 @@ export const projectData: Project[] = [
 		</p>`
 	}
 	// {
+	// 	title: 'Not the Same Sun',
+	// 	slug: 'not-the-same-sun',
+	// 	route: '/projects/not-the-same-sun',
+	// 	thumbnail: '/project-content/not-the-same-sun/thumb.png',
+	// 	guide: 'No interaction required.\nWatch the sun cross the sky.',
+	// 	interaction: [],
+	// 	excerpt: 'The same sun, rising each day over a different landscape.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		This piece is derived from a short note by Camus: "In a foreign country, the sun bathing the houses on a hill in golden light. A more intense emotion than that produced by the same sight in one's own country. It is not the same sun. I know perfectly well that it is not the same sun." The sun repeats more faithfully than anything else, rising and setting along the same arc every day. What it shines on does not. <span style="font-style: italic;">Not the Same Sun</span> follows one sun from sunrise to sunset. The world brightens as it climbs and darkens as it falls, until everything goes black. In the dark, the horizon and the stream are redrawn, and the same sun rises over a different place.
+	// 	</p>`
+	// },
+	// {
+	// 	title: 'Window',
+	// 	slug: 'window',
+	// 	route: '/projects/window',
+	// 	thumbnail: '/project-content/window/thumb.png',
+	// 	guide: 'No interaction required.\nWatch the view move through the window.',
+	// 	interaction: [],
+	// 	excerpt: 'An endless sequence of windows, each one looking out onto another.',
+	// 	description: `<p style="margin-block-start: 0;">
+	// 		This piece began with a glance out of a window that landed on another window across the street. Behind it, someone was probably doing the same thing, looking out at yet another window. <span style="font-style: italic;">Window</span> follows that thought. A single window in a pale room looks out on a blue sky and a dark building. The view drifts toward the glass and into one of the building's windows. Dark from the outside, it opens onto the same pale room, with the same window, facing a different building. The loop never arrives at a last window. Every view outward is also someone else's view inward.
+	// 	</p>`
+	// },
+	// {
 	// 	title: 'Large Loop Model',
 	// 	slug: 'large-loop-model',
 	// 	route: '/projects/large-loop-model',
@@ -151,20 +175,6 @@ export const projectData: Project[] = [
 	// 	excerpt: 'Work In Progress.',
 	// 	description: `<p style="margin-block-start: 0;">
 	// 		Text Work In Progress.
-	// 	</p>`
-	// },
-	// {
-	// 	title: 'Not the Same Sun',
-	// 	slug: 'not-the-same-sun',
-	// 	route: '/projects/not-the-same-sun',
-	// 	thumbnail: '/project-content/not-the-same-sun/thumb.png',
-	// 	guide: '',
-	// 	interaction: [],
-	// 	excerpt: 'Work In Progress.',
-	// 	description: `<p style="margin-block-start: 0;">
-	// 		"In a foreign country, the sun bathing the houses on a hill in golden light.
-	// 		A more intense emotion than that produced by the same sight in one's own country.
-	// 		It is not the same sun. I know perfectly well that it is not the same sun."
 	// 	</p>`
 	// },
 	// {

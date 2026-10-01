@@ -43,6 +43,12 @@ export const exhibitionProjects: ExhibitionProject[] = [
 		mode: 'ambient',
 		guide: 'Observe the two canvases and their labels.',
 		video: '/exhibition/interaction-1.mp4'
+	},
+	{
+		slug: 'window',
+		mode: 'ambient',
+		guide: 'Watch the view move through the window. Every window opens onto another.',
+		video: '/exhibition/interaction-1.mp4'
 	}
 ];
 
