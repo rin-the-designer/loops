@@ -9,8 +9,6 @@
 	let iframeLoaded = false;
 	let channel: RealtimeChannel | null = null;
 	let heartbeatInterval: ReturnType<typeof setInterval>;
-	let tabletConnected = false;
-	let tabletHeartbeatTimeout: ReturnType<typeof setTimeout>;
 
 	function broadcastStatus() {
 		if (!channel) return;
@@ -46,14 +44,6 @@
 		} catch {}
 	}
 
-	function resetTabletHeartbeat() {
-		tabletConnected = true;
-		clearTimeout(tabletHeartbeatTimeout);
-		tabletHeartbeatTimeout = setTimeout(() => {
-			tabletConnected = false;
-		}, 15000);
-	}
-
 	onMount(async () => {
 		const room = new URLSearchParams(window.location.search).get('room') ?? 'default';
 		channel = await getExhibitionChannel(room);
@@ -64,9 +54,6 @@
 			})
 			.on('broadcast', { event: 'exit_project' }, () => {
 				handleExitProject();
-			})
-			.on('broadcast', { event: 'heartbeat' }, ({ payload }) => {
-				if (payload.source === 'tablet') resetTabletHeartbeat();
 			})
 			.subscribe();
 
@@ -83,7 +70,6 @@
 
 	onDestroy(() => {
 		clearInterval(heartbeatInterval);
-		clearTimeout(tabletHeartbeatTimeout);
 		destroyChannel();
 	});
 </script>

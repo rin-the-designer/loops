@@ -1,13 +1,5 @@
 <script lang="ts">
-	interface Project {
-		title: string;
-		slug: string;
-		route: string;
-		thumbnail: string;
-		guide: string;
-		excerpt: string;
-		description: string;
-	}
+	import type { Project } from '$lib/data/ProjectData';
 	export let project: Project;
 </script>
 
@@ -30,11 +22,15 @@
 		background: #181818;
 		overflow: hidden;
 		transition: all 0.2s ease;
+		/* Grid lines: spread fills the 1px grid gap, so empty cells stay black */
+		box-shadow: 0 0 0 1px #404040;
 	}
 
 	.gallery-item:hover {
 		background: #333;
-		box-shadow: 0 1px 0 0 #fff;
+		box-shadow:
+			0 1px 0 0 #fff,
+			0 0 0 1px #404040;
 	}
 
 	.image-container {
@@ -69,15 +65,9 @@
 		justify-content: start;
 		align-items: start;
 		width: 100%;
-		background: transparent;
 		padding: 1rem 0;
 		gap: 0.5rem;
 		height: 100%;
-		transition: background 0.2s ease;
-	}
-
-	.gallery-item:hover .caption-container {
-		background: transparent;
 	}
 
 	.caption {
@@ -85,11 +75,6 @@
 		font-size: 0.875rem;
 		font-weight: 500;
 		padding: 0 1rem;
-		transition: color 0.2s ease;
-	}
-
-	.gallery-item:hover .caption {
-		color: #fff;
 	}
 
 	.excerpt {

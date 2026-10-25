@@ -3,62 +3,38 @@
 	import { goto } from '$app/navigation';
 
 	export let title: string;
+	/** Hide the header after brief inactivity (project view page) */
+	export let autoHide = false;
 
 	let isHeaderVisible = true;
 	let hideTimeout: ReturnType<typeof setTimeout>;
 
-	function goBack() {
-		goto('/');
-	}
-
 	function handleUserActivity() {
-		if (!window.isGatewayOpen) {
-			isHeaderVisible = true;
-
-			if (hideTimeout) clearTimeout(hideTimeout);
-
-			hideTimeout = setTimeout(() => {
-				if (!window.isGatewayOpen) {
-					isHeaderVisible = false;
-				}
-			}, 200);
-		}
+		isHeaderVisible = true;
+		clearTimeout(hideTimeout);
+		hideTimeout = setTimeout(() => (isHeaderVisible = false), 200);
 	}
 
 	onMount(() => {
-		hideTimeout = setTimeout(() => {
-			if (!window.isGatewayOpen) {
-				isHeaderVisible = false;
-			}
-		}, 200);
+		if (!autoHide) return;
 
-		window.addEventListener('mousemove', handleUserActivity);
-		window.addEventListener('click', handleUserActivity);
-		window.addEventListener('keydown', handleUserActivity);
-		window.addEventListener('touchstart', handleUserActivity);
-		window.addEventListener('scroll', handleUserActivity);
+		const events = ['mousemove', 'click', 'keydown', 'touchstart', 'scroll'];
+		handleUserActivity();
+		events.forEach((e) => window.addEventListener(e, handleUserActivity));
 
 		return () => {
-			if (hideTimeout) clearTimeout(hideTimeout);
-			window.removeEventListener('mousemove', handleUserActivity);
-			window.removeEventListener('click', handleUserActivity);
-			window.removeEventListener('keydown', handleUserActivity);
-			window.removeEventListener('touchstart', handleUserActivity);
-			window.removeEventListener('scroll', handleUserActivity);
+			clearTimeout(hideTimeout);
+			events.forEach((e) => window.removeEventListener(e, handleUserActivity));
 		};
 	});
 </script>
 
-<div class="header-container" class:hidden={!isHeaderVisible && !window.isGatewayOpen}>
+<div class="header-container" class:hidden={!isHeaderVisible}>
 	<div class="left-button">
-		<button on:click={goBack} aria-label="Go back">←</button>
+		<button on:click={() => goto('/')} aria-label="Go back">←</button>
 	</div>
 
 	<h1>{title}</h1>
-
-	<div class="right-button" style="display: none !important;">
-		<button aria-label="Information">ⓘ</button>
-	</div>
 </div>
 
 <style>
@@ -92,10 +68,6 @@
 
 	.left-button {
 		justify-self: start;
-	}
-
-	.right-button {
-		justify-self: end;
 	}
 
 	button {

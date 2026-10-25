@@ -1,8 +1,3 @@
-<script lang="ts">
-	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
-</script>
-
 <div class="header-container">
 	<h1>
 		<a href="/">∞</a>

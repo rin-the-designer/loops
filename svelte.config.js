@@ -9,18 +9,7 @@ const config = {
 
 	kit: {
 		// adapter-auto handles detecting the deployment platform automatically
-		adapter: adapter(),
-
-		// Define paths for assets
-		paths: {
-			base: '',
-			assets: ''
-		},
-
-		// Define where static files are located
-		files: {
-			assets: 'static'
-		}
+		adapter: adapter()
 	}
 };
 

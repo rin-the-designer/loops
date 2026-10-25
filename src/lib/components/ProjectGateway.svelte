@@ -1,17 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
-
-	interface Project {
-		title: string;
-		slug: string;
-		route: string;
-		guide: string;
-		description: string;
-		interaction: {
-			type: 'camera' | 'click' | 'audio' | 'flash';
-			optional?: boolean;
-		}[];
-	}
+	import type { Project } from '$lib/data/ProjectData';
 
 	export let project: Project;
 
@@ -113,11 +102,6 @@
 		font-size: 4rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
-	}
-
-	button:hover {
-		background: white;
-		color: black;
 	}
 
 	@media (max-width: 768px) {

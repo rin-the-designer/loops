@@ -3,7 +3,7 @@ import { createClient, type SupabaseClient, type RealtimeChannel } from '@supaba
 let supabaseClient: SupabaseClient | null = null;
 let channel: RealtimeChannel | null = null;
 
-async function getClient(): Promise<SupabaseClient> {
+export async function getSupabase(): Promise<SupabaseClient> {
 	if (supabaseClient) return supabaseClient;
 
 	const res = await fetch('/api/config');
@@ -17,14 +17,10 @@ async function getClient(): Promise<SupabaseClient> {
 export async function getExhibitionChannel(room = 'default'): Promise<RealtimeChannel> {
 	if (channel) return channel;
 
-	const supabase = await getClient();
+	const supabase = await getSupabase();
 	channel = supabase.channel(`exhibition:${room}`);
 
 	return channel;
-}
-
-export async function getSupabase(): Promise<SupabaseClient> {
-	return getClient();
 }
 
 export function destroyChannel() {

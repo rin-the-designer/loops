@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import 'highlight.js/styles/github-dark.css';
 
 	let { data } = $props();
 
 	/** First h1 row in the sidebar (no top divider on that item) */
-	let firstH1Index = $derived(data.sidebarNav.findIndex((x) => x.kind === 'h1'));
+	let firstH1Index = $derived(data.sidebarNav.findIndex((x) => x.level === 1));
 
 	/** Sidebar slug to highlight (h1 / h2 only; h3 in the document maps to parent h2 or h1) */
 	let activeSlug = $state('');
@@ -83,26 +82,18 @@
 		<nav aria-label="Table of contents">
 			<p class="toc-title">Table of Contents</p>
 			<ul class="toc-list">
-				{#each data.sidebarNav as item, i (item.kind === 'h1' ? `h1-${item.slug}` : `h2-${item.slug}`)}
-					{#if item.kind === 'h1'}
-						<li class="toc-item toc-h1" class:toc-h1-divider={i !== firstH1Index}>
-							<a
-								class="toc-link"
-								class:toc-link-active={item.slug === activeSlug}
-								aria-current={item.slug === activeSlug ? 'location' : undefined}
-								href="#{item.slug}">{item.text}</a
-							>
-						</li>
-					{:else}
-						<li class="toc-item toc-h2">
-							<a
-								class="toc-link"
-								class:toc-link-active={item.slug === activeSlug}
-								aria-current={item.slug === activeSlug ? 'location' : undefined}
-								href="#{item.slug}">{item.text}</a
-							>
-						</li>
-					{/if}
+				{#each data.sidebarNav as item, i (item.slug)}
+					<li
+						class="toc-item toc-h{item.level}"
+						class:toc-h1-divider={item.level === 1 && i !== firstH1Index}
+					>
+						<a
+							class="toc-link"
+							class:toc-link-active={item.slug === activeSlug}
+							aria-current={item.slug === activeSlug ? 'location' : undefined}
+							href="#{item.slug}">{item.text}</a
+						>
+					</li>
 				{/each}
 			</ul>
 		</nav>
@@ -351,10 +342,6 @@
 	.doc-content :global(pre code) {
 		padding: 0;
 		background: none;
-	}
-
-	.doc-content :global(pre:has(code.hljs)) {
-		padding: 1rem;
 	}
 
 	.doc-content :global(img) {

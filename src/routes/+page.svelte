@@ -1,36 +1,6 @@
 <script lang="ts">
 	import List from '$lib/components/List.svelte';
-	import { onMount } from 'svelte';
 	let { data } = $props();
-
-	// Calculate number of columns based on viewport width
-	let columns = $state(6); // Default to largest layout
-
-	// Calculate number of empty cards needed to fill last row
-	let emptyCards = $derived(() => {
-		const remainder = data.projects.length % columns;
-		return remainder === 0 ? 0 : columns - remainder;
-	});
-
-	// Update columns on window resize
-	onMount(() => {
-		const updateColumns = () => {
-			columns =
-				window.innerWidth >= 1920
-					? 6
-					: window.innerWidth >= 1280
-						? 4
-						: window.innerWidth >= 768
-							? 3
-							: window.innerWidth >= 360
-								? 2
-								: 1;
-		};
-
-		updateColumns();
-		window.addEventListener('resize', updateColumns);
-		return () => window.removeEventListener('resize', updateColumns);
-	});
 </script>
 
 <svelte:head>
@@ -59,9 +29,6 @@
 	{#each data.projects as project}
 		<List {project} />
 	{/each}
-	{#if emptyCards() > 0}
-		<div class="empty-card" style="grid-column: span {emptyCards()}"></div>
-	{/if}
 </div>
 
 <style>
@@ -101,7 +68,6 @@
 
 	.gallery-grid {
 		display: grid;
-		background: #ffffff40;
 		gap: 1px;
 		grid-template-columns: repeat(6, 1fr);
 		padding: 0 0 1px 0;
@@ -156,9 +122,5 @@
 		.hero-description {
 			font-size: 1rem;
 		}
-	}
-
-	.empty-card {
-		background-color: black;
 	}
 </style>

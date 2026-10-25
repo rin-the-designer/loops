@@ -1,8 +1,8 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import { projectData } from '$lib/data/ProjectData';
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: LayoutServerLoad = async ({ params }) => {
 	const { slug } = params;
 
 	// Find the project data server-side

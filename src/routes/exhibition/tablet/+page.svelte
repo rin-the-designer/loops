@@ -3,7 +3,7 @@
 	import { getExhibitionChannel, destroyChannel, getSupabase } from '$lib/exhibition/supabase';
 	import { exhibitionProjects } from '$lib/exhibition/ExhibitionData';
 	import List from '$lib/components/List.svelte';
-	import type { TvStatusPayload } from '$lib/exhibition/types';
+	import type { ExhibitionProject, TvStatusPayload } from '$lib/exhibition/types';
 	import type { RealtimeChannel } from '@supabase/supabase-js';
 	import type { Project } from '$lib/data/ProjectData';
 
@@ -11,32 +11,16 @@
 
 	let view: 'grid' | 'detail' = 'grid';
 	let selectedProject: Project | null = null;
-	let selectedMode: string | null = null;
-	let selectedGuide: string = '';
-	let selectedVideo: string | null = null;
+	let selectedExhibit: ExhibitionProject | undefined;
 	let channel: RealtimeChannel | null = null;
 	let tvConnected = false;
 	let tvState: TvStatusPayload['state'] = 'idle';
-	let heartbeatInterval: ReturnType<typeof setInterval>;
 	let tvHeartbeatTimeout: ReturnType<typeof setTimeout>;
 	let currentSessionId: string | null = null;
 
-	function getProjectMode(slug: string): string {
-		return (
-			exhibitionProjects.find((p: { slug: string; mode: string }) => p.slug === slug)?.mode ??
-			'ambient'
-		);
-	}
-
-	function getProjectGuide(slug: string): string {
-		return exhibitionProjects.find((p) => p.slug === slug)?.guide ?? '';
-	}
-
 	async function selectProject(project: Project) {
 		selectedProject = project;
-		selectedMode = getProjectMode(project.slug);
-		selectedGuide = getProjectGuide(project.slug);
-		selectedVideo = exhibitionProjects.find((p) => p.slug === project.slug)?.video ?? null;
+		selectedExhibit = exhibitionProjects.find((p: ExhibitionProject) => p.slug === project.slug);
 		view = 'detail';
 
 		channel?.send({
@@ -70,7 +54,7 @@
 
 		view = 'grid';
 		selectedProject = null;
-		selectedMode = null;
+		selectedExhibit = undefined;
 
 		channel?.send({
 			type: 'broadcast',
@@ -105,26 +89,15 @@
 				if (payload.source === 'tv') resetTvHeartbeat();
 			})
 			.subscribe();
-
-		heartbeatInterval = setInterval(() => {
-			channel?.send({
-				type: 'broadcast',
-				event: 'heartbeat',
-				payload: { source: 'tablet', timestamp: Date.now() }
-			});
-		}, 10000);
 	});
 
 	onDestroy(() => {
-		clearInterval(heartbeatInterval);
 		clearTimeout(tvHeartbeatTimeout);
 		destroyChannel();
 	});
 </script>
 
 <svelte:head>
-	<link rel="preconnect" href="https://rsms.me/" />
-	<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 	<link rel="manifest" href="/exhibition-manifest.json" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -180,24 +153,17 @@
 							{/each}
 						</div>
 
-						{#if selectedVideo}
+						{#if selectedExhibit}
 							<div class="guide-animation">
-								<video src={selectedVideo} autoplay loop muted playsinline class="guide-video"></video>
-								<p>{selectedGuide}</p>
-							</div>
-						{:else if selectedMode === 'camera'}
-							<div class="guide-animation camera-guide">
-								<div class="guide-icon">
-									<div class="camera-pulse"></div>
-								</div>
-								<p>{selectedGuide}</p>
-							</div>
-						{:else}
-							<div class="guide-animation ambient-guide">
-								<div class="guide-icon">
-									<div class="ambient-pulse"></div>
-								</div>
-								<p>{selectedGuide}</p>
+								<video
+									src={selectedExhibit.video}
+									autoplay
+									loop
+									muted
+									playsinline
+									class="guide-video"
+								></video>
+								<p>{selectedExhibit.guide}</p>
 							</div>
 						{/if}
 
@@ -219,7 +185,6 @@
 		flex-direction: column;
 		background: #000;
 		color: #fff;
-		font-family: 'Inter', sans-serif;
 		overflow: hidden;
 	}
 
@@ -380,54 +345,6 @@
 		margin: 0;
 	}
 
-	.guide-icon {
-		width: 60px;
-		height: 60px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.camera-pulse {
-		width: 24px;
-		height: 24px;
-		border-radius: 50%;
-		background: #fff;
-		animation: pulse 2s ease-in-out infinite;
-	}
-
-	.ambient-pulse {
-		width: 24px;
-		height: 24px;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.3);
-		animation: breathe 3s ease-in-out infinite;
-	}
-
-	@keyframes pulse {
-		0%,
-		100% {
-			transform: scale(1);
-			opacity: 1;
-		}
-		50% {
-			transform: scale(1.5);
-			opacity: 0.5;
-		}
-	}
-
-	@keyframes breathe {
-		0%,
-		100% {
-			transform: scale(1);
-			opacity: 0.3;
-		}
-		50% {
-			transform: scale(1.8);
-			opacity: 0.8;
-		}
-	}
-
 	.tv-loading {
 		text-align: center;
 		font-size: 0.875rem;
@@ -446,7 +363,6 @@
 		padding: 1.25rem;
 		cursor: pointer;
 		transition: background 0.2s;
-		font-family: 'Inter', sans-serif;
 		align-self: stretch;
 	}
 

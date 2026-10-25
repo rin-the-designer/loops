@@ -2,14 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // SvelteKit API route to handle OpenAI API calls
-export const POST: RequestHandler = async ({ request, setHeaders }) => {
-	// Enable CORS
-	setHeaders({
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Methods': 'POST, OPTIONS',
-		'Access-Control-Allow-Headers': 'Content-Type'
-	});
-
+export const POST: RequestHandler = async ({ request }) => {
 	const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 	if (!OPENAI_API_KEY) {
@@ -63,14 +56,4 @@ export const POST: RequestHandler = async ({ request, setHeaders }) => {
 		console.error('Error:', error);
 		return json({ error: 'Internal server error' }, { status: 500 });
 	}
-};
-
-// Handle preflight OPTIONS request
-export const OPTIONS: RequestHandler = async ({ setHeaders }) => {
-	setHeaders({
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Methods': 'POST, OPTIONS',
-		'Access-Control-Allow-Headers': 'Content-Type'
-	});
-	return new Response(null, { status: 200 });
 };
