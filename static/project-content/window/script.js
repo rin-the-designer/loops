@@ -6,6 +6,8 @@
 // Room units: the room's window is 1 tall and centered on the origin.
 const FRAME = 0.05; // frame thickness relative to window height, for every window
 const PANE_H = 1 - 2 * FRAME;
+const BACK_WALL_W = 2.4; // the wall the window is in, seen straight on
+const BACK_WALL_H = 1.7;
 
 const CYCLE_SECONDS = 20;
 // How much a building window's glass hides the room behind it when seen from afar:
@@ -18,6 +20,7 @@ const FAR_DIM = 0.9;
 const PERSPECTIVE = 0.85;
 
 const ROOM = '#ddd';
+const ROOM_LINE = '#c8c8c8'; // corners where walls, floor and ceiling meet
 const WHITE = '#fff';
 const SKY = '#0069DA';
 const BUILDING = '#000';
@@ -143,6 +146,28 @@ function drawWindow(x, y, w, h, f, color, clip, view) {
 // the room color.
 function room(x, y, s, clip, n) {
 	if (s < 1) return;
+
+	// Back wall outline, and the corners running from it toward the viewer.
+	// Skipped once the back wall fills the whole view and no corner is in sight.
+	const bw = (BACK_WALL_W / 2) * s;
+	const bh = (BACK_WALL_H / 2) * s;
+	if (!(x - bw <= clip.x0 && x + bw >= clip.x1 && y - bh <= clip.y0 && y + bh >= clip.y1)) {
+		ctx.strokeStyle = ROOM_LINE;
+		ctx.lineWidth = 0.004 * s;
+		ctx.beginPath();
+		ctx.rect(x - bw, y - bh, 2 * bw, 2 * bh);
+		for (const [dx, dy] of [
+			[-1, -1],
+			[1, -1],
+			[1, 1],
+			[-1, 1]
+		]) {
+			ctx.moveTo(x + dx * bw, y + dy * bh);
+			ctx.lineTo(x + dx * bw * 40, y + dy * bh * 40);
+		}
+		ctx.stroke();
+	}
+
 	drawWindow(x, y, aspect(n - 1) * s, s, FRAME * s, WHITE, clip, (view) => facade(x, y, s, view, n));
 }
 
