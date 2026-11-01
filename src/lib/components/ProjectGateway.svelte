@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
 	import type { Project } from '$lib/data/ProjectData';
+	import { exhibitionProjects } from '$lib/exhibition/ExhibitionData';
 
 	export let project: Project;
+
+	$: exhibit = exhibitionProjects.find((p) => p.slug === project.slug);
 
 	const dispatch = createEventDispatcher();
 
@@ -31,14 +34,20 @@
 	<div class="guide">
 		<div class="interaction-icons">
 			{#each project.interaction as interaction}
-				<img
-					src="/icons/{interaction.type}.svg"
-					alt="{interaction.type} interaction"
-					class:optional={interaction.optional}
-				/>
+				<div class="interaction-badge" class:optional={interaction.optional}>
+					<img src="/icons/{interaction.type}.svg" alt="" />
+					<span
+						>{interaction.type === 'flash' ? 'flash alert' : interaction.type}{interaction.optional
+							? ' (optional)'
+							: ''}</span
+					>
+				</div>
 			{/each}
 		</div>
-		<div class="guide-text">{project.guide}</div>
+		{#if exhibit}
+			<video src={exhibit.video} autoplay loop muted playsinline class="guide-video"></video>
+		{/if}
+		<div class="guide-text">{exhibit?.guide ?? project.guide}</div>
 	</div>
 	<button on:click={handleEnter}>↳ Enter</button>
 </div>
@@ -65,29 +74,49 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 1rem;
-		justify-content: center;
+		gap: 0.75rem;
 		background-color: #000;
-		padding: 1rem;
+		padding: 1.2rem;
+		overflow-y: auto;
 	}
 
 	.interaction-icons {
+		align-self: stretch;
 		display: flex;
-		flex-direction: row;
-		gap: 0.5rem;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 1.75rem;
+	}
+
+	.interaction-badge {
+		display: flex;
 		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: rgba(255, 255, 255, 0.08);
+		border-radius: 2rem;
+		font-size: 1rem;
 	}
 
-	.interaction-icons img {
-		width: 48px;
-		height: 48px;
+	.interaction-badge.optional {
+		opacity: 0.4;
 	}
 
-	.interaction-icons img.optional {
-		opacity: 0.2;
+	.interaction-badge img {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+
+	.guide-video {
+		height: 10rem;
+		max-width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 0.5rem;
 	}
 
 	.guide-text {
+		max-width: 32rem;
 		font-size: 1.2rem;
 		line-height: 1.5;
 		white-space: pre-wrap;
@@ -121,7 +150,6 @@
 		.guide {
 			grid-row: 2/3;
 			font-size: 1rem;
-			padding: 1rem;
 			white-space: pre-line;
 			border-top: 2px solid white;
 		}
@@ -130,9 +158,17 @@
 			font-size: 1rem;
 		}
 
-		.interaction-icons img {
-			width: 36px;
-			height: 36px;
+		.interaction-badge {
+			font-size: 0.875rem;
+		}
+
+		.interaction-badge img {
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+
+		.guide-video {
+			height: 7rem;
 		}
 
 		button {

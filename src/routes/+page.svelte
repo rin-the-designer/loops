@@ -11,6 +11,10 @@
 	<div class="hero-section">
 		<div class="hero-title">The Loops<span style="color: #ff8800;">.</span></div>
 		<div class="hero-subtitle">by Rin Kim</div>
+		<div class="hero-links">
+			<a href="/documentation">Documentation</a>
+			<a href="https://rin.kim" target="_blank" rel="noopener">Rin Kim ↗</a>
+		</div>
 	</div>
 	<div class="hero-section">
 		<div class="hero-description">
@@ -60,10 +64,29 @@
 		font-size: calc(100vw / 1920 * 32);
 	}
 
-	.hero-description {
+	.hero-description,
+	.hero-links {
 		margin-top: auto;
 		opacity: 0.8;
 		font-size: calc(100vw / 1920 * 24);
+	}
+
+	.hero-links {
+		display: flex;
+		gap: 0.5em;
+		opacity: 1;
+	}
+
+	.hero-links a {
+		background: #fff;
+		color: #000;
+		padding: 0.25em 0.5em;
+		text-decoration: none;
+		transition: background 0.2s ease;
+	}
+
+	.hero-links a:hover {
+		background: #ff8800;
 	}
 
 	.gallery-grid {
@@ -88,7 +111,8 @@
 		.hero-subtitle {
 			font-size: calc(100vw / 1280 * 32);
 		}
-		.hero-description {
+		.hero-description,
+		.hero-links {
 			font-size: calc(100vw / 1280 * 24);
 		}
 	}
@@ -105,7 +129,8 @@
 		.hero-subtitle {
 			font-size: 1.5rem;
 		}
-		.hero-description {
+		.hero-description,
+		.hero-links {
 			font-size: 1rem;
 		}
 	}
@@ -119,7 +144,8 @@
 		.hero-subtitle {
 			font-size: 1.5rem;
 		}
-		.hero-description {
+		.hero-description,
+		.hero-links {
 			font-size: 1rem;
 		}
 	}

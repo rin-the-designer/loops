@@ -153,7 +153,11 @@
 							{#each selectedProject.interaction.filter((i) => i.type !== 'click') as interaction}
 								<div class="interaction-badge" class:optional={interaction.optional}>
 									<img src="/icons/{interaction.type}.svg" alt={interaction.type} />
-									<span>{interaction.type}{interaction.optional ? ' (optional)' : ''}</span>
+									<span
+										>{interaction.type === 'flash' ? 'flash alert' : interaction.type}{interaction.optional
+											? ' (optional)'
+											: ''}</span
+									>
 								</div>
 							{/each}
 						</div>
