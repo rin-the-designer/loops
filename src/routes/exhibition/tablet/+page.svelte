@@ -106,12 +106,6 @@
 </svelte:head>
 
 <div class="tablet">
-	<!-- Connection status -->
-	<div class="status-bar">
-		<div class="status-dot" class:connected={tvConnected}></div>
-		<span class="status-text">{tvConnected ? 'TV Connected' : 'TV Disconnected'}</span>
-	</div>
-
 	{#if view === 'grid'}
 		<!-- Grid view -->
 		<div class="grid-view">
@@ -119,6 +113,7 @@
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div
 				class="gallery-grid"
+				style="--cols: {Math.ceil((data.projects.length + 1) / 2)}"
 				on:click|preventDefault={(e) => {
 					const anchor = (e.target as HTMLElement)?.closest('.gallery-item');
 					if (!anchor) return;
@@ -127,6 +122,16 @@
 					if (project) selectProject(project);
 				}}
 			>
+				<div class="intro">
+					<div>
+						<h1>The Loops<span class="dot">.</span></h1>
+						<p>Tap a piece to play it on the TV.</p>
+					</div>
+					<div class="status">
+						<div class="status-dot" class:connected={tvConnected}></div>
+						{tvConnected ? 'TV Connected' : 'TV Disconnected'}
+					</div>
+				</div>
 				{#each data.projects as project}
 					<List {project} />
 				{/each}
@@ -188,19 +193,18 @@
 		overflow: hidden;
 	}
 
-	/* Status bar */
-	.status-bar {
+	/* TV connection status */
+	.status {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.75rem 1rem;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-		flex-shrink: 0;
+		font-size: 0.75rem;
+		opacity: 0.6;
 	}
 
 	.status-dot {
-		width: 8px;
-		height: 8px;
+		width: 0.5rem;
+		height: 0.5rem;
 		border-radius: 50%;
 		background: #ff4444;
 		transition: background 0.3s;
@@ -208,11 +212,6 @@
 
 	.status-dot.connected {
 		background: #44ff44;
-	}
-
-	.status-text {
-		font-size: 0.75rem;
-		opacity: 0.6;
 	}
 
 	/* Grid view */
@@ -225,18 +224,45 @@
 		display: grid;
 		background: #ffffff40;
 		gap: 1px;
-		grid-template-columns: repeat(4, 1fr);
+		/* Intro tile + pieces fill two rows; columns grow with the piece count */
+		grid-template-columns: repeat(var(--cols), 1fr);
 		grid-template-rows: 1fr 1fr;
 		height: 100%;
 		padding: 0;
+	}
+
+	.intro {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 1rem;
+		background: #000;
+	}
+
+	.intro h1 {
+		font-size: 2.5rem;
+		font-weight: 600;
+		margin: 0 0 0.75rem;
+	}
+
+	.dot {
+		color: #ff8800;
+	}
+
+	.intro p {
+		font-size: 1.125rem;
+		line-height: 1.4;
+		opacity: 0.6;
+		margin: 0;
 	}
 
 	.gallery-grid :global(.gallery-item) {
 		cursor: pointer;
 	}
 
-	.gallery-grid :global(.excerpt) {
-		display: none;
+	/* Shorter thumbnail area leaves room for the excerpt */
+	.gallery-grid :global(.image-container) {
+		aspect-ratio: 5 / 4;
 	}
 
 	.gallery-grid :global(.caption) {
@@ -318,8 +344,8 @@
 	}
 
 	.interaction-badge img {
-		width: 20px;
-		height: 20px;
+		width: 1.25rem;
+		height: 1.25rem;
 	}
 
 	/* Guide animations */
@@ -332,7 +358,7 @@
 	}
 
 	.guide-video {
-		height: 160px;
+		height: 10rem;
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
 		border-radius: 0.5rem;
@@ -370,9 +396,41 @@
 		background: rgba(255, 255, 255, 0.2);
 	}
 
-	@media (max-width: 768px) {
+	/* Designed at iPad Pro 11" (1194×834). On other landscape screens tall enough
+	   to fit everything, rem scales with the viewport so proportions stay the same. */
+	@media (orientation: landscape) and (min-height: 600px) {
+		:global(html:has(.tablet)) {
+			font-size: min(100vw * 16 / 1194, 100dvh * 16 / 834);
+		}
+	}
+
+	/* Portrait and short screens: scrolling gallery with the title tile as a header */
+	@media not all and (orientation: landscape) and (min-height: 600px) {
+		.grid-view,
+		.detail-view {
+			overflow-y: auto;
+		}
+
 		.gallery-grid {
 			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: none;
+			height: auto;
+		}
+
+		@media (min-width: 600px) {
+			.gallery-grid {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+
+		.intro {
+			grid-column: 1 / -1;
+			gap: 2rem;
+		}
+
+		.detail-grid {
+			grid-template-columns: 1fr;
+			height: auto;
 		}
 	}
 </style>

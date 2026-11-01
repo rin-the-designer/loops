@@ -9,7 +9,7 @@
 
 <div class="hero">
 	<div class="hero-section">
-		<div class="hero-title">Loops<span style="color: #ff8800;">.</span></div>
+		<div class="hero-title">The Loops<span style="color: #ff8800;">.</span></div>
 		<div class="hero-subtitle">by Rin Kim</div>
 	</div>
 	<div class="hero-section">

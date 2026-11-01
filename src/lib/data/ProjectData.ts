@@ -21,7 +21,7 @@ export const projectData: Project[] = [
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
 		interaction: [{ type: 'camera' }, { type: 'click' }],
 		excerpt:
-			'A visual represenation of a philosophical essay that explores the concept of the absurd and the human search for meaning in a meaningless world.',
+			'A visual representation of the absurd: the human search for meaning in a meaningless world.',
 		description: `<p style="margin-block-start: 0;">
 			In Camus's retelling of the Greek myth, Sisyphus is condemned to push a boulder up a hill, only to watch it roll back down, endlessly. Camus finds in this not tragedy but defiance: the act of pushing becomes its own purpose. This piece translates the myth into something you can touch. Push the boulder up the slope with your hand or mouse; when it reaches the top, the hill flips and the cycle continues. There is no score, no ending. The choice of whether to keep pushing, stop, or hold the boulder still belongs entirely to you.
 		</p>`
@@ -35,7 +35,7 @@ export const projectData: Project[] = [
 			'This project contains audio.\nPlease ensure your volume is turned on.\nCamera input is optional.',
 		interaction: [{ type: 'audio' }, { type: 'camera', optional: true }],
 		excerpt:
-			'A continuous cylce of black and white doors representing the transitions we experience in life.',
+			'A continuous cycle of black and white doors representing the transitions we experience in life.',
 		description: `<p style="margin-block-start: 0;">
 			A door is one of the most ordinary objects we encounter, yet every doorway marks a small shift: from work to home, from public to private, from one phase of life to another. <span style="font-style: italic;">Doors</span> stretches this quiet transformation into an infinite corridor. Black and white thresholds alternate as the viewer drifts forward, the colors standing in for the dualities that frame any transition: light and dark, presence and absence, beginning and ending. There is no final room. The loop continues because transition itself never ends.
 		</p>`
@@ -49,7 +49,7 @@ export const projectData: Project[] = [
 			'This project utilizes click interaction.\nPotentially flashing content.\nAudio is optional.',
 		interaction: [{ type: 'click' }, { type: 'flash' }, { type: 'audio', optional: true }],
 		excerpt:
-			'A digital reflection of the accumulation of small, repetitive actions, adding up to a larger pattern.',
+			'A digital reflection of small, repetitive actions adding up to a larger pattern.',
 		description: `<p style="margin-block-start: 0;">
 			This piece began as a painting exercise: drawing black circles on a canvas, covering them with white paint, and repeating until the canvas appeared blank again. From a distance, nothing seemed to have changed. Up close, the surface had grown heavier with every layer. <span style="font-style: italic;">Accumulation</span> recreates that logic on screen. Layers stack invisibly, one each second, never erased, only added. The work asks what it means to accumulate without leaving a visible record, and how much of who we become is built from cycles that quietly pile up beneath the surface.
 		</p>`
@@ -75,7 +75,7 @@ export const projectData: Project[] = [
 		guide: 'This project utilizes camera input.\nPlease allow access to your camera.',
 		interaction: [{ type: 'camera' }],
 		excerpt:
-			'A visualization of a burning incense, changing directions through human interaction, representing the connection between life and death.',
+			'A burning incense changing directions through human interaction, representing the connection between life and death.',
 		description: `<p style="margin-block-start: 0;">
 			In many East Asian cultural practices, incense is burned during ceremonies and rituals as a way of connecting the living with those who have passed. The smoke is read as presence: when it drifts toward someone, it is sometimes understood as a sign that an ancestor has arrived. The act of burning is itself a kind of loop, the same ritual repeated across generations. <span style="font-style: italic;">Incense</span> renders that loop digitally. A stick fades in, glows, burns down, and the cycle begins again. The smoke shifts in response to the viewer's position, as real smoke would.
 		</p>`

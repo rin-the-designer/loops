@@ -38,6 +38,11 @@ export const exhibitionProjects: ExhibitionProject[] = [
 		video: '/exhibition/interaction-1.mp4'
 	},
 	{
+		slug: 'not-the-same-sun',
+		guide: 'Watch the sun cross the sky. When it sets, the same sun rises over a different place.',
+		video: '/exhibition/interaction-1.mp4'
+	},
+	{
 		slug: 'window',
 		guide: 'Watch the view move through the window. Every window opens onto another.',
 		video: '/exhibition/interaction-1.mp4'
