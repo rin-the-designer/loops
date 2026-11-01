@@ -50,17 +50,65 @@ function setRandomCircleSize() {
 	document.documentElement.style.setProperty('--circle-size', `${randomSize}vw`);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+// Closer viewers make bigger circles. Face width as a share of the camera frame
+// maps from FACE_FAR (5vw circle) to FACE_NEAR (120vw circle); tune both on the install camera.
+const FACE_FAR = 0.08;
+const FACE_NEAR = 0.5;
+let smoothedFaceShare = null;
+
+// faceMeshReady keeps downloading while the camera starts and the viewer answers the permission prompt
+async function startFaceDistance(faceMeshReady) {
+	if (!faceMeshReady || !navigator.mediaDevices) return;
+
+	// never added to the page, so the DOM counter only counts the piece
+	const video = document.createElement('video');
+	video.muted = true;
+	video.playsInline = true;
+	try {
+		video.srcObject = await navigator.mediaDevices.getUserMedia({
+			audio: false,
+			video: { facingMode: 'user' }
+		});
+		await video.play();
+	} catch (error) {
+		console.warn('Camera unavailable, circle size stays on click:', error);
+		return;
+	}
+	video.width = video.videoWidth;
+	video.height = video.videoHeight;
+
+	const faceMesh = await faceMeshReady;
+	faceMesh.detectStart(video, (faces) => {
+		if (faces.length === 0) return;
+		if (smoothedFaceShare === null) {
+			console.log('first face size', Math.round(performance.now()), 'ms after page load');
+		}
+		const share = faces[0].box.width / video.width;
+		smoothedFaceShare =
+			smoothedFaceShare === null ? share : smoothedFaceShare + (share - smoothedFaceShare) * 0.2;
+		const closeness = Math.min(
+			Math.max((smoothedFaceShare - FACE_FAR) / (FACE_NEAR - FACE_FAR), 0),
+			1
+		);
+		document.documentElement.style.setProperty(
+			'--circle-size',
+			`${(5 + closeness * 115).toFixed(1)}vw`
+		);
+	});
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
 	const main = document.querySelector('main');
 	main.innerHTML = '';
 
 	function calculateCurrentSize() {
 		const currentHTML = document.documentElement.outerHTML;
 		const bytes = new TextEncoder().encode(currentHTML).length;
-		const kilobytes = (bytes / 1024).toFixed(2);
-		const filesizeElement = document.getElementById('filesize');
-		const formattedKB = Number(kilobytes).toLocaleString();
-		filesizeElement.textContent = `DOM: ${Number(formattedKB).toFixed(2)} KB`;
+		const kilobytes = (bytes / 1024).toLocaleString(undefined, {
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2
+		});
+		document.getElementById('filesize').textContent = `DOM: ${kilobytes} KB`;
 	}
 
 	let lineCount = 20;
@@ -128,5 +176,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	calculateCurrentSize();
 	updateCodeLines();
 
+	const faceMeshReady = typeof ml5 === 'undefined' ? null : ml5.faceMesh({ maxFaces: 1 });
+	startFaceDistance(faceMeshReady);
+	// like the other camera pieces, nothing appears until the tracking model is ready
+	await faceMeshReady?.catch(() => {});
 	startAccumulation();
 });

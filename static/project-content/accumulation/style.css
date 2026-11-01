@@ -9,6 +9,8 @@ body {
 	margin: 0 !important;
 	overflow: hidden;
 	font-family: 'Inter', sans-serif;
+	/* ~22px on a 1440px-wide screen, grows with the display, never below 12px */
+	font-size: max(12px, 1.5vw);
 	background-color: #fff;
 }
 
@@ -35,8 +37,8 @@ body {
 .info {
 	z-index: 10000;
 	position: absolute;
-	bottom: 1rem;
-	left: 1rem;
+	bottom: 1em;
+	left: 1em;
 	color: var(--text-color);
 	display: flex;
 	flex-direction: column;
@@ -46,8 +48,8 @@ body {
 .line {
 	z-index: 10000;
 	position: absolute;
-	bottom: 1rem;
-	right: 1rem;
+	bottom: 1em;
+	right: 1em;
 	color: var(--text-color);
 	display: flex;
 	flex-direction: column;

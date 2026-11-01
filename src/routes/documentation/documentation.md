@@ -297,6 +297,11 @@ Without explanation, most viewers treated _Accumulation_ as a non-interactive an
 
 Once the premise was explained, many said it resonated with their own sense of hidden build-up: stress, habits, routines, accumulation that does not read as change until it is named. That gap between initial perception and later understanding became part of the piece.
 
+### Experiments
+
+- **October 31, 2026: Distance shapes the circle**<br>
+  The webcam now looks for a face and sizes the circle by how close the viewer stands. The width of the face as a share of the camera frame maps from 8% (far away, a 5vw circle) to 50% (very close, a 120vw circle that fills the screen), smoothed so the circle swells and recedes instead of jittering. The camera feed is never added to the page, so the DOM counter still measures only the piece itself. As with the other camera pieces, the first layer waits until the face model has loaded, so the very first circle already answers to the viewer. Clicking still flips the colors, and still sets the size whenever no one is in view. Earlier testing showed that most viewers never discovered the click. The question is whether a piece that responds to the body's distance, without being touched, is noticed sooner, and whether stepping in to read the counters, which makes the circle swallow the screen, changes how the accumulation is read.
+
 ## #4 - Zen Garden
 
 ![Zen Garden artwork showing repeated raked sand-like arcs and lines forming a continuous pattern](static/documentation/images/zen-garden.jpg)
