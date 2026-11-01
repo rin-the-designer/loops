@@ -59,8 +59,11 @@ export const projectData: Project[] = [
 		slug: 'zen-garden',
 		route: '/projects/zen-garden',
 		thumbnail: '/project-content/zen-garden/thumb.png',
-		guide: 'Audio is optional.',
-		interaction: [{ type: 'audio', optional: true }],
+		guide: 'Audio is optional.\nClick the blank sand before raking begins to place or lift rocks.',
+		interaction: [
+			{ type: 'audio', optional: true },
+			{ type: 'click', optional: true }
+		],
 		excerpt:
 			'A visualized graphic of a Karesansui, focusing on the tranquility and patterns of the raking.',
 		description: `<p style="margin-block-start: 0;">

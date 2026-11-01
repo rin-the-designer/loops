@@ -331,6 +331,11 @@ This piece runs autonomously. There is no direct user control. The only interact
 
 _Zen Garden_ shifts the threshold away from choice and toward attention. With no moment to intervene, the piece asks what it means to stay with a repetitive act that never completes. The reset is not a clean slate; it is the return of the same task. Over time the work becomes less about the pattern and more about the viewer's willingness to remain with it.
 
+### Experiments
+
+- **October 31, 2026: Rocks in the sand**<br>
+  A karesansui (枯山水) is a dry landscape of mountain (山) and water (水). The raked lines were always the water; this adds the mountain. The piece now opens on a blank pause: clicking the sand places an orange stone, clicking a stone lifts it, and raking begins three seconds after the last click. The rake circles each stone with three rings, stones close together share one curved outline, and the straight lines run into the outer ring. The rake is also finer and slower. The stones stay across loops; only the water is raked again.
+
 ## #5 - Incense
 
 ![Incense artwork showing a single vertical incense stick with a glowing tip and drifting smoke particles](static/documentation/images/incense.jpg)
