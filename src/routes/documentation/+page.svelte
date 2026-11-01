@@ -82,7 +82,7 @@
 </script>
 
 <svelte:head>
-	<title>Documentation — Loops</title>
+	<title>Documentation — The Loops</title>
 </svelte:head>
 
 <div class="doc-layout">
@@ -125,7 +125,7 @@
 	<div class="doc-main">
 		<article class="doc-content">
 			<header class="doc-title" id="loops" tabindex="-1">
-				<h1 class="doc-title-heading">Loops</h1>
+				<h1 class="doc-title-heading">The Loops</h1>
 				<p class="doc-title-byline">by Rin Kim</p>
 			</header>
 			<div class="doc-body">

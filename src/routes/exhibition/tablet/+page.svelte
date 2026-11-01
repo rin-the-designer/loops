@@ -101,7 +101,7 @@
 	<link rel="manifest" href="/exhibition-manifest.json" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta name="apple-mobile-web-app-title" content="Loops" />
+	<meta name="apple-mobile-web-app-title" content="The Loops" />
 	<meta name="theme-color" content="#000000" />
 </svelte:head>
 

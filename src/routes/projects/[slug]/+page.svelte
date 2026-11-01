@@ -14,7 +14,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.project.title} from Loops by Rin Kim</title>
+	<title>{data.project.title} from The Loops by Rin Kim</title>
 </svelte:head>
 
 <ProjectHeader title={data.project.title} />

@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Loops by Rin Kim</title>
+	<title>The Loops by Rin Kim</title>
 </svelte:head>
 
 <div class="hero">
