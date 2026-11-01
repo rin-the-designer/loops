@@ -1,35 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
 	export let title: string;
-	/** Hide the header after brief inactivity (project view page) */
-	export let autoHide = false;
-
-	let isHeaderVisible = true;
-	let hideTimeout: ReturnType<typeof setTimeout>;
-
-	function handleUserActivity() {
-		isHeaderVisible = true;
-		clearTimeout(hideTimeout);
-		hideTimeout = setTimeout(() => (isHeaderVisible = false), 200);
-	}
-
-	onMount(() => {
-		if (!autoHide) return;
-
-		const events = ['mousemove', 'click', 'keydown', 'touchstart', 'scroll'];
-		handleUserActivity();
-		events.forEach((e) => window.addEventListener(e, handleUserActivity));
-
-		return () => {
-			clearTimeout(hideTimeout);
-			events.forEach((e) => window.removeEventListener(e, handleUserActivity));
-		};
-	});
 </script>
 
-<div class="header-container" class:hidden={!isHeaderVisible}>
+<div class="header-container">
 	<div class="left-button">
 		<button on:click={() => goto('/')} aria-label="Go back">←</button>
 	</div>
@@ -49,11 +24,6 @@
 		border-bottom: 2px solid #fff;
 		background-color: #000;
 		z-index: 100;
-		transition: transform 0.3s ease;
-	}
-
-	.hidden {
-		transform: translateY(-100%);
 	}
 
 	h1 {

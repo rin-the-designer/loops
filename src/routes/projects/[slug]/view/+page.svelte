@@ -1,6 +1,4 @@
 <script lang="ts">
-	import ProjectHeader from '$lib/components/ProjectHeader.svelte';
-
 	export let data;
 
 	let iframeLoaded = false;
@@ -9,8 +7,6 @@
 <svelte:head>
 	<title>{data.project.title} View</title>
 </svelte:head>
-
-<ProjectHeader title={data.project.title} autoHide />
 
 <div class="iframe-container">
 	<iframe
