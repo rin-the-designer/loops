@@ -24,11 +24,8 @@ let targetX;
 let cameraRotation = 0;
 let isVisible = false;
 
-function preload() {
-	bodyPose = ml5.bodyPose({ flipped: true });
-}
-
-function setup() {
+async function setup() {
+	bodyPose = await ml5.bodyPose({ flipped: true });
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	noStroke();
 	angleMode(DEGREES);

@@ -6,20 +6,13 @@ let video;
 let hands = [];
 let colors = [
 	['#FFFFFF', '#000000'],
-	['#AD1717', '#D81D1D'],
 	['#CC6D00', '#FF8800'],
-	['#CCA600', '#FFD000'],
-	['#70AA05', '#8CD406'],
-	['#1B4AB6', '#225CE3'],
-	['#AE1BB6', '#D922E3']
+	['#1B4AB6', '#225CE3']
 ];
 let colorIndex = 0;
 
-function preload() {
-	handPose = ml5.handPose({ maxHands: 1, flipped: true });
-}
-
-function setup() {
+async function setup() {
+	handPose = await ml5.handPose({ maxHands: 1, flipped: true });
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	angleMode(DEGREES);
 
@@ -47,13 +40,6 @@ function handleHandSwipe() {
 		let hand = hands[0];
 		let handPosition = hand.wrist;
 		let handX = handPosition.x;
-		// Change color when a hand first appears
-		if (lastHandX === null && handX !== null) {
-			let prevIndex = colorIndex;
-			while (colorIndex === prevIndex) {
-				colorIndex = floor(random(colors.length));
-			}
-		}
 		if (lastHandX !== null) {
 			let dx = handX - lastHandX;
 			if (abs(dx) > 10) {
@@ -103,6 +89,10 @@ function drawSpinner() {
 		cylinder(baseValue / 30, baseValue);
 		pop();
 	}
+}
+
+function mouseClicked() {
+	colorIndex = (colorIndex + 1) % colors.length;
 }
 
 function gotHands(results) {

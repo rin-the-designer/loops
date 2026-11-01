@@ -90,9 +90,13 @@ function drawLowerBasinStructure() {
 	fill(0);
 	beginShape();
 	vertex(sx(960), sy(830));
-	bezierVertex(sx(1136.73), sy(830), sx(1280), sy(686.731), sx(1280), sy(510));
+	bezierVertex(sx(1136.73), sy(830));
+	bezierVertex(sx(1280), sy(686.731));
+	bezierVertex(sx(1280), sy(510));
 	vertex(sx(640), sy(510));
-	bezierVertex(sx(640), sy(686.731), sx(783.269), sy(830), sx(960), sy(830));
+	bezierVertex(sx(640), sy(686.731));
+	bezierVertex(sx(783.269), sy(830));
+	bezierVertex(sx(960), sy(830));
 	endShape(CLOSE);
 	// Rim
 	fill('#2F2F2F');
@@ -125,9 +129,13 @@ function drawUpperBasinStructure() {
 	fill(0);
 	beginShape();
 	vertex(sx(960), sy(550));
-	bezierVertex(sx(1070.46), sy(550), sx(1160), sy(460.457), sx(1160), sy(350));
+	bezierVertex(sx(1070.46), sy(550));
+	bezierVertex(sx(1160), sy(460.457));
+	bezierVertex(sx(1160), sy(350));
 	vertex(sx(760), sy(350));
-	bezierVertex(sx(760), sy(460.457), sx(849.543), sy(550), sx(960), sy(550));
+	bezierVertex(sx(760), sy(460.457));
+	bezierVertex(sx(849.543), sy(550));
+	bezierVertex(sx(960), sy(550));
 	endShape(CLOSE);
 	// Rim
 	fill('#2F2F2F');

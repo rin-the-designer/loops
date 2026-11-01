@@ -33,11 +33,8 @@ let rotationAngles = [];
 let frameCounter = 0;
 const LOG_INTERVAL = 20;
 
-function preload() {
-	bodyPose = ml5.bodyPose({ minPoseScore: 0.3, flipped: true });
-}
-
-function setup() {
+async function setup() {
+	bodyPose = await ml5.bodyPose({ minPoseScore: 0.3, flipped: true });
 	createCanvas(windowWidth, windowHeight);
 	angleMode(DEGREES);
 	frameRate(60);

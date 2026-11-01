@@ -16,11 +16,8 @@ let bodyPose;
 let poses = [];
 let targetX;
 
-function preload() {
-	bodyPose = ml5.bodyPose({ flipped: true });
-}
-
-function setup() {
+async function setup() {
+	bodyPose = await ml5.bodyPose({ flipped: true });
 	createCanvas(windowWidth, windowHeight);
 	background(backgroundColor);
 	strokeCap(SQUARE);

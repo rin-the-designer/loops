@@ -26,11 +26,8 @@ let poses = [];
 let cameraRotation = 0;
 let isVisible = false;
 
-function preload() {
-	bodyPose = ml5.bodyPose({ flipped: true });
-}
-
-function setup() {
+async function setup() {
+	bodyPose = await ml5.bodyPose({ flipped: true });
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	background(0);
 
@@ -68,8 +65,8 @@ function setup() {
 		{ threshold: 0.5 }
 	); // Trigger when 50% of the iframe is visible
 
-	// Start observing the canvas
-	observer.observe(canvas);
+	// Start observing the canvas container
+	observer.observe(document.querySelector('main'));
 }
 
 function gotPoses(results) {

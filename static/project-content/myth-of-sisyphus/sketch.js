@@ -12,11 +12,8 @@ let handSmoothingFactor = 0.2;
 let handBoundsInsetX = 0.08;
 let handBoundsInsetY = 0.08;
 
-function preload() {
-	handPose = ml5.handPose({ maxHands: 1, flipped: true });
-}
-
-function setup() {
+async function setup() {
+	handPose = await ml5.handPose({ maxHands: 1, flipped: true });
 	createCanvas(windowWidth, windowHeight);
 	rock = {
 		x: 0,

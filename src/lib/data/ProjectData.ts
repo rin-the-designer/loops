@@ -86,8 +86,8 @@ export const projectData: Project[] = [
 		route: '/projects/playground-spinner',
 		thumbnail: '/project-content/playground-spinner/thumb.png',
 		guide:
-			'This project utilizes camera input.\nPlease allow access to your camera.\nPotentially flashing content.',
-		interaction: [{ type: 'camera' }, { type: 'flash' }],
+			'This project utilizes camera input.\nPlease allow access to your camera.\nClick to change colors.\nPotentially flashing content.',
+		interaction: [{ type: 'camera' }, { type: 'click', optional: true }, { type: 'flash' }],
 		excerpt: 'A revisit to a childhood playground memory.',
 		description: `<p style="margin-block-start: 0;">
 			The playground spinner, also known as a merry-go-round, is one of those objects whose entire purpose is the act itself. There is no goal in spinning it, no score, no destination, only the spin. For many people it is also a shared childhood memory: you ran toward it, grabbed a handle, and pushed. <span style="font-style: italic;">Playground Spinner</span> renders that object digitally. Move your hand in front of the screen and it spins, slows, and waits for the next push. The loop has no purpose beyond its own continuation, much like the spinning we did as children.
