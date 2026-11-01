@@ -11,6 +11,9 @@ let smoothedHandY = null;
 let handSmoothingFactor = 0.2;
 let handBoundsInsetX = 0.08;
 let handBoundsInsetY = 0.08;
+// each climb makes the rock lag further behind the pointer; push too fast and it slips
+let iteration = 0;
+let heaviness = 1;
 
 async function setup() {
 	handPose = await ml5.handPose({ maxHands: 1, flipped: true });
@@ -91,6 +94,8 @@ function draw() {
 		((direction === 1 && rock.x >= windowWidth - 100) || (direction === -1 && rock.x <= 100))
 	) {
 		direction *= -1;
+		iteration++;
+		console.log('iteration:', iteration, 'heaviness:', heaviness, 'grip:', grip());
 		isNewIteration = false;
 		updateHillConfiguration();
 		rock.x = direction === 1 ? windowWidth - rock.x : windowWidth - rock.x;
@@ -107,7 +112,7 @@ function draw() {
 
 	// mouse control
 	if (mouseIsPressed && dist(mouseX, mouseY, rock.x, rock.y) < rock.radius) {
-		rock.x = mouseX;
+		rock.x = lerp(rock.x, mouseX, grip());
 		rock.y = targetY;
 		rock.velocity = 0;
 		cursor('grabbing');
@@ -146,7 +151,6 @@ function draw() {
 			if (keypointCount > 0) {
 				let avgX = Math.round(sumX / keypointCount);
 				let avgY = Math.round(sumY / keypointCount);
-				console.log('Average X:', avgX, 'Average Y:', avgY);
 				if (smoothedHandX === null || smoothedHandY === null) {
 					smoothedHandX = avgX;
 					smoothedHandY = avgY;
@@ -171,7 +175,7 @@ function draw() {
 
 		if (typeof handCenterX === 'number' && typeof handCenterY === 'number') {
 			if (dist(handCenterX, handCenterY, rock.x, rock.y) < rock.radius) {
-				rock.x = handCenterX;
+				rock.x = lerp(rock.x, handCenterX, grip());
 				rock.y = targetY;
 				rock.velocity = 0;
 			} else {
@@ -187,6 +191,10 @@ function draw() {
 			}
 		}
 	}
+}
+
+function grip() {
+	return 1 / (1 + iteration * heaviness);
 }
 
 function gotHands(results) {

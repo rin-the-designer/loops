@@ -209,6 +209,11 @@ In testing, people inhabited this loop in noticeably different ways. One partici
 
 These responses clarified what the piece is really asking. The system defines the hill, gravity, and the inevitability of return, but agency shows up in how someone chooses to stay with the repetition, resist it, pause it, or leave. Reaching the top does not resolve the loop; it only reveals it. The work becomes less about the boulder and more about noticing what it feels like to keep choosing to push.
 
+### Experiments
+
+- **October 31, 2026: A boulder that grows heavier**<br>
+  Each time the boulder reaches the top and the hill flips, it becomes harder to push. Instead of snapping to the cursor or hand, the boulder now eases toward it, and the easing slows with every completed climb (`grip = 1 / (1 + iteration × heaviness)`, with `heaviness = 1`). The first climb behaves as before; by the fourth, the boulder only covers a quarter of the remaining distance to the hand each frame. Push too quickly and the hand slips off the boulder, which rolls back down. A fast push that works on the first climb loses the boulder by the fourth, and by the eleventh only a slow, steady push gets it to the top. The weight is never reset within a session and the task never becomes impossible, only slower. The question is whether the growing effort changes the decision to keep going, or whether people stay with the repetition precisely because it asks more of them each time.
+
 ## #2 - Doors
 
 ![Doors artwork showing an endless corridor of alternating black and white thresholds in 3D space](static/documentation/images/doors.jpg)
