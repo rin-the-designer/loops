@@ -13,6 +13,7 @@
 		<div class="hero-subtitle">by Rin Kim</div>
 		<div class="hero-links">
 			<a href="/documentation">Documentation</a>
+			<a href="https://doi.org/10.1145/3731459.3786210" target="_blank" rel="noopener">Publication ↗</a>
 			<a href="https://rin.kim" target="_blank" rel="noopener">Rin Kim ↗</a>
 		</div>
 	</div>
