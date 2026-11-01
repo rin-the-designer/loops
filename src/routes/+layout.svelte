@@ -3,11 +3,12 @@
 	import Header from '$lib/components/Header.svelte';
 	import { page } from '$app/stores';
 
-	$: isProjectPage = $page.url.pathname.startsWith('/projects/');
-	$: isExhibitionPage = $page.url.pathname.startsWith('/exhibition/');
+	$: hideHeader = ['/projects/', '/exhibition/', '/documentation'].some((p) =>
+		$page.url.pathname.startsWith(p)
+	);
 </script>
 
-{#if !isProjectPage && !isExhibitionPage}
+{#if !hideHeader}
 	<Header />
 {/if}
 

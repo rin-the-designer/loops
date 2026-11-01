@@ -3,8 +3,16 @@
 
 	let { data } = $props();
 
-	/** First h1 row in the sidebar (no top divider on that item) */
-	let firstH1Index = $derived(data.sidebarNav.findIndex((x) => x.level === 1));
+	type NavItem = (typeof data.sidebarNav)[number];
+
+	/** h1 rows with their h2 children, one collapsible group each */
+	let sections = $derived(
+		data.sidebarNav.reduce<(NavItem & { children: NavItem[] })[]>((acc, item) => {
+			if (item.level === 1) acc.push({ ...item, children: [] });
+			else acc.at(-1)?.children.push(item);
+			return acc;
+		}, [])
+	);
 
 	/** Sidebar slug to highlight (h1 / h2 only; h3 in the document maps to parent h2 or h1) */
 	let activeSlug = $state('');
@@ -82,22 +90,38 @@
 		<nav aria-label="Table of contents">
 			<p class="toc-title">Table of Contents</p>
 			<ul class="toc-list">
-				{#each data.sidebarNav as item, i (item.slug)}
-					<li
-						class="toc-item toc-h{item.level}"
-						class:toc-h1-divider={item.level === 1 && i !== firstH1Index}
-					>
-						<a
-							class="toc-link"
-							class:toc-link-active={item.slug === activeSlug}
-							aria-current={item.slug === activeSlug ? 'location' : undefined}
-							href="#{item.slug}">{item.text}</a
-						>
+				{#each sections as section (section.slug)}
+					<li class="toc-item toc-h1">
+						{#if section.children.length}
+							<!-- Section holding the active heading opens itself while scrolling -->
+							<details
+								open={section.slug === activeSlug ||
+									section.children.some((c) => c.slug === activeSlug)}
+							>
+								<summary>{@render link(section)}</summary>
+								<ul class="toc-list">
+									{#each section.children as child (child.slug)}
+										<li class="toc-item toc-h2">{@render link(child)}</li>
+									{/each}
+								</ul>
+							</details>
+						{:else}
+							{@render link(section)}
+						{/if}
 					</li>
 				{/each}
 			</ul>
 		</nav>
+		<a class="toc-back" href="/">← Back to Project</a>
 	</aside>
+	{#snippet link(item: NavItem)}
+		<a
+			class="toc-link"
+			class:toc-link-active={item.slug === activeSlug}
+			aria-current={item.slug === activeSlug ? 'location' : undefined}
+			href="#{item.slug}">{item.text}</a
+		>
+	{/snippet}
 	<div class="doc-main">
 		<article class="doc-content">
 			<header class="doc-title" id="loops" tabindex="-1">
@@ -113,8 +137,6 @@
 
 <style>
 	.doc-layout {
-		/* Site header: 1rem + 1rem padding + 2rem title line + 2px border ≈ 66px */
-		--doc-header-offset: 66px;
 		display: flex;
 		align-items: flex-start;
 		width: 100%;
@@ -124,12 +146,14 @@
 
 	.toc-sidebar {
 		position: sticky;
-		top: var(--doc-header-offset);
+		top: 0;
+		display: flex;
+		flex-direction: column;
 		align-self: flex-start;
 		flex: 0 0 16rem;
 		box-sizing: border-box;
-		min-height: calc(100vh - var(--doc-header-offset));
-		max-height: calc(100vh - var(--doc-header-offset));
+		min-height: 100vh;
+		max-height: 100vh;
 		overflow-y: auto;
 		padding: 0 0.5rem;
 		border-right: 1px solid rgba(255, 255, 255, 0.18);
@@ -175,19 +199,46 @@
 		font-weight: 600;
 	}
 
-	.toc-h1-divider {
-		margin-top: 0.65rem;
-		padding-top: 0.65rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.18);
+	/* 1rem clears the chevron, 1rem more indents under the section name */
+	.toc-item.toc-h2 {
+		margin-left: 2rem;
+		font-weight: 400;
 	}
 
-	.toc-item.toc-h2 {
+	summary {
+		display: flex;
+		align-items: center;
+		list-style: none;
+		cursor: pointer;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	summary::before {
+		content: '›';
+		flex: 0 0 1rem;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.55);
+		transition: transform 0.15s ease;
+	}
+
+	details[open] > summary::before {
+		transform: rotate(90deg);
+	}
+
+	summary > .toc-link {
+		flex: 1;
+	}
+
+	/* h1 without children: line up with the chevron rows */
+	.toc-h1 > .toc-link {
 		margin-left: 1rem;
 	}
 
 	.toc-link {
 		display: block;
-		width: 100%;
 		box-sizing: border-box;
 		padding: 0.3rem 0.45rem;
 		border: none;
@@ -202,6 +253,26 @@
 	.toc-link:hover {
 		background: rgba(255, 255, 255, 0.1);
 		color: #fff;
+	}
+
+	/* Pinned to the sidebar bottom; follows the list when it overflows */
+	.toc-sidebar nav {
+		margin-bottom: 1rem;
+	}
+
+	/* Same look as the home page hero links */
+	.toc-back {
+		align-self: flex-start;
+		margin: auto 0 1rem;
+		padding: 0.25em 0.5em;
+		background: #fff;
+		color: #000;
+		text-decoration: none;
+		transition: background 0.2s ease;
+	}
+
+	.toc-back:hover {
+		background: #ff8800;
 	}
 
 	.toc-link.toc-link-active {
@@ -225,7 +296,7 @@
 		margin: 0 0 0.25rem;
 		padding: 0 0 1.5rem;
 		text-align: center;
-		scroll-margin-top: 5.5rem;
+		scroll-margin-top: 1.5rem;
 	}
 
 	.doc-title-heading {
@@ -252,7 +323,7 @@
 		font-size: 2rem;
 		font-weight: 600;
 		margin: 2.25rem 0 1rem;
-		scroll-margin-top: 5.5rem;
+		scroll-margin-top: 1.5rem;
 	}
 
 	.doc-content :global(h1:not([id='loops'])) {
@@ -265,21 +336,21 @@
 		font-size: 1.5rem;
 		font-weight: 600;
 		margin: 2rem 0 0.75rem;
-		scroll-margin-top: 5.5rem;
+		scroll-margin-top: 1.5rem;
 	}
 
 	.doc-content :global(h3) {
 		font-size: 1.2rem;
 		font-weight: 600;
 		margin: 1.5rem 0 0.5rem;
-		scroll-margin-top: 5.5rem;
+		scroll-margin-top: 1.5rem;
 	}
 
 	.doc-content :global(h4) {
 		font-size: 1.05rem;
 		font-weight: 600;
 		margin: 1.25rem 0 0.5rem;
-		scroll-margin-top: 5.5rem;
+		scroll-margin-top: 1.5rem;
 	}
 
 	.doc-content :global(p) {
